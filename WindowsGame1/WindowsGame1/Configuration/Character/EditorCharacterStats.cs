@@ -8,7 +8,7 @@ namespace TheGameOfForever.Configuration.Character
     /// <summary>
     /// Character to be used in editor, contains setter methods as opposed to being immutable.
     /// </summary>
-    class EditorCharacterStats : ICharacterStats
+    public class EditorCharacterStats : ICharacterStats
     {
         private int health;
         private float movementSpeed;

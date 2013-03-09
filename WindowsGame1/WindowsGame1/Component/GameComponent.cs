@@ -8,7 +8,7 @@ namespace TheGameOfForever.Component
     /// <summary>
     /// Dummy interface representing a game component.
     /// </summary>
-    interface IGameComponent
+    public interface IGameComponent
     {
 
     }

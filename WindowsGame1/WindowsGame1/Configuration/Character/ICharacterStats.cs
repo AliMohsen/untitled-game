@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheGameOfForever.Configuration.Character
 {
-    interface ICharacterStats
+    public interface ICharacterStats
     {
         int getHealth();
         float getMovementSpeed();

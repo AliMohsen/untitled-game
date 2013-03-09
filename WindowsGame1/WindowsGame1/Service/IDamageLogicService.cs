@@ -7,7 +7,7 @@ using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever.Service
 {
-    interface IDamageLogicService
+    public interface IDamageLogicService
     {
         Damage damageDealt(ICharacterStats attacker, IWeaponStats weapon, ICharacterStats victim);
     }
@@ -24,7 +24,7 @@ namespace TheGameOfForever.Service
         }
     }
 
-    enum Status
+    public enum Status
     {
         MISS,
         HIT
