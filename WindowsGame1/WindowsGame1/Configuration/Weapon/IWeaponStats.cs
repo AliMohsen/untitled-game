@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheGameOfForever.Configuration.Weapon
 {
-    interface IWeaponStats
+    public interface IWeaponStats
     {
         int getAccuracy();
         int getShotsPerTurn();
