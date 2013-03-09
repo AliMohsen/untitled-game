@@ -10,9 +10,13 @@ namespace TheGameOfForever.Component.Character
 {
     class BasicCharacter : IGameComponent
     {
+        // Stats
         ICharacterStats characterStats;
         IWeaponStats weaponStats;
+
+        // Service
         IDamageLogicService damageLogicService;
+
         private int health;
 
         public BasicCharacter(ICharacterStats characterStats, IDamageLogicService damageLogicService)

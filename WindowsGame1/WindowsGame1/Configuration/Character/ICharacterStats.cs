@@ -7,6 +7,7 @@ namespace TheGameOfForever.Configuration.Character
 {
     public interface ICharacterStats
     {
+        string getId();
         int getHealth();
         float getMovementSpeed();
         int getAccuracy();
