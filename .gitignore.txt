@@ -1,0 +1,11 @@
+# Common files to ignore
+*.swp
+*.zip
+*.suo
+*.user
+WindowsGame1/WindowsGame1/bin
+WindowsGame1/WindowsGame1Content/bin
+WindowsGame1/WindowsGame1/obj
+WindowsGame1/WindowsGame1Content/obj
+*.cachefile
+*.ccgame
