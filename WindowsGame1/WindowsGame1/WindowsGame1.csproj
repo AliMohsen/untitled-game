@@ -93,6 +93,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -107,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="Component\Character\BasicCharacter.cs" />
     <Compile Include="Component\GameComponent.cs" />
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
@@ -118,6 +120,12 @@
     <Compile Include="Service\DamageLogicServiceImpl.cs" />
     <Compile Include="Service\EditorDamageLogicServiceImpl.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />
+    <Compile Include="Ui\Editor\BasicButton.cs" />
+    <Compile Include="Ui\Editor\EditorContent.cs" />
+    <Compile Include="Ui\Editor\Texture2d.cs" />
+    <Compile Include="Ui\Font\BasicFontCollection.cs" />
+    <Compile Include="Ui\Font\FontFactory.cs" />
+    <Compile Include="Ui\Font\IFontCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -155,7 +163,6 @@
     <Folder Include="Control\" />
     <Folder Include="Editor\" />
     <Folder Include="Processor\" />
-    <Folder Include="Ui\" />
     <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

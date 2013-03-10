@@ -125,6 +125,11 @@ namespace TheGameOfForever.Configuration.Character
         {
             return evasion;
         }
+            
+        public string getId()
+        {
+            return "editor";
+        }
         #endregion
     }
 }
