@@ -24,7 +24,7 @@ namespace TheGameOfForever.Ui.Font
             if (instance == null)
             {
                 instance = new FontFactory();
-                instance.fonts.Add("Mentone", new BasicFontCollection("Mentone", FontFactory.contentManager));
+                instance.fonts.Add("mentone", new BasicFontCollection("mentone", FontFactory.contentManager));
             }
             return instance;
         }

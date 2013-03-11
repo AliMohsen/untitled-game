@@ -30,10 +30,17 @@ namespace TheGameOfForever
         SpriteBatch spriteBatch;
         public static ContentManager content;
 
+        private static UiService uiLayer = new UiService();
+
+        private Texture2D mousePointer;
+
+        private static int width = 1280;
+        private static int height = 800;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
             IntPtr hWnd = this.Window.Handle;
             var control = System.Windows.Forms.Control.FromHandle(hWnd);
@@ -45,18 +52,20 @@ namespace TheGameOfForever
         private void Form1_MouseDown(object sender,
         System.Windows.Forms.MouseEventArgs e)
         {
+            /*
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
                 IntPtr hWnd = this.Window.Handle;
                 SendMessage(hWnd, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
+            }*/
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -65,25 +74,35 @@ namespace TheGameOfForever
             Game1.content = Content;
             FontFactory.setContentManager(content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            mousePointer = Content.Load<Texture2D>("editor//mousepointer");
         }
 
         protected override void UnloadContent()
         {
         }
 
-        BasicButton button = new BasicButton(new Rectangle(50, 50, 150, 20), "Testing");
+        BasicButton button = new BasicButton(uiLayer, new Rectangle(width - 150, 50, 100, 20), "Testing");
+        BasicButton button2 = new BasicButton(uiLayer, new Rectangle(width - 150, 150, 100, 20), "Testing2");
 
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            button.hasClicked();
+            uiLayer.update();
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            MouseState mouse = Mouse.GetState();
+            GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(0, 0, 1, GraphicsDevice.Viewport.Height), Color.DarkGray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 1), Color.DarkGray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(0, GraphicsDevice.Viewport.Height - 1, GraphicsDevice.Viewport.Width, 1), Color.DarkGray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(GraphicsDevice.Viewport.Width - 1, 0, 1, GraphicsDevice.Viewport.Height), Color.DarkGray);
             button.draw(spriteBatch);
+            button2.draw(spriteBatch);
+            spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

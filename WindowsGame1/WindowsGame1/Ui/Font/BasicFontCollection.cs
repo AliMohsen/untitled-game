@@ -23,6 +23,7 @@ namespace TheGameOfForever.Ui.Font
 
         private static int[] initialSizes = new int[]
         {
+            10,
             12,
             14,
             16,

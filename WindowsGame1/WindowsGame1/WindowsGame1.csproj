@@ -122,10 +122,13 @@
     <Compile Include="Service\IDamageLogicService.cs" />
     <Compile Include="Ui\Editor\BasicButton.cs" />
     <Compile Include="Ui\Editor\EditorContent.cs" />
+    <Compile Include="Ui\Editor\IClickable.cs" />
     <Compile Include="Ui\Editor\Texture2d.cs" />
+    <Compile Include="Ui\Editor\UiService.cs" />
     <Compile Include="Ui\Font\BasicFontCollection.cs" />
     <Compile Include="Ui\Font\FontFactory.cs" />
     <Compile Include="Ui\Font\IFontCollection.cs" />
+    <Compile Include="Ui\Font\DrawStringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
