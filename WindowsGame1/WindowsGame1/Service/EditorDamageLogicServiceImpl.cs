@@ -11,6 +11,19 @@ namespace TheGameOfForever.Service
     public class EditorDamageLogicServiceImpl : IDamageLogicService
     {
         Random rand = new Random();
+        
+        private readonly int distance = 50;
+        private float chanceToHit = 0.5f;
+
+        public void setChancetoHit(float chance)
+        {
+            chanceToHit = chance;
+        }
+
+        public float getChanceToHit()
+        {
+            return chanceToHit;
+        }
 
         public Damage damageDealt(Configuration.Character.ICharacterStats attacker, Configuration.Weapon.IWeaponStats weapon, Configuration.Character.ICharacterStats victim)
         {
@@ -50,6 +63,21 @@ namespace TheGameOfForever.Service
             // If the random number is within the victims Evasion %, the victim
             // will dodge.
             if (rand.NextDouble() <= victim.getEvasion())
+            {
+                return new Damage(Status.MISS, damagePoints);
+            }
+            
+            // If the distance between the attacker and victim exceeds the
+            // the weapon range, reduce the chanceToHit.
+
+            if (weapon.getRange() < distance)
+            {
+                chanceToHit *= (weapon.getRange() / distance);
+            }
+
+            // Determine whether the shot is a hit or miss.
+
+            if (rand.NextDouble() > chanceToHit)
             {
                 return new Damage(Status.MISS, damagePoints);
             }
