@@ -81,8 +81,8 @@ namespace TheGameOfForever
         {
         }
 
-        BasicButton button = new BasicButton(uiLayer, new Rectangle(width - 150, 50, 100, 20), "Testing");
-        BasicButton button2 = new BasicButton(uiLayer, new Rectangle(width - 150, 150, 100, 20), "Testing2");
+        BasicButton button = new BasicButton(uiLayer, new Rectangle(width - 150, 50, 100, 24), "Testing");
+        BasicButton button2 = new BasicButton(uiLayer, new Rectangle(width - 150, 150, 100, 24), "Testing2");
 
         protected override void Update(GameTime gameTime)
         {

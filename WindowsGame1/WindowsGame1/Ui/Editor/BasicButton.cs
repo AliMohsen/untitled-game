@@ -90,19 +90,24 @@ namespace TheGameOfForever.Ui.Editor
             {
                 hoverAlpha = MathHelper.SmoothStep(hoverAlpha, 0.95f, 0.25f);
                 bgColor = new Color(hoverAlpha, hoverAlpha, hoverAlpha);
-                underlineColor = textColor = Color.SlateGray;
+                underlineColor = Color.LightGray;
+                textColor = Color.SlateGray;
             }
             else
             {
                 hoverAlpha = MathHelper.SmoothStep(hoverAlpha, 1f, 0.25f);
                 bgColor = Color.White;
-                underlineColor = textColor = Color.SlateGray;
+                underlineColor = Color.LightGray;
+                textColor = Color.SlateGray;
             }
             sprite.Draw(EditorContent.blank, box, bgColor);
-            DrawStringHelper.drawString(sprite, displayName, "mentone", 10, textColor, new Vector2(box.X + box.Width / 2, box.Y + 2), Alignment.CENTERED);
+            DrawStringHelper.drawString(sprite, displayName, "mentone", 10, textColor, new Vector2(box.X + box.Width / 2, box.Y + box.Height/2), VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
             sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y + box.Height, box.Width, 1), underlineColor);
-            sprite.Draw(EditorContent.blank, new Rectangle(box.X + 1, box.Y + box.Height, 1, box.Height / 3), new Rectangle(0, 0, 1, 1), underlineColor, MathHelper.Pi, Vector2.Zero, SpriteEffects.None, 1);
-            sprite.Draw(EditorContent.blank, new Rectangle(box.X + box.Width, box.Y + box.Height, 1, box.Height / 3), new Rectangle(0,0,1,1), underlineColor, MathHelper.Pi, Vector2.Zero, SpriteEffects.None, 1);
+            sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y, box.Width, 1), underlineColor);
+            sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y, 1, box.Height), underlineColor);
+            sprite.Draw(EditorContent.blank, new Rectangle(box.X + box.Width - 1, box.Y, 1, box.Height), underlineColor);
+            //sprite.Draw(EditorContent.blank, new Rectangle(box.X + 1, box.Y + box.Height, 1, box.Height / 3), new Rectangle(0, 0, 1, 1), underlineColor, MathHelper.Pi, Vector2.Zero, SpriteEffects.None, 1);
+            //sprite.Draw(EditorContent.blank, new Rectangle(box.X + box.Width, box.Y + box.Height, 1, box.Height / 3), new Rectangle(0,0,1,1), underlineColor, MathHelper.Pi, Vector2.Zero, SpriteEffects.None, 1);
         }
 
     }

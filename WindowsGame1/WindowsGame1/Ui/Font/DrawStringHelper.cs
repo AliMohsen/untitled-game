@@ -13,32 +13,50 @@ namespace TheGameOfForever.Ui.Font
         public static void drawString(SpriteBatch sprite, String text, String fontName, int size, Color color,
             Vector2 position)
         {
-            drawString(sprite, text, fontName, size, color, position, Alignment.RIGHTALIGN);
+            drawString(sprite, text, fontName, size, color, position, VerticalAlignment.RIGHTALIGN, HorizontalAlignment.BELOW);
         }
 
         public static void drawString(SpriteBatch sprite, String text, String fontName, int size, Color color,
-            Vector2 position, Alignment alignment)
+            Vector2 position, VerticalAlignment alignment, HorizontalAlignment horizontalAlignment)
         {
             SpriteFont font = FontFactory.getInstance().getFont(fontName).getSize(size);
             switch (alignment)
             {
-                case Alignment.LEFTALIGN:
+                case VerticalAlignment.LEFTALIGN:
                     position = new Vector2(position.X - font.MeasureString(text).X, position.Y);
                     break;
-                case Alignment.RIGHTALIGN:
+                case VerticalAlignment.RIGHTALIGN:
                     break;
-                case Alignment.CENTERED:
+                case VerticalAlignment.CENTERED:
                     position = new Vector2(position.X - (font.MeasureString(text).X / 2), position.Y);
                     break;
             }
-            sprite.DrawString(font, text, position, color);
+            switch (horizontalAlignment)
+            {
+                case HorizontalAlignment.ABOVE:
+                    position = new Vector2(position.X, position.Y - font.MeasureString(text).Y);
+                    break;
+                case HorizontalAlignment.BELOW:
+                    break;
+                case HorizontalAlignment.CENTERED:
+                    position = new Vector2(position.X, position.Y - font.MeasureString(text).Y / 2);
+                    break;
+            }
+            sprite.DrawString(font, text, new Vector2((int)position.X, (int)position.Y), color);
         }
     }
 
-    public enum Alignment
+    public enum VerticalAlignment
     {
         LEFTALIGN,
         RIGHTALIGN,
         CENTERED
+    }
+
+    public enum HorizontalAlignment
+    {
+        CENTERED,
+        ABOVE,
+        BELOW
     }
 }
