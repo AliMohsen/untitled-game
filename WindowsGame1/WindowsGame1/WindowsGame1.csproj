@@ -111,6 +111,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Component\Character\BasicCharacter.cs" />
     <Compile Include="Component\GameComponent.cs" />
+    <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
     <Compile Include="Configuration\Character\ICharacterStats.cs" />
     <Compile Include="Configuration\Weapon\IWeaponStats.cs" />

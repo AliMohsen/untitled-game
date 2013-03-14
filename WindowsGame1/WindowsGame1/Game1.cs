@@ -12,6 +12,7 @@ using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Ui.Font;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using TheGameOfForever.Ui.Layer;
 
 namespace TheGameOfForever
 {
@@ -36,6 +37,8 @@ namespace TheGameOfForever
 
         private static int width = 1280;
         private static int height = 800;
+
+        BattleLayer battlerLayer = new BattleLayer();
 
         public Game1()
         {
@@ -87,6 +90,7 @@ namespace TheGameOfForever
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            battlerLayer.update(gameTime);
             uiLayer.update();
         }
 
@@ -94,6 +98,7 @@ namespace TheGameOfForever
         {
             MouseState mouse = Mouse.GetState();
             GraphicsDevice.Clear(Color.White);
+
             spriteBatch.Begin();
             spriteBatch.Draw(EditorContent.blank, new Rectangle(0, 0, 1, GraphicsDevice.Viewport.Height), Color.DarkGray);
             spriteBatch.Draw(EditorContent.blank, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 1), Color.DarkGray);
@@ -102,8 +107,10 @@ namespace TheGameOfForever
             button.draw(spriteBatch);
             button2.draw(spriteBatch);
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
-
             spriteBatch.End();
+            battlerLayer.draw(spriteBatch);
+
+
             base.Draw(gameTime);
         }
     }

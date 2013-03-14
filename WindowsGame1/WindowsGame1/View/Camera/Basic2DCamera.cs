@@ -22,7 +22,7 @@ namespace TheGameOfForever.View.Camera
         private int worldWidth;
         private int worldHeight;
 
-        private float zoom;
+        private float zoom = 1;
         private Matrix transform;
         private Vector2 position;
         private float rotation;
@@ -31,8 +31,8 @@ namespace TheGameOfForever.View.Camera
 
         public Basic2DCamera()
         {
-            viewportWidth = GraphicsDeviceManager.DefaultBackBufferWidth;
-            viewportWidth = GraphicsDeviceManager.DefaultBackBufferHeight;
+            viewportWidth = 1280;
+            viewportWidth = 800;
             worldHeight = 5 * 200; // 200 metres;
             worldWidth = 5 * 200;
         }
@@ -48,12 +48,18 @@ namespace TheGameOfForever.View.Camera
         {
             if (isStale || transform == null)
             {
+                /*
+                transform =
+                   Matrix.CreateTranslation(position.X, position.Y, 0) *
+                   Matrix.CreateScale(zoom, zoom, 1) *
+                   Matrix.CreateRotationZ(MathHelper.ToRadians(rotation)) *
+                   Matrix.CreateTranslation(viewportWidth, viewportHeight, 0);
+                /**/
                 transform =
                      Matrix.CreateTranslation(new Vector3(-position.X, -position.Y, 0))
                      * Matrix.CreateRotationZ(rotation) 
                      * Matrix.CreateScale(new Vector3(zoom, zoom, 1)) 
-                     * Matrix.CreateTranslation(new Vector3(viewportWidth 
-                         * 0.5f,viewportHeight * 0.5f, 0));
+                     * Matrix.CreateTranslation(new Vector3(0,0, 0));
             }
             return transform;
         }

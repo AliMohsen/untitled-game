@@ -5,15 +5,25 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Component.Map;
+using TheGameOfForever.View.Camera;
+using Microsoft.Xna.Framework.Input;
+using TheGameOfForever.Ui.Editor;
 
 namespace TheGameOfForever.Ui.Layer
 {
     /// <summary>
     /// UI battle layer, shows the battle map.
     /// </summary>
-    private class BattleLayer : ILayer
+    public class BattleLayer : ILayer
     {
-        private Map map;
+        private Map map = new Map();
+        private ICamera camera = new Basic2DCamera();
+
+        public BattleLayer()
+        {
+
+            camera.setMap(map);
+        }
 
         Boolean focus = false;
 
@@ -29,12 +39,33 @@ namespace TheGameOfForever.Ui.Layer
 
         public void draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, (int)map.getWorldWidth(), (int)map.getWorldWidth()), Color.Gray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 10, 10), Color.Gray);
+            spriteBatch.End();
         }
 
         public void update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            KeyboardState keyboardState = Keyboard.GetState();
+            Vector2 worldPosition = camera.getWorldPosition();
+            if (keyboardState.IsKeyDown(Keys.A))
+            {
+                worldPosition += new Vector2(-1, 0);
+            }
+            if (keyboardState.IsKeyDown(Keys.W))
+            {
+                worldPosition += new Vector2(0, -1);
+            }
+            if (keyboardState.IsKeyDown(Keys.S))
+            {
+                worldPosition += new Vector2(0, 1);
+            }
+            if (keyboardState.IsKeyDown(Keys.D))
+            {
+                worldPosition += new Vector2(1, 0);
+            }
+            camera.setWorldPosition(worldPosition);
         }
     }
 }
