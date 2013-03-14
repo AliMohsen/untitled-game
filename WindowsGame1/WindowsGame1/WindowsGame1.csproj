@@ -129,6 +129,11 @@
     <Compile Include="Ui\Font\FontFactory.cs" />
     <Compile Include="Ui\Font\IFontCollection.cs" />
     <Compile Include="Ui\Font\DrawStringHelper.cs" />
+    <Compile Include="Ui\Layer\BattleLayer.cs" />
+    <Compile Include="Ui\Layer\ILayer.cs" />
+    <Compile Include="Ui\Layer\UiLayerManager.cs" />
+    <Compile Include="View\Camera\Basic2DCamera.cs" />
+    <Compile Include="View\Camera\ICamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -166,7 +171,6 @@
     <Folder Include="Control\" />
     <Folder Include="Editor\" />
     <Folder Include="Processor\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
