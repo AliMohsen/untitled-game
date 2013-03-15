@@ -1,0 +1,28 @@
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\null.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.exe
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.pdb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\para.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing normal.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing blur.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\parabg.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50heiht.xnb
+C:\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\light.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\null.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\para.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing normal.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing blur.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\parabg.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50heiht.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\light.xnb
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.exe
+C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.pdb
