@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\null.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\null.xnb</Output>
       <Time>2010-10-23T22:46:35.1004788+01:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50.xnb</Output>
       <Time>2010-10-24T12:07:05.1667406+01:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\para.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\para.xnb</Output>
       <Time>2010-10-28T22:04:23.6577744+01:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing normal.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing normal.xnb</Output>
       <Time>2010-10-28T22:32:42.4519398+01:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing blur.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing blur.xnb</Output>
       <Time>2010-10-28T22:32:46.5051717+01:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\parabg.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\parabg.xnb</Output>
       <Time>2010-10-30T19:06:51.1660813+01:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50heiht.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50heiht.xnb</Output>
       <Time>2010-11-06T16:51:41.5950541+00:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\light.xnb</Output>
+      <Output>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\light.xnb</Output>
       <Time>2010-11-07T22:25:21.0626171+00:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -78,10 +78,10 @@
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Windows.old.001\Users\jkh13\Documents\Visual Studio 2008\Projects\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
