@@ -125,7 +125,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityFactory.cs" />
     <Compile Include="Entities\EntityManager.cs" />
-    <Compile Include="Entities\Exception\InvalidEntityException.cs" />
+    <Compile Include="Entities\InvalidEntityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -191,6 +191,7 @@
   <ItemGroup>
     <Folder Include="Control\" />
     <Folder Include="Editor\" />
+    <Folder Include="Entities\Exception\" />
     <Folder Include="Processor\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
