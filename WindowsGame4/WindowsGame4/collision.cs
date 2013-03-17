@@ -447,8 +447,8 @@ namespace WindowsGame4
             }
 
             if (a.Flag == 0 && b.Flag == 1)
-            { 
-                return -(intersectCircleRectangle(a,b));
+            {
+                return -(intersectCircleRectangle(a, b));
             }
 
             if (a.Flag == 1 && b.Flag == 0)

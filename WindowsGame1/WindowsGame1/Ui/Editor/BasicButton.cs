@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Ui.Font;
+using TheGameOfForever.Ui.Editor.Input;
 
 namespace TheGameOfForever.Ui.Editor
 {
@@ -16,7 +17,7 @@ namespace TheGameOfForever.Ui.Editor
         Rectangle box;
         public string displayName;
         bool hover;
-        bool clicked;
+        bool pressed;
         UiService uiService;
 
         public BasicButton(UiService uiService, Rectangle box, string displayName)
@@ -31,8 +32,6 @@ namespace TheGameOfForever.Ui.Editor
         {
             get { return new Vector2(box.X, box.Y); }
         }
-
-        MouseState lastState = Mouse.GetState();
 
         public delegate void HandleMouseClick();
         private List<HandleMouseClick> handleMouseClickHandlers = new List<HandleMouseClick>();
@@ -49,28 +48,25 @@ namespace TheGameOfForever.Ui.Editor
 
         public void hasClicked()
         {
-            if (box.Intersects(new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 1, 1))
+            if (box.Intersects(new Rectangle(MouseService.getX(), MouseService.getY(), 1, 1))
                 && uiService.propagateClicks)
             {
                 hover = true;
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (MouseService.isLeftPressed())
                 {
-                    clicked = true;
-                    if (lastState.LeftButton == ButtonState.Released)
+                    pressed = true;
+                    if (MouseService.isLeftClicked())
                     {
-                        lastState = Mouse.GetState();
                         foreach (HandleMouseClick handler in handleMouseClickHandlers)
                         {
                             handler();
                         }
                     }
                 }
-                else clicked = false;
+                else pressed = false;
                 uiService.stopPropagation();
             }
             else hover = false;
-
-            lastState = Mouse.GetState();
         }
 
         private float hoverAlpha = 1;
@@ -81,7 +77,7 @@ namespace TheGameOfForever.Ui.Editor
             Color underlineColor;
             Color textColor;
 
-            if (clicked)
+            if (pressed)
             {
                 bgColor = new Color(0.95f, 0.95f, 0.95f);
                 underlineColor = textColor = Color.DeepSkyBlue;

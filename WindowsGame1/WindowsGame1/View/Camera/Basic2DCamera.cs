@@ -40,8 +40,8 @@ namespace TheGameOfForever.View.Camera
         public void setMap(Map map)
         {
             this.map = map;
-            worldWidth = (int)map.getWorldHeight();
-            worldHeight = (int)map.getWorldWidth();
+            worldWidth = (int)Map.getWorldHeight();
+            worldHeight = (int)Map.getWorldWidth();
         }
 
         public Matrix getCameraTransformMatrix()

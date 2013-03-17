@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="ByteArrayOutputStream.cs" />
     <Compile Include="Component\Character\BasicCharacter.cs" />
     <Compile Include="Component\BaseComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Ui\Editor\BasicButton.cs" />
     <Compile Include="Ui\Editor\EditorContent.cs" />
     <Compile Include="Ui\Editor\IClickable.cs" />
+    <Compile Include="Ui\Editor\Input\MouseService.cs" />
     <Compile Include="Ui\Editor\Texture2d.cs" />
     <Compile Include="Ui\Editor\UiService.cs" />
     <Compile Include="Ui\Font\BasicFontCollection.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Ui\Font\DrawStringHelper.cs" />
     <Compile Include="Ui\Layer\BattleLayer.cs" />
     <Compile Include="Ui\Layer\ILayer.cs" />
+    <Compile Include="Ui\Layer\SaveLoadLayer.cs" />
     <Compile Include="Ui\Layer\UiLayerManager.cs" />
     <Compile Include="View\Camera\Basic2DCamera.cs" />
     <Compile Include="View\Camera\ICamera.cs" />

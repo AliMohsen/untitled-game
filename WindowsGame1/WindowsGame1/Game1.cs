@@ -13,6 +13,8 @@ using TheGameOfForever.Ui.Font;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TheGameOfForever.Ui.Layer;
+using TheGameOfForever.Ui.Editor.Input;
+using System.IO;
 
 namespace TheGameOfForever
 {
@@ -38,7 +40,10 @@ namespace TheGameOfForever
         private static int width = 1280;
         private static int height = 800;
 
-        BattleLayer battlerLayer = new BattleLayer();
+        UiLayerManager layerManager = new UiLayerManager();
+        MouseService mouseService = new MouseService();
+        UiService uiService = new UiService();
+        public static List<String> consoleOutput = new List<string>();
 
         public Game1()
         {
@@ -50,6 +55,8 @@ namespace TheGameOfForever
             var form = control.FindForm();
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.MouseDown += new MouseEventHandler(Form1_MouseDown);
+            layerManager.addLayerOnTop(new BattleLayer());
+            layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
         }
 
         private void Form1_MouseDown(object sender,
@@ -70,6 +77,7 @@ namespace TheGameOfForever
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
             base.Initialize();
+            consoleOutput.Add("Initialising");
         }
 
         protected override void LoadContent()
@@ -78,6 +86,7 @@ namespace TheGameOfForever
             FontFactory.setContentManager(content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
+            consoleOutput.Add("Loading");
         }
 
         protected override void UnloadContent()
@@ -89,9 +98,11 @@ namespace TheGameOfForever
 
         protected override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            battlerLayer.update(gameTime);
+            mouseService.updateCurrent();
+            layerManager.update(gameTime);
             uiLayer.update();
+            uiService.update();
+            mouseService.updateLast();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -104,13 +115,18 @@ namespace TheGameOfForever
             spriteBatch.Draw(EditorContent.blank, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 1), Color.DarkGray);
             spriteBatch.Draw(EditorContent.blank, new Rectangle(0, GraphicsDevice.Viewport.Height - 1, GraphicsDevice.Viewport.Width, 1), Color.DarkGray);
             spriteBatch.Draw(EditorContent.blank, new Rectangle(GraphicsDevice.Viewport.Width - 1, 0, 1, GraphicsDevice.Viewport.Height), Color.DarkGray);
-            button.draw(spriteBatch);
-            button2.draw(spriteBatch);
-            spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
             spriteBatch.End();
-            battlerLayer.draw(spriteBatch);
 
-
+            spriteBatch.Begin();
+            layerManager.draw(spriteBatch);
+            DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5));
+            spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
+            for (int i = (int) MathHelper.Max(0, consoleOutput.Count - 4); i < consoleOutput.Count; i++)
+            {
+                DrawStringHelper.drawString(spriteBatch, consoleOutput[i], "mentone", 10, 
+                    Color.Black, new Vector2(10, 660 + (i - (int) MathHelper.Max(0, consoleOutput.Count - 4)) * 12 ));
+            }
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

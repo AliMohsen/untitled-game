@@ -56,21 +56,20 @@ namespace TheGameOfForever.Ui.Layer
         public void draw(SpriteBatch spriteBatch)
         {
             bool canDraw = true;
-            Queue<ILayer> layersToDraw = new Queue<ILayer>();
+            List<ILayer> layersToDraw = new List<ILayer>();
             foreach (ILayer layer in layers)
             {
                 if (canDraw)
                 {
-                    layersToDraw.Enqueue(layer);
+                    layersToDraw.Add(layer);
                     canDraw &= !layer.stopDrawPropagation();
                 }
             }
+            layersToDraw.Reverse();
             foreach (ILayer layer in layersToDraw)
             {
                 layer.draw(spriteBatch);
             }
         }
-
-
     }
 }

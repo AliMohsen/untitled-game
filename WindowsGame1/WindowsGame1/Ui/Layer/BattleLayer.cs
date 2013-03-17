@@ -39,14 +39,16 @@ namespace TheGameOfForever.Ui.Layer
 
         public void draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
-            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, (int)map.getWorldWidth(), (int)map.getWorldWidth()), Color.Gray);
-            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 10, 10), Color.Gray);
             spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 30, (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.Gray);
+            spriteBatch.End();
+            spriteBatch.Begin();
         }
 
         public void update(GameTime gameTime)
         {
+            /*
             KeyboardState keyboardState = Keyboard.GetState();
             Vector2 worldPosition = camera.getWorldPosition();
             if (keyboardState.IsKeyDown(Keys.A))
@@ -66,6 +68,7 @@ namespace TheGameOfForever.Ui.Layer
                 worldPosition += new Vector2(1, 0);
             }
             camera.setWorldPosition(worldPosition);
+             */
         }
     }
 }
