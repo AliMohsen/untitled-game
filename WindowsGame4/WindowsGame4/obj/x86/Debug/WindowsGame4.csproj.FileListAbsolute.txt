@@ -40,3 +40,17 @@ C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\
 C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
 C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\parabg.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing blur.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\light.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\para.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\circle50heiht.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\testing normal.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\null.xnb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.exe
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.pdb
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
+C:\Users\Ali\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb

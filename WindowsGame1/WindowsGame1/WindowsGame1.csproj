@@ -129,11 +129,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Service\CollisionService.cs" />
     <Compile Include="Service\DamageLogicServiceImpl.cs" />
     <Compile Include="Service\EditorDamageLogicServiceImpl.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
     <Compile Include="Service\IGameService.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />
+    <Compile Include="Service\Shapes\Circle.cs" />
+    <Compile Include="Service\Shapes\IShape.cs" />
+    <Compile Include="Service\Shapes\Line.cs" />
+    <Compile Include="Service\Shapes\RectangleShape.cs" />
     <Compile Include="Ui\Editor\BasicButton.cs" />
     <Compile Include="Ui\Editor\EditorContent.cs" />
     <Compile Include="Ui\Editor\IClickable.cs" />
