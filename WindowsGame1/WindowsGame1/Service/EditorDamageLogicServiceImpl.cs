@@ -8,7 +8,7 @@ namespace TheGameOfForever.Service
     /// <summary>
     /// Editor damage logic service implementation.
     /// </summary>
-    public class EditorDamageLogicServiceImpl : IDamageLogicService
+    public class EditorDamageLogicServiceImpl : AbstractGameService, IDamageLogicService
     {
         Random rand = new Random();
         

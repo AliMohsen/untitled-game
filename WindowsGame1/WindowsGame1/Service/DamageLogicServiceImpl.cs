@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheGameOfForever.Service
 {
-    public class DamageLogicServiceImpl : IDamageLogicService
+    public class DamageLogicServiceImpl : AbstractGameService, IDamageLogicService
     {
         /// <summary>
         /// Default logic to damage enemy.

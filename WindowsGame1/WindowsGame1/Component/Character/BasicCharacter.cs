@@ -8,7 +8,7 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.Component.Character
 {
-    class BasicCharacter : IGameComponent
+    class BasicCharacter : BaseComponent
     {
         // Stats
         ICharacterStats characterStats;

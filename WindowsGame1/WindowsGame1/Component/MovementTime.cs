@@ -5,11 +5,8 @@ using System.Text;
 
 namespace TheGameOfForever.Component
 {
-    /// <summary>
-    /// Dummy interface representing a game component.
-    /// </summary>
-    public interface IGameComponent
+    public class MovementTime : BaseComponent
     {
-
+        private long millisToMove;
     }
 }
