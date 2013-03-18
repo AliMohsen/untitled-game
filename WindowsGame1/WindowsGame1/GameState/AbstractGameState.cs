@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheGameOfForever.GameState
 {
-    public class AbstractGameState
+    public abstract class AbstractGameState
     {
         private GameStateManager gameStateManager;
 
@@ -14,8 +14,8 @@ namespace TheGameOfForever.GameState
             this.gameStateManager = gameStateManager;
         }
 
-        virtual bool isPropagateUpdate();
-        virtual bool isPropagateDraw();
+        public abstract bool isPropagateUpdate();
+        public abstract bool isPropagateDraw();
 
         protected void changeState(AbstractGameState gameState)
         {
