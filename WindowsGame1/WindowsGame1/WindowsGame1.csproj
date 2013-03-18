@@ -136,11 +136,12 @@
     <Compile Include="Service\AbstractGameService.cs" />
     <Compile Include="Service\IGameService.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />
-    <Compile Include="Service\GameServiceManager.cs" />
     <Compile Include="Service\Shapes\Circle.cs" />
     <Compile Include="Service\Shapes\IShape.cs" />
     <Compile Include="Service\Shapes\Line.cs" />
     <Compile Include="Service\Shapes\RectangleShape.cs" />
+	<Compile Include="GameState\AbstractGameState.cs" />
+	<Compile Include="GameState\GameStateManager.cs" />
     <Compile Include="Ui\Editor\BasicButton.cs" />
     <Compile Include="Ui\Editor\EditorContent.cs" />
     <Compile Include="Ui\Editor\EditorOutputConsole.cs" />
