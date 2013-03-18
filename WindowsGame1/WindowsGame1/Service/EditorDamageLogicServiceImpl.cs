@@ -11,7 +11,8 @@ namespace TheGameOfForever.Service
     public class EditorDamageLogicServiceImpl : AbstractGameService, IDamageLogicService
     {
         Random rand = new Random();
-        
+
+        private readonly int objectWidth = 10;
         private readonly int distance = 50;
         private float chanceToHit = 0.5f;
 
@@ -84,6 +85,14 @@ namespace TheGameOfForever.Service
 
             return new Damage(Status.HIT, damagePoints);
 
+        }
+
+        public float calculateConeAngle(Configuration.Character.ICharacterStats attacker, Configuration.Character.ICharacterStats victim)
+        {
+            // Angle = ( width of object / ( hitRatio * distance )) * ( 180/pi )
+
+            float angle = (objectWidth / (chanceToHit * distance)) * (180 / (float)Math.PI);
+            return angle;
         }
     }
 }

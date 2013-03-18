@@ -18,5 +18,20 @@ namespace TheGameOfForever.Service.Shapes
             this.radius = radius;
             this.mass = mass;
         }
+
+        public Vector2 getLocation()
+        {
+            return location;
+        }
+
+        public float getRadius()
+        {
+            return radius;
+        }
+
+        public int getMass()
+        {
+            return mass;
+        }
     }
 }

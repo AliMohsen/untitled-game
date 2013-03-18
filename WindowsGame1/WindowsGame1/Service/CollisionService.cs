@@ -13,7 +13,7 @@ namespace TheGameOfForever.Service
         {
             if (a is Shapes.RectangleShape && b is Shapes.RectangleShape)
             {
-                return intersectRectangles(a, b);
+                return intersectRectangles((Shapes.RectangleShape)a, (Shapes.RectangleShape)b);
             }
 
             if (a is Shapes.Circle && b is Shapes.RectangleShape)
@@ -28,13 +28,13 @@ namespace TheGameOfForever.Service
 
             if (a is Shapes.Circle && b is Shapes.Circle)
             {
-                return intersectCircles(a, b);
+                return intersectCircles((Shapes.Circle)a, (Shapes.Circle)b);
             }
 
             return Vector2.Zero;
         }
 
-        public Vector2 intersectRectangles(Shapes.IShape a, Shapes.IShape b)
+        public Vector2 intersectRectangles(Shapes.RectangleShape a, Shapes.RectangleShape b)
         {
             throw new NotImplementedException();
         }
@@ -44,9 +44,22 @@ namespace TheGameOfForever.Service
             throw new NotImplementedException();
         }
 
-        public Vector2 intersectCircles(Shapes.IShape a, Shapes.IShape b)
+        public Vector2 intersectCircles(Shapes.Circle a, Shapes.Circle b)
         {
-            throw new NotImplementedException();
+            Vector2 aLocation = a.getLocation();
+            Vector2 bLocation = b.getLocation();
+            float aRadius = a.getRadius();
+            float bRadius = b.getRadius();
+            float distance = Vector2.Distance(aLocation, bLocation);
+
+            if (distance > aRadius + bRadius)
+            {
+                return Vector2.Zero;
+            }
+            else
+            {
+                return Vector2.Normalize(bLocation - aLocation) * (distance - (aRadius + bRadius));
+            }
         }
 
     }
