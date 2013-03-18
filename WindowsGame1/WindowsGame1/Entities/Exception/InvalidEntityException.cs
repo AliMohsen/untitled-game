@@ -8,14 +8,6 @@ namespace TheGameOfForever.Entities.Exception
     public class InvalidEntityException : SystemException
     {
         public InvalidEntityException(String message)
-            : base(message)
-        {
-
-        }
-
-        public InvalidEntityException(String message, SystemException e) 
-            : base(message, e)
-        {
-        }
+            : base(message) { }
     }
 }

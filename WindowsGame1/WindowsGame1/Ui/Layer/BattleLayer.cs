@@ -8,6 +8,8 @@ using TheGameOfForever.Component.Map;
 using TheGameOfForever.View.Camera;
 using Microsoft.Xna.Framework.Input;
 using TheGameOfForever.Ui.Editor;
+using TheGameOfForever.Ui.Editor.Input;
+using TheGameOfForever.Ui.Font;
 
 namespace TheGameOfForever.Ui.Layer
 {
@@ -19,9 +21,11 @@ namespace TheGameOfForever.Ui.Layer
         private Map map = new Map();
         private ICamera camera = new Basic2DCamera();
 
+        private Vector2 screenOffset = new Vector2(10, 30);
+        private Vector2 currentMousePosition;
+
         public BattleLayer()
         {
-
             camera.setMap(map);
         }
 
@@ -37,38 +41,28 @@ namespace TheGameOfForever.Ui.Layer
             return false;
         }
 
+        private Vector2 calculateMousePositionOnMap()
+        {
+            return new Vector2(MouseService.getX() - screenOffset.X,
+                MouseService.getY() - screenOffset.Y);
+        }
+
         public void draw(SpriteBatch spriteBatch)
         {
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
-            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 30, (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.Gray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle((int) screenOffset.X, (int) screenOffset.Y, 
+                (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.LightGray);
+            DrawStringHelper.drawString(spriteBatch, 
+                "Loc[Metres]: (" + (int) (currentMousePosition.X / 5) + ", " + (int) (currentMousePosition.Y / 5) + ")", "mentone", 10,
+                Color.Black, new Vector2(screenOffset.X, screenOffset.Y + Map.getWorldHeight() - 17));
             spriteBatch.End();
             spriteBatch.Begin();
         }
 
         public void update(GameTime gameTime)
         {
-            /*
-            KeyboardState keyboardState = Keyboard.GetState();
-            Vector2 worldPosition = camera.getWorldPosition();
-            if (keyboardState.IsKeyDown(Keys.A))
-            {
-                worldPosition += new Vector2(-1, 0);
-            }
-            if (keyboardState.IsKeyDown(Keys.W))
-            {
-                worldPosition += new Vector2(0, -1);
-            }
-            if (keyboardState.IsKeyDown(Keys.S))
-            {
-                worldPosition += new Vector2(0, 1);
-            }
-            if (keyboardState.IsKeyDown(Keys.D))
-            {
-                worldPosition += new Vector2(1, 0);
-            }
-            camera.setWorldPosition(worldPosition);
-             */
+            currentMousePosition = calculateMousePositionOnMap();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace TheGameOfForever
         UiLayerManager layerManager = new UiLayerManager();
         MouseService mouseService = new MouseService();
         UiService uiService = new UiService();
-        public static List<String> consoleOutput = new List<string>();
+
 
         public Game1()
         {
@@ -77,7 +77,7 @@ namespace TheGameOfForever
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
             base.Initialize();
-            consoleOutput.Add("Initialising");
+
         }
 
         protected override void LoadContent()
@@ -86,7 +86,7 @@ namespace TheGameOfForever
             FontFactory.setContentManager(content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
-            consoleOutput.Add("Loading");
+            OutputConsole.writeLn("Loading");
         }
 
         protected override void UnloadContent()
@@ -121,11 +121,7 @@ namespace TheGameOfForever
             layerManager.draw(spriteBatch);
             DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5));
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
-            for (int i = (int) MathHelper.Max(0, consoleOutput.Count - 4); i < consoleOutput.Count; i++)
-            {
-                DrawStringHelper.drawString(spriteBatch, consoleOutput[i], "mentone", 10, 
-                    Color.Black, new Vector2(10, 660 + (i - (int) MathHelper.Max(0, consoleOutput.Count - 4)) * 12 ));
-            }
+            OutputConsole.draw(spriteBatch, 4, new Vector2(10,660), 0);
             spriteBatch.End();
             base.Draw(gameTime);
         }

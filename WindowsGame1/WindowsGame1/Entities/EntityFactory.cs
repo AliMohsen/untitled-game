@@ -30,19 +30,24 @@ namespace TheGameOfForever.Entities
             }
         }
 
-        public static Entity createHumanEntity(int health)
+        public static Entity createHumanEntity(int health, Vector2 startingLocation, int teamId,
+            params BaseComponent[] otherComponents)
         {
             // Add health.
             HealthComponent healthComponent = new HealthComponent(health);
             // WHERE YOU AT!
-            LocationComponent locationComponent = new LocationComponent();
+            LocationComponent locationComponent = new LocationComponent(startingLocation);
             // People can move.
             MovementComponent movementComponent = new MovementComponent(6);
+            // Humans form teams.
+            AllegianceComponent allegianceComponent = new AllegianceComponent(teamId);
+
             return createEntityWithComponents(
                 healthComponent, 
                 new IsHumanComponent(), 
                 locationComponent, 
-                movementComponent);
+                movementComponent,
+                allegianceComponent);
         }
     }
 }

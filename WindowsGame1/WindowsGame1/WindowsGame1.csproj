@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="ByteArrayOutputStream.cs" />
+    <Compile Include="Component\Allegiance.cs" />
     <Compile Include="Component\Character\BasicCharacter.cs" />
     <Compile Include="Component\BaseComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityFactory.cs" />
     <Compile Include="Entities\EntityManager.cs" />
-    <Compile Include="Entities\InvalidEntityException.cs" />
+    <Compile Include="Entities\Exception\InvalidEntityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -135,12 +136,14 @@
     <Compile Include="Service\AbstractGameService.cs" />
     <Compile Include="Service\IGameService.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />
+    <Compile Include="Service\GameServiceManager.cs" />
     <Compile Include="Service\Shapes\Circle.cs" />
     <Compile Include="Service\Shapes\IShape.cs" />
     <Compile Include="Service\Shapes\Line.cs" />
     <Compile Include="Service\Shapes\RectangleShape.cs" />
     <Compile Include="Ui\Editor\BasicButton.cs" />
     <Compile Include="Ui\Editor\EditorContent.cs" />
+    <Compile Include="Ui\Editor\EditorOutputConsole.cs" />
     <Compile Include="Ui\Editor\IClickable.cs" />
     <Compile Include="Ui\Editor\Input\MouseService.cs" />
     <Compile Include="Ui\Editor\Texture2d.cs" />
@@ -191,7 +194,6 @@
   <ItemGroup>
     <Folder Include="Control\" />
     <Folder Include="Editor\" />
-    <Folder Include="Entities\Exception\" />
     <Folder Include="Processor\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

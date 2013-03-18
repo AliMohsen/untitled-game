@@ -10,6 +10,11 @@ namespace TheGameOfForever.Component
     {
         private Vector2 location;
 
+        public LocationComponent(Vector2 startingLocation)
+        {
+            this.location = location;
+        }
+
         public Vector2 getLocation()
         {
             return location;
