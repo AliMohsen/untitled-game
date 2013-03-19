@@ -38,7 +38,7 @@ namespace TheGameOfForever.Entities
             // WHERE YOU AT!
             LocationComponent locationComponent = new LocationComponent(startingLocation);
             // People can move.
-            MovementComponent movementComponent = new MovementComponent(6);
+            MovementComponent movementComponent = new MovementComponent(6, Vector2.Zero);
             // Humans form teams.
             AllegianceComponent allegianceComponent = new AllegianceComponent(teamId);
 

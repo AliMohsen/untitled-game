@@ -7,6 +7,6 @@ namespace TheGameOfForever.Entities
 {
     public interface IEntityLoader
     {
-        public void loadEntities(EntityManager entityManager);
+        void loadEntities(EntityManager entityManager);
     }
 }
