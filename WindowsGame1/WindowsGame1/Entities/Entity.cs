@@ -42,16 +42,16 @@ namespace TheGameOfForever.Entities
             return false;
         }
 
-        public BaseComponent getComponent<T>()
+        public T getComponent<T>() where T : BaseComponent
         {
             foreach (BaseComponent component in components)
             {
                 if (component is T)
                 {
-                    return component;
+                    return (T) component;
                 }
             }
-            return null;
+            return default(T);
         }
     }
 }

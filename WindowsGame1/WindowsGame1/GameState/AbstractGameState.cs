@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
     public abstract class AbstractGameState
     {
         private GameStateManager gameStateManager;
+        protected List<IGameService> gameServices = new List<IGameService>();
 
         public AbstractGameState(GameStateManager gameStateManager)
         {
@@ -35,6 +38,14 @@ namespace TheGameOfForever.GameState
         protected void addStateOnTopOfThis(AbstractGameState gameState)
         {
             gameStateManager.addOnTop(this, gameState);
+        }
+
+        public virtual void update(GameTime gameTime)
+        {
+            foreach (IGameService service in gameServices)
+            {
+                service.update(gameTime);
+            }
         }
     }
 }

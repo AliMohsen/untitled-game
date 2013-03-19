@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using TheGameOfForever.Configuration.Character;
+using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever.Service
 {
@@ -14,10 +17,14 @@ namespace TheGameOfForever.Service
         /// <param name="weapon"></param>
         /// <param name="victim"></param>
         /// <returns></returns>
-        public Damage damageDealt(Configuration.Character.ICharacterStats attacker, Configuration.Weapon.IWeaponStats weapon, Configuration.Character.ICharacterStats victim)
+        public Damage damageDealt(ICharacterStats attacker, IWeaponStats weapon, ICharacterStats victim)
         {
             //Damage logic belongs here.
             return new Damage(Status.HIT, 5);
+        }
+
+        public override void update(GameTime gameTime)
+        {
         }
     }
 }

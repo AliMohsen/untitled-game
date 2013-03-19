@@ -10,9 +10,15 @@ namespace TheGameOfForever.GameState
 {
     public class GameStateManager
     {
-        EntityManager entityManager = new EntityManager();
         List<IGameService> gameServices = new List<IGameService>();
         LinkedList<AbstractGameState> gameStates = new LinkedList<AbstractGameState>();
+        private EntityManager entityManager = new EntityManager();
+        private IEntityLoader entityLoader;
+
+        public GameStateManager(IEntityLoader entityLoader)
+        {
+            this.entityLoader = entityLoader;
+        }
 
         public void pushState(AbstractGameState state)
         {
@@ -25,6 +31,18 @@ namespace TheGameOfForever.GameState
             {
                 gameStates.RemoveFirst();
             }
+        }
+
+        public T getService<T>() where T : IGameService
+        {
+            foreach (IGameService service in gameServices)
+            {
+                if (service is T)
+                {
+                    return (T) service;
+                }
+            }
+            return default(T);
         }
 
         public void swapState(AbstractGameState oldState, AbstractGameState newState)
@@ -47,7 +65,7 @@ namespace TheGameOfForever.GameState
         }
 
         private void initializeServices()
-        { 
+        {
         }
 
         public void initializeEntities()

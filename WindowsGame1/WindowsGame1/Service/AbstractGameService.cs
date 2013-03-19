@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TheGameOfForever.Entities;
+using Microsoft.Xna.Framework;
 
 namespace TheGameOfForever.Service
 {
-    public class AbstractGameService : IGameService
+    public abstract class AbstractGameService : IGameService
     {
         protected List<Type> interestingComponentTypes = new List<Type>();
         protected HashSet<int> entityIds = new HashSet<int>();
+        protected EntityManager entityManager;
+
+        public AbstractGameService(EntityManager entityManager)
+        {
+            this.entityManager = entityManager;
+        }
 
         public void registerEntityIfNeeded(Entity entity)
         {

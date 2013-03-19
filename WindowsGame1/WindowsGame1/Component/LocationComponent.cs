@@ -8,21 +8,29 @@ namespace TheGameOfForever.Component
 {
     public class LocationComponent : BaseComponent
     {
-        private Vector2 location;
+        private Vector2 currentLocation;
+        private Vector2 lastLocation;
 
         public LocationComponent(Vector2 startingLocation)
         {
-            this.location = location;
+            this.currentLocation = startingLocation;
+            this.lastLocation = startingLocation;
         }
 
-        public Vector2 getLocation()
+        public Vector2 getCurrentLocation()
         {
-            return location;
+            return currentLocation;
         }
 
-        public void setLocation(Vector2 location)
+        public void setCurrentLocation(Vector2 location)
         {
-            this.location = location;
+            lastLocation = currentLocation;
+            this.currentLocation = location;
+        }
+
+        public Vector2 getLastLocation()
+        {
+            return lastLocation;
         }
     }
 }
