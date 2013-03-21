@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TheGameOfForever.Entities;
 using Microsoft.Xna.Framework;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
@@ -33,5 +34,7 @@ namespace TheGameOfForever.Service
         {
             entityIds.Remove(entity.getId());       
         }
+
+        public abstract void update(GameTime gameTime, AbstractGameState gameState);
     }
 }

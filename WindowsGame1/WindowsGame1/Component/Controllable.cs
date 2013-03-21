@@ -8,9 +8,12 @@ namespace TheGameOfForever.Component
     public class Controllable : BaseComponent
     {
         Boolean inControl = false;
+        int commandCost = 0;
 
-        public Controllable()
-        { }
+        public Controllable(int commandCost)
+        {
+            this.commandCost = commandCost;
+        }
 
         public bool isInControl()
         {
@@ -25,6 +28,11 @@ namespace TheGameOfForever.Component
         public void toggleInControl()
         {
             inControl = !inControl;
+        }
+
+        public int getCommandCost()
+        {
+            return commandCost;
         }
     }
 }

@@ -10,11 +10,13 @@ namespace TheGameOfForever.Component
     {
         private Vector2 currentLocation;
         private Vector2 lastLocation;
+        private float facingRadians = 0;
 
-        public LocationComponent(Vector2 startingLocation)
+        public LocationComponent(Vector2 startingLocation, float facingRadians)
         {
             this.currentLocation = startingLocation;
             this.lastLocation = startingLocation;
+            this.facingRadians = facingRadians;
         }
 
         public Vector2 getCurrentLocation()
@@ -31,6 +33,16 @@ namespace TheGameOfForever.Component
         public Vector2 getLastLocation()
         {
             return lastLocation;
+        }
+
+        public void setFacingRadians(float facingRadians)
+        {
+            this.facingRadians = facingRadians;
+        }
+
+        public float getFacingRadians()
+        {
+            return facingRadians;
         }
     }
 }

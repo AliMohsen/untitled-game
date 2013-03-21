@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
@@ -12,17 +13,44 @@ namespace TheGameOfForever.Service
     {
         public MovementControlService(EntityManager entityManager) : base(entityManager)
         {
-            interestingComponentTypes.Add(typeof(Controllable));
+            interestingComponentTypes.Add(typeof(CollisionHitBox));
         }
 
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, AbstractGameState gameState)
         {
-            foreach (int e in entityIds)
+            int entityId = ((MovementState)gameState).getEntityId();
+            Entity entity = entityManager.getEntity(entityId);
+            if (entity.hasComponent<LocationComponent>())
             {
-                Entity entity = entityManager.getEntity(e);
-                // Do movement logic based on controller input.
-                LocationComponent loc = entity.getComponent<LocationComponent>();
+                LocationComponent locationComponent = entity.getComponent<LocationComponent>();
+                // Need controller input.
+                Vector2 moveInDirection = Vector2.Zero;
+                locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+                if (moveInDirection != Vector2.Zero)
+                {
+                    ((MovementState)gameState).setHasMovement(true);
+                }
             }
+        }
+
+        /// <summary>
+        /// Check on map and against other entities whether it can move.
+        /// </summary>
+        /// <param name="location"></param>
+        private bool checkMovePossible(Vector2 location)
+        {
+            foreach (int entityId in entityIds)
+            {
+                Entity entity = entityManager.getEntity(entityId);
+                // check if collides
+                if (true)
+                {
+                    continue;
+                }
+                return false;
+            }
+            //We need to check map item collisions as well.
+            return true;
         }
     }
 }

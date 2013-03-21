@@ -2,49 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheGameOfForever.Service.Shapes;
 using Microsoft.Xna.Framework;
 
-namespace TheGameOfForever.Service
+namespace TheGameOfForever.Geometry
 {
-    class CollisionService
+    public class CollisionHelper
     {
-
-        public Vector2 collide(Shapes.IShape a, Shapes.IShape b)
+        public static Vector2 collide(IShape a, IShape b)
         {
-            if (a is Shapes.RectangleShape && b is Shapes.RectangleShape)
+            if (a is RectangleShape && b is RectangleShape)
             {
-                return intersectRectangles((Shapes.RectangleShape)a, (Shapes.RectangleShape)b);
+                return intersectRectangles((RectangleShape)a, (RectangleShape)b);
             }
 
-            if (a is Shapes.Circle && b is Shapes.RectangleShape)
+            if (a is Circle && b is RectangleShape)
             {
                 return -intersectCircleRectangle(a, b);
             }
 
-            if (a is Shapes.RectangleShape && b is Shapes.Circle)
+            if (a is RectangleShape && b is Circle)
             {
                 return intersectCircleRectangle(a, b);
             }
 
-            if (a is Shapes.Circle && b is Shapes.Circle)
+            if (a is Circle && b is Circle)
             {
-                return intersectCircles((Shapes.Circle)a, (Shapes.Circle)b);
+                return intersectCircles((Circle)a, (Circle)b);
             }
 
             return Vector2.Zero;
         }
 
-        public Vector2 intersectRectangles(Shapes.RectangleShape a, Shapes.RectangleShape b)
+        public static Vector2 intersectRectangles(RectangleShape a, RectangleShape b)
         {
             throw new NotImplementedException();
         }
 
-        public Vector2 intersectCircleRectangle(Shapes.IShape a, Shapes.IShape b)
+        public static Vector2 intersectCircleRectangle(IShape a, IShape b)
         {
             throw new NotImplementedException();
         }
 
-        public Vector2 intersectCircles(Shapes.Circle a, Shapes.Circle b)
+        public static Vector2 intersectCircles(Circle a, Circle b)
         {
             Vector2 aLocation = a.getLocation();
             Vector2 bLocation = b.getLocation();
@@ -61,6 +61,5 @@ namespace TheGameOfForever.Service
                 return Vector2.Normalize(bLocation - aLocation) * (distance - (aRadius + bRadius));
             }
         }
-
     }
 }

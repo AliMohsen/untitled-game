@@ -9,7 +9,7 @@ namespace TheGameOfForever.GameState
 {
     public abstract class AbstractGameState
     {
-        private GameStateManager gameStateManager;
+        protected GameStateManager gameStateManager;
         protected List<IGameService> gameServices = new List<IGameService>();
 
         public AbstractGameState(GameStateManager gameStateManager)
@@ -20,22 +20,22 @@ namespace TheGameOfForever.GameState
         public abstract bool isPropagateUpdate();
         public abstract bool isPropagateDraw();
 
-        protected void changeState(AbstractGameState gameState)
+        public void changeState(AbstractGameState gameState)
         {
             gameStateManager.swapState(this, gameState);
         }
 
-        protected void addStateOnTop(AbstractGameState gameState)
+        public void addStateOnTop(AbstractGameState gameState)
         {
             gameStateManager.pushState(gameState);
         }
 
-        protected void removeState()
+        public void removeState()
         {
             gameStateManager.removeState(this);
         }
 
-        protected void addStateOnTopOfThis(AbstractGameState gameState)
+        public void addStateOnTopOfThis(AbstractGameState gameState)
         {
             gameStateManager.addOnTop(this, gameState);
         }
@@ -44,7 +44,7 @@ namespace TheGameOfForever.GameState
         {
             foreach (IGameService service in gameServices)
             {
-                service.update(gameTime);
+                service.update(gameTime, this);
             }
         }
     }
