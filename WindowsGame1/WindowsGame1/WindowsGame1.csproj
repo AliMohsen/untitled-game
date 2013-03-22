@@ -125,6 +125,10 @@
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
     <Compile Include="Configuration\Character\ICharacterStats.cs" />
     <Compile Include="Configuration\Weapon\IWeaponStats.cs" />
+    <Compile Include="Control\Control.cs" />
+    <Compile Include="Control\GamepadControl.cs" />
+    <Compile Include="Control\IControl.cs" />
+    <Compile Include="Control\KeyboardControl.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityFactory.cs" />
     <Compile Include="Entities\EntityManager.cs" />
@@ -199,7 +203,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Control\" />
     <Folder Include="Editor\" />
     <Folder Include="Processor\" />
   </ItemGroup>
