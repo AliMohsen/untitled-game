@@ -6,6 +6,7 @@ using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.GameState;
+using TheGameOfForever.Control;
 
 namespace TheGameOfForever.Service
 {
@@ -16,11 +17,12 @@ namespace TheGameOfForever.Service
     {
         public PlayerUnitService(EntityManager entityManager) : base(entityManager)
         {
-            interestingComponentTypes.Add(typeof(Controllable));
+            subscribeToComponentGroup(typeof(Controllable));
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
         {
+            IControl control = DefaultControl.Instance;
             UnitSelectState state = ((UnitSelectState)gameState);
             List<int> selectableIds = new List<int>();
             foreach(int id in entityIds)
@@ -33,23 +35,24 @@ namespace TheGameOfForever.Service
             }
 
             //If the player presses next.
-            if (false)
+            if (control.isLRightPressed())
             {
                 state.setSelectId((state.getSelectId() + 1) % selectableIds.Count);
             }
 
             //If the player presses back.
-            if (false)
+            if (control.isLLeftPressed())
             {
                 state.setSelectId((state.getSelectId() - 1) % selectableIds.Count);
             }
 
             //If the player presses action(one).
-            if (false)
+            if (control.isActionAPressed())
             {
                 state.selectUnit(entityManager.getEntity(state.getSelectId())
                     .getComponent<Controllable>().getCommandCost());
             }
         }
+
     }
 }

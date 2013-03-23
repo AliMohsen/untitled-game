@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
@@ -15,6 +16,7 @@ namespace TheGameOfForever.GameState
         {
             commandPoints = 10;
             this.controlId = controlId;
+            gameServices.Add(gameStateManager.getService<PlayerUnitService>());
         }
 
         public void selectUnit(int commandCost)

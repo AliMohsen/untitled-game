@@ -5,8 +5,14 @@ using System.Text;
 
 namespace TheGameOfForever.Entities
 {
-    public interface IEntityLoader
+    public delegate void LoadEntities(EntityManager entityManager);
+    public class EntityLoader
     {
-        void loadEntities(EntityManager entityManager);
+        private EntityManager entityManager;
+        public EntityLoader(EntityManager entityManager, LoadEntities loadEntities)
+        {
+            this.loadEntities = loadEntities;
+        }
+        public LoadEntities loadEntities;
     }
 }

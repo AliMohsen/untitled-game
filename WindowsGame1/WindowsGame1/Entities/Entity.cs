@@ -12,7 +12,7 @@ namespace TheGameOfForever.Entities
         int id = -1;
         private List<BaseComponent> components;
 
-        public Entity(int id, params BaseComponent[] components)
+        private Entity(int id, params BaseComponent[] components)
         {
             for (int i = 0; i < components.Length; i++)
             {
@@ -20,8 +20,9 @@ namespace TheGameOfForever.Entities
             }
         }
 
-        public Entity(int id, List<BaseComponent> components)
+        private Entity(int id, List<BaseComponent> components)
         {
+            this.id = id;
             this.components = components;
         }
 
@@ -32,9 +33,21 @@ namespace TheGameOfForever.Entities
 
         public Boolean hasComponent<T>()
         {
-            foreach (IGameComponent component in components)
+            foreach (BaseComponent component in components)
             {
                 if (component is T)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Boolean hasComponent(Type t)
+        {
+            foreach (BaseComponent component in components)
+            {
+                if (t.IsAssignableFrom(component.GetType()))
                 {
                     return true;
                 }
@@ -52,6 +65,47 @@ namespace TheGameOfForever.Entities
                 }
             }
             return default(T);
+        }
+
+        public class EntityFactory
+        {
+            private static int uniqueId = 0;
+            private static Object thisLock = new Object();
+
+            public static Entity createEntityWithComponents(List<BaseComponent> components)
+            {
+                lock (thisLock)
+                {
+                    uniqueId++;
+                    return new Entity(uniqueId, components);
+                }
+            }
+
+            public static Entity createEntityWithComponents(params BaseComponent[] components)
+            {
+                lock (thisLock)
+                {
+                    uniqueId++;
+                    return new Entity(uniqueId, components);
+                }
+            }
+
+            public static Entity createHumanEntity(int health, Vector2 startingLocation, int teamId, bool controllable,
+                params BaseComponent[] otherComponents)
+            {
+                List<BaseComponent> components = new List<BaseComponent>();
+                // Add health.
+                components.Add(new HealthComponent(health));
+                // WHERE YOU AT!
+                components.Add(new LocationComponent(startingLocation, 0));
+                // People can move.
+                components.Add(new MovementComponent(6, Vector2.Zero));
+                // Humans form teams.
+                components.Add(new AllegianceComponent(teamId));
+                components.Add(new IsHumanComponent());
+                components.Add(new Controllable(1));
+                return createEntityWithComponents(components);
+            }
         }
     }
 }

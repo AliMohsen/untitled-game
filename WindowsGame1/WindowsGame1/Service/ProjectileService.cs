@@ -5,6 +5,7 @@ using System.Text;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using Microsoft.Xna.Framework;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
@@ -12,10 +13,10 @@ namespace TheGameOfForever.Service
     {
         public ProjectileService(EntityManager entityManager) : base(entityManager)
         {
-            interestingComponentTypes.Add(typeof(IsProjectile));
+            subscribeToComponentGroup(typeof(IsProjectile));
         }
 
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, AbstractGameState gameState)
         {
             foreach (int e in entityIds)
             {

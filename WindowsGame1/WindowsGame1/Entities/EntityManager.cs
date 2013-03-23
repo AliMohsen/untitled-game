@@ -13,9 +13,13 @@ namespace TheGameOfForever.Entities
         Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
         private List<IGameService> services = new List<IGameService>();
 
-        public void registerEntityService(IGameService gameService)
+        public void registerService(IGameService gameService)
         {
             services.Add(gameService);
+            foreach (Entity entity in entities.Values)
+            {
+                gameService.registerEntityIfNeeded(entity);
+            }
         }
 
         public Entity getEntity(int id)
@@ -25,7 +29,7 @@ namespace TheGameOfForever.Entities
 
         public void addEntity(Entity entity)
         {
-            if (entity.getId() > 0) 
+            if (entity.getId() < 0) 
             {
                 throw new InvalidEntityException("Invalid ID for entity.");
             }

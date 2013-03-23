@@ -16,7 +16,7 @@ namespace TheGameOfForever.Service
 
         public CrossFireService(EntityManager entityManager) : base(entityManager)
         {
-            interestingComponentTypes.Add(typeof(CanFire));
+            subscribeToComponentGroup(typeof(CanFire));
         }
 
         public override void update(GameTime gameTime, GameState.AbstractGameState gameState)

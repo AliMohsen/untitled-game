@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using TheGameOfForever.Ui.Layer;
 using TheGameOfForever.Ui.Editor.Input;
 using System.IO;
+using TheGameOfForever.GameState;
+using TheGameOfForever.Entities;
 
 namespace TheGameOfForever
 {
@@ -44,6 +46,18 @@ namespace TheGameOfForever
         MouseService mouseService = new MouseService();
         UiService uiService = new UiService();
 
+        /// <summary>
+        /// Load up the entities
+        /// </summary>
+        GameStateManager stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
+            (EntityManager entityManager) =>
+            {
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 10), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 40), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
+            }
+        ));
 
         public Game1()
         {
@@ -55,8 +69,11 @@ namespace TheGameOfForever
             var form = control.FindForm();
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.MouseDown += new MouseEventHandler(Form1_MouseDown);
+
             layerManager.addLayerOnTop(new BattleLayer());
             layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
+
+            stateManager.pushState(new UnitSelectState(0, stateManager));
         }
 
         private void Form1_MouseDown(object sender,
@@ -102,6 +119,7 @@ namespace TheGameOfForever
             layerManager.update(gameTime);
             uiLayer.update();
             uiService.update();
+            stateManager.update(gameTime);
             mouseService.updateLast();
         }
 
@@ -119,6 +137,7 @@ namespace TheGameOfForever
 
             spriteBatch.Begin();
             layerManager.draw(spriteBatch);
+            stateManager.draw(gameTime, spriteBatch);
             DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5));
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
             OutputConsole.draw(spriteBatch, 4, new Vector2(10,660), 0);

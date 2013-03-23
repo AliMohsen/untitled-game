@@ -5,6 +5,7 @@ using System.Text;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Service;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheGameOfForever.GameState
 {
@@ -13,11 +14,12 @@ namespace TheGameOfForever.GameState
         List<IGameService> gameServices = new List<IGameService>();
         LinkedList<AbstractGameState> gameStates = new LinkedList<AbstractGameState>();
         private EntityManager entityManager = new EntityManager();
-        private IEntityLoader entityLoader;
+        private EntityLoader entityLoader;
 
-        public GameStateManager(IEntityLoader entityLoader)
+        public GameStateManager(EntityLoader entityLoader)
         {
             this.entityLoader = entityLoader;
+            initializeEntities();
         }
 
         public void pushState(AbstractGameState state)
@@ -42,7 +44,10 @@ namespace TheGameOfForever.GameState
                     return (T) service;
                 }
             }
-            return default(T);
+            T newService = (T) Activator.CreateInstance(typeof(T), entityManager);
+            entityManager.registerService(newService);
+            gameServices.Add(newService);
+            return newService;
         }
 
         public void swapState(AbstractGameState oldState, AbstractGameState newState)
@@ -70,14 +75,25 @@ namespace TheGameOfForever.GameState
 
         public void initializeEntities()
         {
-            // Load all starting entities.
-            entityManager.addEntity(EntityFactory.createHumanEntity(100, new Vector2(100, 100), 0));
-            entityManager.addEntity(EntityFactory.createHumanEntity(100, new Vector2(200, 100), 1));
+
+            entityLoader.loadEntities(entityManager);
         }
 
         public void update(GameTime gameTime)
         {
-            
+            foreach (AbstractGameState gameState in gameStates)
+            {
+                gameState.update(gameTime);
+                if (!gameState.isPropagateUpdate())
+                {
+                    return;
+                }
+            }
+        }
+
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+
         }
     }
 }
