@@ -5,12 +5,12 @@ using System.Text;
 
 namespace TheGameOfForever.Control
 {
-    public class Control
+    public class DefaultControl
     {
         private static IControl instance;
         private static ControllerType type;
 
-        private Control() { }
+        private DefaultControl() { }
 
         public static IControl Instance
         {
