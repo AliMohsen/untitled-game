@@ -51,6 +51,5 @@ namespace TheGameOfForever.Service
                     .getComponent<Controllable>().getCommandCost());
             }
         }
-
     }
 }
