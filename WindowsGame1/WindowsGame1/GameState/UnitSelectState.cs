@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TheGameOfForever.Service;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace TheGameOfForever.GameState
 {
@@ -39,6 +41,11 @@ namespace TheGameOfForever.GameState
         public int getControlId()
         {
             return controlId;
+        }
+
+        public int getCommandPoints()
+        {
+            return commandPoints;
         }
 
         public override bool isPropagateUpdate()

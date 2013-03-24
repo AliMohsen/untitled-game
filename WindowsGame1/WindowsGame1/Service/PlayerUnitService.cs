@@ -7,6 +7,9 @@ using TheGameOfForever.Component;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Control;
+using Microsoft.Xna.Framework.Graphics;
+using TheGameOfForever.Ui.Editor;
+using TheGameOfForever.Ui.Font;
 
 namespace TheGameOfForever.Service
 {
@@ -15,7 +18,8 @@ namespace TheGameOfForever.Service
     /// </summary>
     public class PlayerUnitService : AbstractGameService
     {
-        public PlayerUnitService(EntityManager entityManager) : base(entityManager)
+        public PlayerUnitService(EntityManager entityManager)
+            : base(entityManager)
         {
             subscribeToComponentGroup(typeof(Controllable));
         }
@@ -25,7 +29,8 @@ namespace TheGameOfForever.Service
             IControl control = DefaultControl.Instance;
             UnitSelectState state = ((UnitSelectState)gameState);
             List<int> selectableIds = new List<int>();
-            foreach(int id in entityIds)
+
+            foreach (int id in entityIds)
             {
                 if (entityManager.getEntity(id).getComponent<AllegianceComponent>()
                     .getControlId() == state.getControlId())
@@ -33,18 +38,22 @@ namespace TheGameOfForever.Service
                     selectableIds.Add(id);
                 }
             }
-
+            int index = selectableIds.IndexOf(state.getSelectId());
+            if (index == -1) index = 0;
             //If the player presses next.
             if (control.isLRightPressed())
             {
-                state.setSelectId((state.getSelectId() + 1) % selectableIds.Count);
+                index = (index + 1) % selectableIds.Count;
             }
 
             //If the player presses back.
             if (control.isLLeftPressed())
             {
-                state.setSelectId((state.getSelectId() - 1) % selectableIds.Count);
+                if (index == 0) index = selectableIds.Count - 1;
+                else index = (index - 1) % selectableIds.Count;
             }
+
+            state.setSelectId(selectableIds[index]);
 
             //If the player presses action(one).
             if (control.isActionAPressed())
@@ -54,5 +63,34 @@ namespace TheGameOfForever.Service
             }
         }
 
+        public override void draw(GameTime gameTime, AbstractGameState gameState, SpriteBatch spriteBatch)
+        {
+            foreach (int id in entityIds)
+            {
+                Entity entity = entityManager.getEntity(id);
+                Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();
+                if (entity.getComponent<AllegianceComponent>()
+                    .getControlId() == ((UnitSelectState)gameState).getControlId())
+                {
+                    if (id == ((UnitSelectState)gameState).getSelectId())
+                    {
+                        spriteBatch.Draw(EditorContent.blank,
+                            new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Orange);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(EditorContent.blank,
+                            new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Green);
+                    }
+                }
+                else
+                {
+                    spriteBatch.Draw(EditorContent.blank,
+                         new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Red);
+                }
+            }
+            DrawStringHelper.drawString(spriteBatch, "Command points remaining: " + ((UnitSelectState)gameState).getCommandPoints(),
+                "mentone", 12, Color.Black, new Vector2(5));
+        }
     }
 }

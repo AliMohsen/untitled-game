@@ -5,6 +5,7 @@ using System.Text;
 using TheGameOfForever.Entities;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.GameState;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheGameOfForever.Service
 {
@@ -50,5 +51,10 @@ namespace TheGameOfForever.Service
         }
 
         public abstract void update(GameTime gameTime, AbstractGameState gameState);
+
+        public virtual void draw(GameTime gameTime, AbstractGameState gameState, SpriteBatch spriteBatch)
+        {
+
+        }
     }
 }

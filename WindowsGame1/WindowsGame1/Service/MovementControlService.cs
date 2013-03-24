@@ -48,6 +48,11 @@ namespace TheGameOfForever.Service
                 {
                     ((MovementState)gameState).setHasMovement(true);
                 }
+
+                if (control.isActionAPressed())
+                {
+                    ((MovementState)gameState).endMovement();
+                }
             }
         }
 

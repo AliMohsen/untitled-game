@@ -17,6 +17,7 @@ using TheGameOfForever.Ui.Editor.Input;
 using System.IO;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Entities;
+using TheGameOfForever.Component.Map;
 
 namespace TheGameOfForever
 {
@@ -70,7 +71,6 @@ namespace TheGameOfForever
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.MouseDown += new MouseEventHandler(Form1_MouseDown);
 
-            layerManager.addLayerOnTop(new BattleLayer());
             layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
 
             stateManager.pushState(new UnitSelectState(0, stateManager));
@@ -94,7 +94,7 @@ namespace TheGameOfForever
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
             base.Initialize();
-
+            stateManager.createRenderTarget(GraphicsDevice, (int)Map.getWorldWidth(), (int)Map.getWorldHeight());
         }
 
         protected override void LoadContent()
@@ -123,9 +123,12 @@ namespace TheGameOfForever
             mouseService.updateLast();
         }
 
+        private Vector2 screenOffset = new Vector2(10, 30);
+
         protected override void Draw(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
+            stateManager.draw(gameTime, spriteBatch);
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
@@ -137,8 +140,10 @@ namespace TheGameOfForever
 
             spriteBatch.Begin();
             layerManager.draw(spriteBatch);
-            stateManager.draw(gameTime, spriteBatch);
+
             DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5));
+            spriteBatch.Draw(stateManager.getGameScreen(), new Rectangle((int)screenOffset.X, (int)screenOffset.Y,
+                (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.White);
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
             OutputConsole.draw(spriteBatch, 4, new Vector2(10,660), 0);
             spriteBatch.End();

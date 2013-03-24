@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Service;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheGameOfForever.GameState
 {
@@ -45,6 +46,14 @@ namespace TheGameOfForever.GameState
             foreach (IGameService service in gameServices)
             {
                 service.update(gameTime, this);
+            }
+        }
+
+        public virtual void draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (AbstractGameService gameService in gameServices)
+            {
+                gameService.draw(gameTime, this, spriteBatch);
             }
         }
     }

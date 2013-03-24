@@ -81,19 +81,57 @@ namespace TheGameOfForever.GameState
 
         public void update(GameTime gameTime)
         {
+            Control.DefaultControl.Instance.updateCurrent();
             foreach (AbstractGameState gameState in gameStates)
             {
                 gameState.update(gameTime);
                 if (!gameState.isPropagateUpdate())
                 {
+                    Control.DefaultControl.Instance.updateLast();
                     return;
                 }
             }
+            Control.DefaultControl.Instance.updateLast();
+        }
+
+        GraphicsDevice graphicsDevice;
+        RenderTarget2D gameRenderTarget;
+        public void createRenderTarget(GraphicsDevice graphicsDevice, int width, int height) {
+            this.graphicsDevice = graphicsDevice;
+            gameRenderTarget = new RenderTarget2D(graphicsDevice, width, height);
+
+        }
+
+        public Texture2D getGameScreen()
+        {
+            return gameRenderTarget;
         }
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            graphicsDevice.SetRenderTarget(gameRenderTarget);
 
+            graphicsDevice.Clear(Color.LightGray);
+
+            bool canDraw = true;
+            List<AbstractGameState> layersToDraw = new List<AbstractGameState>();
+
+            foreach (AbstractGameState state in gameStates)
+            {
+                if (canDraw)
+                {
+                    layersToDraw.Add(state);
+                    canDraw &= !state.isPropagateDraw();
+                }
+            }
+            layersToDraw.Reverse();
+            spriteBatch.Begin();
+            foreach (AbstractGameState state in gameStates)
+            {
+                state.draw(gameTime, spriteBatch);
+            }
+            spriteBatch.End();
+            graphicsDevice.SetRenderTarget(null);
         }
     }
 }

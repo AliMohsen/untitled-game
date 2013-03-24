@@ -161,7 +161,6 @@
     <Compile Include="Ui\Editor\EditorOutputConsole.cs" />
     <Compile Include="Ui\Editor\IClickable.cs" />
     <Compile Include="Ui\Editor\Input\MouseService.cs" />
-    <Compile Include="Ui\Editor\Texture2d.cs" />
     <Compile Include="Ui\Editor\UiService.cs" />
     <Compile Include="Ui\Font\BasicFontCollection.cs" />
     <Compile Include="Ui\Font\FontFactory.cs" />

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TheGameOfForever.Service;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TheGameOfForever.GameState
 {
@@ -46,6 +48,16 @@ namespace TheGameOfForever.GameState
         {
             // Do not allow other states to draw underneath this one.
             return false;
+        }
+
+        internal void endMovement()
+        {
+            this.removeState();
+        }
+
+        public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+
         }
     }
 }
