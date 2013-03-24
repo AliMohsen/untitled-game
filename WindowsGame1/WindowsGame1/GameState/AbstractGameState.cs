@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Service;
 using Microsoft.Xna.Framework.Graphics;
+using TheGameOfForever.View.Camera;
 
 namespace TheGameOfForever.GameState
 {
@@ -12,31 +13,37 @@ namespace TheGameOfForever.GameState
     {
         protected GameStateManager gameStateManager;
         protected List<IGameService> gameServices = new List<IGameService>();
-
+        private ICamera camera;
         public AbstractGameState(GameStateManager gameStateManager)
         {
             this.gameStateManager = gameStateManager;
+            camera = gameStateManager.getCamera();
         }
 
         public abstract bool isPropagateUpdate();
         public abstract bool isPropagateDraw();
 
-        public void changeState(AbstractGameState gameState)
+        public ICamera getCamera()
+        {
+            return camera;
+        }
+
+        protected void changeState(AbstractGameState gameState)
         {
             gameStateManager.swapState(this, gameState);
         }
 
-        public void addStateOnTop(AbstractGameState gameState)
+        protected void addStateOnTop(AbstractGameState gameState)
         {
             gameStateManager.pushState(gameState);
         }
 
-        public void removeState()
+        protected void removeState()
         {
             gameStateManager.removeState(this);
         }
 
-        public void addStateOnTopOfThis(AbstractGameState gameState)
+        protected void addStateOnTopOfThis(AbstractGameState gameState)
         {
             gameStateManager.addOnTop(this, gameState);
         }

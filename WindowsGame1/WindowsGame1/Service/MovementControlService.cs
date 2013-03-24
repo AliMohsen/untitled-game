@@ -10,17 +10,26 @@ using TheGameOfForever.Control;
 
 namespace TheGameOfForever.Service
 {
-    public class MovementControlService : AbstractGameService
+    public class MovementService : AbstractGameService
     {
-        public MovementControlService(EntityManager entityManager) : base(entityManager)
+        public interface MovementServiceObserver
+        {
+            void endMovement();
+            void setHasMovement(bool hasMovement);
+            void setEntityLocation(Vector2 entityLocation);
+            int getEntityId();
+        }
+
+        public MovementService(EntityManager entityManager) : base(entityManager)
         {
             subscribeToComponentGroup(typeof(CollisionHitBox));
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
         {
+            MovementServiceObserver observer = (MovementServiceObserver)gameState;
             IControl control = DefaultControl.Instance;
-            int entityId = ((MovementState)gameState).getEntityId();
+            int entityId = observer.getEntityId();
             Entity entity = entityManager.getEntity(entityId);
             if (entity.hasComponent<LocationComponent>())
             {
@@ -29,30 +38,35 @@ namespace TheGameOfForever.Service
                 Vector2 moveInDirection = Vector2.Zero;
                 if (control.isLLeftHeld())
                 {
-                    moveInDirection += new Vector2(-1, 0);
+                    //moveInDirection += new Vector2(-1, 0);
+                    moveInDirection += new Vector2(-26f * gameTime.ElapsedGameTime.Milliseconds/1000f, 0);
                 }
                 if (control.isLRightHeld())
                 {
-                    moveInDirection += new Vector2(1, 0);
+                    //moveInDirection += new Vector2(1, 0);
+                    moveInDirection += new Vector2(26f * gameTime.ElapsedGameTime.Milliseconds / 1000f, 0);
                 }
                 if (control.isLDownHeld())
                 {
-                    moveInDirection += new Vector2(0, 1);
+                    //moveInDirection += new Vector2(0, 1);
+                    moveInDirection += new Vector2(0, 26f * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
                 if (control.isLUpHeld())
                 {
-                    moveInDirection += new Vector2(0, -1);
+                    //moveInDirection += new Vector2(0, -1);
+                    moveInDirection += new Vector2(0, -26f * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
                 locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
                 if (moveInDirection != Vector2.Zero)
                 {
-                    ((MovementState)gameState).setHasMovement(true);
+                    observer.setHasMovement(true);
                 }
 
                 if (control.isActionAPressed())
                 {
-                    ((MovementState)gameState).endMovement();
+                    observer.endMovement();
                 }
+                observer.setEntityLocation(locationComponent.getCurrentLocation());
             }
         }
 

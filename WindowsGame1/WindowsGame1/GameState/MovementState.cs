@@ -11,16 +11,19 @@ namespace TheGameOfForever.GameState
     /// <summary>
     /// Represents a single movement phase, state discarded when the player ends the movement state or runs out of time.
     /// </summary>
-    public class MovementState : AbstractGameState
+    public class MovementState : AbstractGameState, TrackingCameraService.TrackingCameraObserver,
+        MovementService.MovementServiceObserver
     {
         Boolean startedMoving = false;
         private int entityId;
         private float millisActive = 0;
+        private Vector2 entityLocation;
 
         public MovementState(int entityId, GameStateManager gameStateManager) : base(gameStateManager)
         {
             this.entityId = entityId;
-            gameServices.Add(gameStateManager.getService<MovementControlService>());
+            gameServices.Add(gameStateManager.getService<MovementService>());
+            gameServices.Add(gameStateManager.getService<TrackingCameraService>());
         }
 
         public int getEntityId()
@@ -50,14 +53,19 @@ namespace TheGameOfForever.GameState
             return false;
         }
 
-        internal void endMovement()
+        public void endMovement()
         {
             this.removeState();
         }
 
-        public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public Vector2 getLocationToTrack()
         {
+            return entityLocation;
+        }
 
+        public void setEntityLocation(Vector2 entityLocation)
+        {
+            this.entityLocation = entityLocation;
         }
     }
 }

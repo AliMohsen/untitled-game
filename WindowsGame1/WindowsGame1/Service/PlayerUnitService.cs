@@ -74,19 +74,19 @@ namespace TheGameOfForever.Service
                 {
                     if (id == ((UnitSelectState)gameState).getSelectId())
                     {
-                        spriteBatch.Draw(EditorContent.blank,
-                            new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Orange);
+                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0,0,1,1), Color.Orange, 
+                            (float)Math.PI/2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None,1);
                     }
                     else
                     {
-                        spriteBatch.Draw(EditorContent.blank,
-                            new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Green);
+                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Green,
+                            (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
                     }
                 }
                 else
                 {
-                    spriteBatch.Draw(EditorContent.blank,
-                         new Rectangle((int)location.X, (int)location.Y, 10, 10), Color.Red);
+                    spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Red,
+                        (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
                 }
             }
             DrawStringHelper.drawString(spriteBatch, "Command points remaining: " + ((UnitSelectState)gameState).getCommandPoints(),

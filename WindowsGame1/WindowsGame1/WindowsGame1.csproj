@@ -143,6 +143,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
+    <Compile Include="Service\TrackingCameraService.cs" />
     <Compile Include="Service\CrossFireService.cs" />
     <Compile Include="Service\EditorDamageLogicServiceImpl.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />

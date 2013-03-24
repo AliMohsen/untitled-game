@@ -6,6 +6,7 @@ using TheGameOfForever.Entities;
 using TheGameOfForever.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TheGameOfForever.View.Camera;
 
 namespace TheGameOfForever.GameState
 {
@@ -15,11 +16,13 @@ namespace TheGameOfForever.GameState
         LinkedList<AbstractGameState> gameStates = new LinkedList<AbstractGameState>();
         private EntityManager entityManager = new EntityManager();
         private EntityLoader entityLoader;
+        ICamera camera = new Basic2DCamera();
 
         public GameStateManager(EntityLoader entityLoader)
         {
             this.entityLoader = entityLoader;
             initializeEntities();
+            camera.setWorldPosition(Vector2.Zero);
         }
 
         public void pushState(AbstractGameState state)
@@ -125,13 +128,18 @@ namespace TheGameOfForever.GameState
                 }
             }
             layersToDraw.Reverse();
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, camera.getCameraTransformMatrix());
             foreach (AbstractGameState state in gameStates)
             {
                 state.draw(gameTime, spriteBatch);
             }
             spriteBatch.End();
             graphicsDevice.SetRenderTarget(null);
+        }
+
+        internal ICamera getCamera()
+        {
+            return camera;
         }
     }
 }
