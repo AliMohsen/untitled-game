@@ -18,6 +18,7 @@ namespace TheGameOfForever.Service
             void setHasMovement(bool hasMovement);
             void setEntityLocation(Vector2 entityLocation);
             int getEntityId();
+            void engageUnit();
         }
 
         public MovementService(EntityManager entityManager) : base(entityManager)
@@ -65,6 +66,11 @@ namespace TheGameOfForever.Service
                 if (control.isActionAPressed())
                 {
                     observer.endMovement();
+                }
+
+                if (control.isActionBPressed())
+                {
+                    observer.engageUnit();
                 }
                 observer.setEntityLocation(locationComponent.getCurrentLocation());
             }

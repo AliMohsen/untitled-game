@@ -67,5 +67,10 @@ namespace TheGameOfForever.GameState
         {
             this.entityLocation = entityLocation;
         }
+
+        public void engageUnit()
+        {
+            addStateOnTopOfThis(new EngageState(entityId, gameStateManager));
+        }
     }
 }

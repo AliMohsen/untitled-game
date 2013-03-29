@@ -136,6 +136,7 @@
     <Compile Include="Entities\EntityManager.cs" />
     <Compile Include="Entities\Exception\InvalidEntityException.cs" />
     <Compile Include="Entities\IEntityLoader.cs" />
+    <Compile Include="GameState\EngageState.cs" />
     <Compile Include="GameState\MovementState.cs" />
     <Compile Include="GameState\UnitSelectState.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
+    <Compile Include="Service\UnitFireService.cs" />
     <Compile Include="Service\TrackingCameraService.cs" />
     <Compile Include="Service\CrossFireService.cs" />
     <Compile Include="Service\EditorDamageLogicServiceImpl.cs" />
