@@ -129,7 +129,7 @@ namespace TheGameOfForever.GameState
             }
             layersToDraw.Reverse();
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, camera.getCameraTransformMatrix());
-            foreach (AbstractGameState state in gameStates)
+            foreach (AbstractGameState state in layersToDraw)
             {
                 state.draw(gameTime, spriteBatch);
             }
