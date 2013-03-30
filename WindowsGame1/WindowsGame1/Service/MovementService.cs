@@ -17,6 +17,7 @@ namespace TheGameOfForever.Service
             void endMovement();
             void setHasMovement(bool hasMovement);
             void setEntityLocation(Vector2 entityLocation);
+            void setEntityRotation(float rotation);
             int getEntityId();
             void engageUnit();
         }
@@ -39,25 +40,32 @@ namespace TheGameOfForever.Service
                 Vector2 moveInDirection = Vector2.Zero;
                 if (control.isLLeftHeld())
                 {
-                    //moveInDirection += new Vector2(-1, 0);
                     moveInDirection += new Vector2(-26f * gameTime.ElapsedGameTime.Milliseconds/1000f, 0);
                 }
                 if (control.isLRightHeld())
                 {
-                    //moveInDirection += new Vector2(1, 0);
                     moveInDirection += new Vector2(26f * gameTime.ElapsedGameTime.Milliseconds / 1000f, 0);
                 }
                 if (control.isLDownHeld())
                 {
-                    //moveInDirection += new Vector2(0, 1);
                     moveInDirection += new Vector2(0, 26f * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
                 if (control.isLUpHeld())
                 {
-                    //moveInDirection += new Vector2(0, -1);
                     moveInDirection += new Vector2(0, -26f * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
                 locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+
+                if (control.isRLeftHeld())
+                {
+                    locationComponent.setFacingRadians(locationComponent.getFacingRadians() 
+                        - (0.001f * gameTime.ElapsedGameTime.Milliseconds));
+                }
+                if (control.isRRightHeld())
+                {
+                    locationComponent.setFacingRadians(locationComponent.getFacingRadians()
+                        + (0.001f * gameTime.ElapsedGameTime.Milliseconds));
+                }
                 if (moveInDirection != Vector2.Zero)
                 {
                     observer.setHasMovement(true);
@@ -73,6 +81,7 @@ namespace TheGameOfForever.Service
                     observer.engageUnit();
                 }
                 observer.setEntityLocation(locationComponent.getCurrentLocation());
+                observer.setEntityRotation(locationComponent.getFacingRadians());
             }
         }
 

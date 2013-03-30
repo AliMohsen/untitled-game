@@ -111,8 +111,8 @@
     <Compile Include="Button.cs" />
     <Compile Include="ByteArrayOutputStream.cs" />
     <Compile Include="Component\Allegiance.cs" />
-    <Compile Include="Component\Character\BasicCharacter.cs" />
     <Compile Include="Component\BaseComponent.cs" />
+    <Compile Include="Component\EntityModelComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
     <Compile Include="Component\Controllable.cs" />
     <Compile Include="Component\IsHumanComponent.cs" />
@@ -140,10 +140,14 @@
     <Compile Include="GameState\MovementState.cs" />
     <Compile Include="GameState\UnitSelectState.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
+    <Compile Include="Processor\Content\ContentException.cs" />
+    <Compile Include="Processor\Content\Models\ModelDefinition.cs" />
+    <Compile Include="Processor\Content\Models\ModelLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
+    <Compile Include="Service\UnitDrawService.cs" />
     <Compile Include="Service\UnitFireService.cs" />
     <Compile Include="Service\TrackingCameraService.cs" />
     <Compile Include="Service\CrossFireService.cs" />
@@ -210,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Editor\" />
-    <Folder Include="Processor\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

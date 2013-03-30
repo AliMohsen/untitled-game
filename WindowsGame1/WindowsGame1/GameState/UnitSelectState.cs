@@ -18,6 +18,7 @@ namespace TheGameOfForever.GameState
         {
             commandPoints = 10;
             this.controlId = controlId;
+            gameServices.Add(gameStateManager.getService<UnitDrawService>());
             gameServices.Add(gameStateManager.getService<PlayerUnitService>());
         }
 

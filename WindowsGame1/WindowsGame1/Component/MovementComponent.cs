@@ -9,8 +9,7 @@ namespace TheGameOfForever.Component
     public class MovementComponent : BaseComponent
     {
         private float baseMovementSpeed;
-        private Vector2 velocity;
-        
+        private Vector2 velocity;      
 
         public MovementComponent(float baseMovementSpeed, Vector2 velocity)
         {

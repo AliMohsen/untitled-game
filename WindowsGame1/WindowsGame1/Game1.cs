@@ -18,6 +18,7 @@ using System.IO;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component.Map;
+using TheGameOfForever.Processor.Content.Models;
 
 namespace TheGameOfForever
 {
@@ -50,16 +51,7 @@ namespace TheGameOfForever
         /// <summary>
         /// Load up the entities
         /// </summary>
-        GameStateManager stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
-            (EntityManager entityManager) =>
-            {
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 10), 0, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 40), 0, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
-            }
-        ));
-
+        GameStateManager stateManager;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -70,10 +62,6 @@ namespace TheGameOfForever
             var form = control.FindForm();
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.MouseDown += new MouseEventHandler(Form1_MouseDown);
-
-            layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
-
-            stateManager.pushState(new UnitSelectState(0, stateManager));
         }
 
         private void Form1_MouseDown(object sender,
@@ -101,8 +89,19 @@ namespace TheGameOfForever
         {
             Game1.content = Content;
             FontFactory.setContentManager(content);
+            ModelLibrary.initModelLibrary(content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
+            stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
+            (EntityManager entityManager) =>
+            {
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 10), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 40), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
+            }));
+            layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
+            stateManager.pushState(new UnitSelectState(0, stateManager));
             OutputConsole.writeLn("Loading");
         }
 

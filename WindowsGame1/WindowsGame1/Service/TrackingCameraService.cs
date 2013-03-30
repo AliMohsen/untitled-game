@@ -14,6 +14,7 @@ namespace TheGameOfForever.Service
         public interface TrackingCameraObserver
         {
             Vector2 getLocationToTrack();
+            float getRotationToTrack();
         }
 
         public TrackingCameraService(EntityManager entityManager)
@@ -30,6 +31,7 @@ namespace TheGameOfForever.Service
                 MathHelper.SmoothStep(
                     observer.getLocationToTrack().Y,
                     gameState.getCamera().getWorldPosition().Y, 0.8f)));
+            gameState.getCamera().setRotation(observer.getRotationToTrack());
         }
     }
 }

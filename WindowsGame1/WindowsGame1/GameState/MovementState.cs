@@ -18,10 +18,12 @@ namespace TheGameOfForever.GameState
         private int entityId;
         private float millisActive = 0;
         private Vector2 entityLocation;
+        private float entityRotation;
 
         public MovementState(int entityId, GameStateManager gameStateManager) : base(gameStateManager)
         {
             this.entityId = entityId;
+            gameServices.Add(gameStateManager.getService<UnitDrawService>());
             gameServices.Add(gameStateManager.getService<MovementService>());
             gameServices.Add(gameStateManager.getService<TrackingCameraService>());
         }
@@ -71,6 +73,18 @@ namespace TheGameOfForever.GameState
         public void engageUnit()
         {
             addStateOnTopOfThis(new EngageState(entityId, gameStateManager));
+        }
+
+
+        public void setEntityRotation(float rotation)
+        {
+            this.entityRotation = rotation;
+        }
+
+
+        public float getRotationToTrack()
+        {
+            return entityRotation;
         }
     }
 }

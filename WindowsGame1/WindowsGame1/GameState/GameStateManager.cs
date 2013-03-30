@@ -124,7 +124,7 @@ namespace TheGameOfForever.GameState
                 if (canDraw)
                 {
                     layersToDraw.Add(state);
-                    canDraw &= !state.isPropagateDraw();
+                    canDraw &= state.isPropagateDraw();
                 }
             }
             layersToDraw.Reverse();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Component;
+using TheGameOfForever.Processor.Content.Models;
 
 namespace TheGameOfForever.Entities
 {
@@ -104,6 +105,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new AllegianceComponent(teamId));
                 components.Add(new IsHumanComponent());
                 components.Add(new Controllable(1));
+                components.Add(new EntityModelComponent(ModelLibrary.getModelIdFromName("test")));
                 return createEntityWithComponents(components);
             }
         }
