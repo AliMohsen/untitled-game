@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace TheGameOfForever.GameState
 {
-    public class UnitSelectState : AbstractGameState
+    public class UnitSelectState : AbstractGameState, TrackingCameraService.TrackingCameraObserver
     {
         private int controlId;
         private int commandPoints;
@@ -20,6 +20,7 @@ namespace TheGameOfForever.GameState
             this.controlId = controlId;
             gameServices.Add(gameStateManager.getService<UnitDrawService>());
             gameServices.Add(gameStateManager.getService<PlayerUnitService>());
+            gameServices.Add(gameStateManager.getService<TrackingCameraService>());
         }
 
         public void selectUnit(int commandCost)
@@ -57,6 +58,16 @@ namespace TheGameOfForever.GameState
         public override bool isPropagateDraw()
         {
             return true;
+        }
+
+        public Vector2 getLocationToTrack()
+        {
+            return Vector2.Zero;
+        }
+
+        public float getRotationToTrack()
+        {
+            return 0;
         }
     }
 }
