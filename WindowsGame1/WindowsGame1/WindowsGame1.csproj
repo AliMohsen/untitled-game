@@ -137,6 +137,7 @@
     <Compile Include="Entities\Exception\InvalidEntityException.cs" />
     <Compile Include="Entities\IEntityLoader.cs" />
     <Compile Include="GameState\EngageState.cs" />
+    <Compile Include="GameState\GlobalStateInfo.cs" />
     <Compile Include="GameState\MovementState.cs" />
     <Compile Include="GameState\UnitSelectState.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />

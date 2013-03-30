@@ -102,6 +102,7 @@ namespace TheGameOfForever
             }));
             layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
             stateManager.pushState(new UnitSelectState(0, stateManager));
+            GlobalStateInfo.setTotalPlayers(2);
             OutputConsole.writeLn("Loading");
         }
 

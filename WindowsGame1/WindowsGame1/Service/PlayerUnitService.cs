@@ -58,8 +58,16 @@ namespace TheGameOfForever.Service
             //If the player presses action(one).
             if (control.isActionAPressed())
             {
-                state.selectUnit(entityManager.getEntity(state.getSelectId())
-                    .getComponent<Controllable>().getCommandCost());
+                int commandCost = entityManager.getEntity(state.getSelectId()).getComponent<Controllable>().getCommandCost();
+                if (state.getCommandPoints() >= commandCost)
+                {
+                    state.selectUnit(commandCost);
+                }
+            }
+
+            if (control.isActionCPressed())
+            {
+                state.endTurn();
             }
         }
 

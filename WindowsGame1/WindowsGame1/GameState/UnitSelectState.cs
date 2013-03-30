@@ -30,6 +30,17 @@ namespace TheGameOfForever.GameState
             addStateOnTopOfThis(new MovementState(selectedId, gameStateManager));
         }
 
+        public void endTurn()
+        {
+
+            int nextId = ++controlId;
+            if(controlId == GlobalStateInfo.getTotalPlayers())
+            {
+                nextId = 0;
+            }
+            gameStateManager.swapState(this, new UnitSelectState(nextId, gameStateManager));
+        }
+
         public int getSelectId()
         {
             return selectedId;
