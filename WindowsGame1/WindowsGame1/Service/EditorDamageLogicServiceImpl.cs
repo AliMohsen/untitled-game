@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheGameOfForever.Configuration.Character;
+using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever.Service
 {
@@ -26,7 +28,7 @@ namespace TheGameOfForever.Service
             return chanceToHit;
         }
 
-        public Damage damageDealt(Configuration.Character.ICharacterStats attacker, Configuration.Weapon.IWeaponStats weapon, Configuration.Character.ICharacterStats victim)
+        public Damage damageDealt(ICharacterStats attacker, IWeaponStats weapon, ICharacterStats victim)
         {
 
             //** DAMAGE CALCULATION **//
@@ -87,7 +89,7 @@ namespace TheGameOfForever.Service
 
         }
 
-        public float calculateConeAngle(Configuration.Character.ICharacterStats attacker, Configuration.Character.ICharacterStats victim)
+        public float calculateConeAngle(ICharacterStats attacker, ICharacterStats victim)
         {
             // Angle = ( width of object / ( hitRatio * distance )) * ( 180/pi )
 
