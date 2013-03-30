@@ -155,7 +155,6 @@
     <Compile Include="Service\EditorDamageLogicServiceImpl.cs" />
     <Compile Include="Service\IDamageLogicService.cs" />
     <Compile Include="Service\IGameService.cs" />
-    <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\PlayerUnitService.cs" />
     <Compile Include="Service\ProjectileService.cs" />
     <Compile Include="Service\Shapes\Circle.cs" />
