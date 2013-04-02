@@ -32,7 +32,6 @@ namespace TheGameOfForever.GameState
 
         public void endTurn()
         {
-
             int nextId = ++controlId;
             if(controlId == GlobalStateInfo.getTotalPlayers())
             {
