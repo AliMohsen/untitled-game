@@ -39,5 +39,14 @@ namespace TheGameOfForever.Entities
                 service.registerEntityIfNeeded(entity);
             }
         }
+
+        public void removeEntity(int entityId)
+        {
+            foreach (IGameService service in services)
+            {
+                service.unregisterEntity(entities[entityId]);
+            }
+            entities.Remove(entityId);
+        }
     }
 }

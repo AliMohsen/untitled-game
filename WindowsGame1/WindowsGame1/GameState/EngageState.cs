@@ -8,12 +8,12 @@ namespace TheGameOfForever.GameState
 {
     class EngageState : AbstractGameState
     {
-        private int controlId;
+        private int entityId;
 
         public EngageState(int entityId, GameStateManager gameStateManager) 
             : base(gameStateManager)
         {
-            this.controlId = entityId;
+            this.entityId = entityId;
             gameServices.Add(gameStateManager.getService<UnitDrawService>());
             gameServices.Add(gameStateManager.getService<UnitFireService>());
         }
@@ -23,9 +23,9 @@ namespace TheGameOfForever.GameState
             this.removeState();
         }
 
-        public int getControlId()
+        public int getEntityId()
         {
-            return controlId;
+            return entityId;
         }
 
         public override bool isPropagateUpdate()
