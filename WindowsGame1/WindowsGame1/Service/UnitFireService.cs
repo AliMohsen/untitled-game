@@ -70,8 +70,8 @@ namespace TheGameOfForever.Service
 
                 List<BaseComponent> components = new List<BaseComponent>();
                 components.Add(new LocationComponent(unitLocation, bulletDirection));
-                float x = (float)Math.Cos(bulletDirection);
-                float y = (float)Math.Sin(bulletDirection);
+                float x = (float)Math.Cos(bulletDirection + unitDirection);
+                float y = (float)Math.Sin(bulletDirection + unitDirection);
                 components.Add(new MovementComponent(10, new Vector2(x, y) * 10));
                 components.Add(new IsProjectile(100, true));
                 
