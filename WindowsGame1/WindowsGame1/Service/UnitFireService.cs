@@ -57,12 +57,25 @@ namespace TheGameOfForever.Service
                 state.disengage();
             }
 
-            if (control.isActionAPressed() || control.isActionAHeld())
-            {
-                Entity unit = entityManager.getEntity(state.getEntityId());
-                Vector2 unitLocation = unit.getComponent<LocationComponent>().getCurrentLocation();
-                float unitDirection = unit.getComponent<LocationComponent>().getFacingRadians();
+            Entity unit = entityManager.getEntity(state.getEntityId());
+            LocationComponent locationComponent = unit.getComponent<LocationComponent>();
 
+
+
+            if (control.isLLeftHeld())
+            {
+                locationComponent.setFacingRadians(unit.getComponent<LocationComponent>().getFacingRadians()
+                    - (0.0005f * gameTime.ElapsedGameTime.Milliseconds));
+            }
+            else if (control.isLRightHeld())
+            {
+                locationComponent.setFacingRadians(unit.getComponent<LocationComponent>().getFacingRadians()
+                    + (0.0005f * gameTime.ElapsedGameTime.Milliseconds));
+            }
+            else if (control.isActionAPressed() || control.isActionAHeld())
+            {
+                float unitDirection = locationComponent.getFacingRadians();
+                Vector2 unitLocation = locationComponent.getCurrentLocation();
                 float maximum = weaponAcc / 2;
                 float minimum = -weaponAcc / 2;
 
@@ -74,7 +87,7 @@ namespace TheGameOfForever.Service
                 float y = (float)Math.Sin(bulletDirection + unitDirection);
                 components.Add(new MovementComponent(10, new Vector2(x, y) * 10));
                 components.Add(new IsProjectile(100, true));
-                
+
                 entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
             }
         }
@@ -95,15 +108,20 @@ namespace TheGameOfForever.Service
             float leftAngle = - weaponAcc / 2;
             float rightAngle = weaponAcc / 2;
 
-            spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), leftLine, Color.Black, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
-            spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine, Color.Black, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+            spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), leftLine,
+                Color.DarkGray, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+            spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
+                Color.DarkGray, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+            spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
+                Color.DarkGray, direction , new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
 
             foreach (int id in entityIds)
             {
                 Entity entity = entityManager.getEntity(id);
                 if (entity.hasComponent<IsProjectile>())
                 {
-                    spriteBatch.Draw(EditorContent.blank, entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
+                    spriteBatch.Draw(EditorContent.blank, 
+                        entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
                         (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
                 }
             }

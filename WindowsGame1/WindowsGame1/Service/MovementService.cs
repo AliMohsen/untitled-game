@@ -7,6 +7,7 @@ using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Control;
+using TheGameOfForever.Geometry;
 
 namespace TheGameOfForever.Service
 {
@@ -54,7 +55,7 @@ namespace TheGameOfForever.Service
                 {
                     moveInDirection += new Vector2(0, -26f * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
-                locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+
 
                 if (control.isRLeftHeld())
                 {
@@ -66,6 +67,10 @@ namespace TheGameOfForever.Service
                     locationComponent.setFacingRadians(locationComponent.getFacingRadians()
                         + (0.001f * gameTime.ElapsedGameTime.Milliseconds));
                 }
+
+                moveInDirection = GeometryHelper.rotateVec(moveInDirection, locationComponent.getFacingRadians());
+                locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+
                 if (moveInDirection != Vector2.Zero)
                 {
                     observer.setHasMovement(true);
