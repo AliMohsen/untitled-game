@@ -11,7 +11,8 @@ namespace TheGameOfForever.Service
     public interface IGameService
     {
         void registerEntityIfNeeded(Entity entity);
-        void unregisterEntity(Entity entity);
+        void refreshEntity(Entity entity);
+        void removeEntity(Entity entity);
 
         void update(GameTime gameTime, AbstractGameState gameState);
     }

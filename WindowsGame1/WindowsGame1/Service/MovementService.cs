@@ -8,6 +8,8 @@ using TheGameOfForever.Component;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Control;
 using TheGameOfForever.Geometry;
+using TheGameOfForever.Draw;
+using TheGameOfForever.Ui.Editor;
 
 namespace TheGameOfForever.Service
 {
@@ -17,15 +19,18 @@ namespace TheGameOfForever.Service
         {
             void endMovement();
             void setHasMovement(bool hasMovement);
+            bool getHasMovement();
             void setEntityLocation(Vector2 entityLocation);
             void setEntityRotation(float rotation);
             int getEntityId();
+            long getMillisToMove();
+            void setMillisToMove(long millis);
             void engageUnit();
         }
 
         public MovementService(EntityManager entityManager) : base(entityManager)
         {
-            subscribeToComponentGroup(typeof(CollisionHitBox));
+            subscribeToComponentGroup(typeof(CollisionHitBox)); // 0
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -69,7 +74,11 @@ namespace TheGameOfForever.Service
                 }
 
                 moveInDirection = GeometryHelper.rotateVec(moveInDirection, locationComponent.getFacingRadians());
-                locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+
+                if (!observer.getHasMovement())
+                {
+                    observer.setMillisToMove(entity.getComponent<MovementTime>().getMillisToMove());
+                }
 
                 if (moveInDirection != Vector2.Zero)
                 {
@@ -85,6 +94,15 @@ namespace TheGameOfForever.Service
                 {
                     observer.engageUnit();
                 }
+                if (observer.getHasMovement())
+                {
+                    long timeLeft = observer.getMillisToMove() - gameTime.ElapsedGameTime.Milliseconds;
+                    observer.setMillisToMove(timeLeft);
+                    if (timeLeft > 0)
+                    {
+                        locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+                    }
+                }
                 observer.setEntityLocation(locationComponent.getCurrentLocation());
                 observer.setEntityRotation(locationComponent.getFacingRadians());
             }
@@ -96,7 +114,7 @@ namespace TheGameOfForever.Service
         /// <param name="location"></param>
         private bool checkMovePossible(Vector2 location)
         {
-            foreach (int entityId in entityIds)
+            foreach (int entityId in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(entityId);
                 // check if collides
@@ -108,6 +126,23 @@ namespace TheGameOfForever.Service
             }
             //We need to check map item collisions as well.
             return true;
+        }
+
+        public override void draw(GameTime gameTime, AbstractGameState gameState, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            MovementServiceObserver observer = (MovementServiceObserver)gameState;
+            int entityId = observer.getEntityId();
+            Entity entity = entityManager.getEntity(entityId);
+            float fractionLeftToMove = observer.getMillisToMove() / (float)entity.getComponent<MovementTime>().getMillisToMove();
+            spriteBatch.End();
+            DrawHelper.spriteBatchBeginUI(spriteBatch);
+
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 200, 5), Color.DarkGray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 11, (int)(200 * fractionLeftToMove), 2), Color.LightBlue);
+            spriteBatch.End();
+            DrawHelper.spriteBatchBeginGame(spriteBatch);
+
+            base.draw(gameTime, gameState, spriteBatch);
         }
     }
 }

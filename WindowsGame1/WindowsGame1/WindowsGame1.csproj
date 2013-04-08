@@ -110,7 +110,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="ByteArrayOutputStream.cs" />
-    <Compile Include="Component\Allegiance.cs" />
+    <Compile Include="Component\AllegianceComponent.cs" />
     <Compile Include="Component\BaseComponent.cs" />
     <Compile Include="Component\EntityModelComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Control\GamepadControl.cs" />
     <Compile Include="Control\IControl.cs" />
     <Compile Include="Control\KeyboardControl.cs" />
+    <Compile Include="Draw\DrawHelper.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityManager.cs" />
     <Compile Include="Entities\Exception\InvalidEntityException.cs" />

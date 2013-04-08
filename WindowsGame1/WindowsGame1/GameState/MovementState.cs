@@ -19,6 +19,7 @@ namespace TheGameOfForever.GameState
         private float millisActive = 0;
         private Vector2 entityLocation;
         private float entityRotation;
+        long millisToMove;
 
         public MovementState(int entityId, GameStateManager gameStateManager) : base(gameStateManager)
         {
@@ -85,6 +86,22 @@ namespace TheGameOfForever.GameState
         public float getRotationToTrack()
         {
             return entityRotation;
+        }
+
+
+        public bool getHasMovement()
+        {
+            return startedMoving;
+        }
+
+        public long getMillisToMove()
+        {
+            return millisToMove;
+        }
+
+        public void setMillisToMove(long millis)
+        {
+            millisToMove = millis;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace TheGameOfForever.GameState
         public AbstractGameState(GameStateManager gameStateManager)
         {
             this.gameStateManager = gameStateManager;
-            camera = gameStateManager.getCamera();
+            camera = GameStateManager.getCamera();
         }
 
         public abstract bool isPropagateUpdate();

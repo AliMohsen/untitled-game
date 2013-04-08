@@ -16,7 +16,7 @@ namespace TheGameOfForever.Service
         public UnitDrawService(EntityManager entityManager)
             : base(entityManager)
         {
-            subscribeToComponentGroup(typeof(EntityModelComponent));
+            subscribeToComponentGroup(typeof(EntityModelComponent)); // 0
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -25,7 +25,7 @@ namespace TheGameOfForever.Service
 
         public override void draw(GameTime gameTime, AbstractGameState gameState, SpriteBatch spriteBatch)
         {
-            foreach (int id in this.entityIds)
+            foreach (int id in this.entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id);
                 ModelDefinition model = ModelLibrary.getModelFromId(entity.getComponent<EntityModelComponent>()

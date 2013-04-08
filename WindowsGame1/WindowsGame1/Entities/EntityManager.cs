@@ -44,7 +44,7 @@ namespace TheGameOfForever.Entities
         {
             foreach (IGameService service in services)
             {
-                service.unregisterEntity(entities[entityId]);
+                service.removeEntity(entities[entityId]);
             }
             entities.Remove(entityId);
         }

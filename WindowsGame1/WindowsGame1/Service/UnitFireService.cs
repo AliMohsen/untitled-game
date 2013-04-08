@@ -30,30 +30,25 @@ namespace TheGameOfForever.Service
             IControl control = DefaultControl.Instance;
             EngageState state = (EngageState)gameState;
 
-            foreach (int id in entityIds)
+            foreach (int id in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id);
-                if (entity.hasComponent<IsProjectile>())
-                {
-                    Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();
-                    Vector2 nextLocation = location + entity.getComponent<MovementComponent>().getVelocity();
-                    entity.getComponent<LocationComponent>().setCurrentLocation(nextLocation);
-                }
+                Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();
+                Vector2 nextLocation = location + entity.getComponent<MovementComponent>().getVelocity();
+                entity.getComponent<LocationComponent>().setCurrentLocation(nextLocation);
+
             }
 
             if (control.isActionBPressed())
             {
                 HashSet<int> newEntityIds = new HashSet<int>();
 
-                foreach (int id in entityIds)
+                foreach (int id in entityIds[1])
                 {
                     Entity entity = entityManager.getEntity(id);
-                    if (!entity.hasComponent<IsProjectile>())
-                    {
-                        newEntityIds.Add(id);
-                    }
+                    newEntityIds.Add(id);
                 }
-                entityIds = newEntityIds;
+                entityIds[1] = newEntityIds;
                 state.disengage();
             }
 
@@ -115,15 +110,13 @@ namespace TheGameOfForever.Service
             spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
                 Color.DarkGray, direction , new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
 
-            foreach (int id in entityIds)
+            foreach (int id in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id);
-                if (entity.hasComponent<IsProjectile>())
-                {
-                    spriteBatch.Draw(EditorContent.blank, 
-                        entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
-                        (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
-                }
+                spriteBatch.Draw(EditorContent.blank,
+                    entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
+                    (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
+
             }
         }
     }

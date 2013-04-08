@@ -21,7 +21,7 @@ namespace TheGameOfForever.Service
         public PlayerUnitService(EntityManager entityManager)
             : base(entityManager)
         {
-            subscribeToComponentGroup(typeof(Controllable));
+            subscribeToComponentGroup(typeof(Controllable)); // 0
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -30,7 +30,7 @@ namespace TheGameOfForever.Service
             UnitSelectState state = ((UnitSelectState)gameState);
             List<int> selectableIds = new List<int>();
 
-            foreach (int id in entityIds)
+            foreach (int id in entityIds[0])
             {
                 if (entityManager.getEntity(id).getComponent<AllegianceComponent>()
                     .getControlId() == state.getControlId())
@@ -73,7 +73,7 @@ namespace TheGameOfForever.Service
 
         public override void draw(GameTime gameTime, AbstractGameState gameState, SpriteBatch spriteBatch)
         {
-            foreach (int id in entityIds)
+            foreach (int id in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id);
                 Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();

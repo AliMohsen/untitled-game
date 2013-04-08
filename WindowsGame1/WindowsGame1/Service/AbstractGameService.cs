@@ -12,7 +12,7 @@ namespace TheGameOfForever.Service
     public abstract class AbstractGameService : IGameService
     {
         private List<List<Type>> interestingComponentTypes = new List<List<Type>>();
-        protected HashSet<int> entityIds = new HashSet<int>();
+        protected List<HashSet<int>> entityIds = new List<HashSet<int>>();
         protected EntityManager entityManager;
 
         public AbstractGameService(EntityManager entityManager)
@@ -23,14 +23,15 @@ namespace TheGameOfForever.Service
         protected void subscribeToComponentGroup(params Type[] types)
         {
             interestingComponentTypes.Add(new List<Type>(types));
+            entityIds.Add(new HashSet<int>());
         }
 
         public void registerEntityIfNeeded(Entity entity)
         {
-            foreach (List<Type> types in interestingComponentTypes) 
+            for (int i = 0; i < interestingComponentTypes.Count; i++)
             {
                 Boolean add = true;
-                foreach (Type type in types)
+                foreach (Type type in interestingComponentTypes[i])
                 {
                     add &= entity.hasComponent(type);
                     if (!add)
@@ -40,14 +41,37 @@ namespace TheGameOfForever.Service
                 }
                 if (add)
                 {
-                    entityIds.Add(entity.getId());
+                    entityIds[i].Add(entity.getId());
                 }
             }
         }
 
-        public void unregisterEntity(Entity entity)
+        public void refreshEntity(Entity entity)
         {
-            entityIds.Remove(entity.getId());       
+            for (int i = 0; i < interestingComponentTypes.Count; i++)
+            {
+                Boolean add = true;
+                foreach (Type type in interestingComponentTypes[i])
+                {
+                    add &= entity.hasComponent(type);
+                    if (!add)
+                    {
+                        continue;
+                    }
+                }
+                if (!add)
+                {
+                    entityIds[i].Remove(entity.getId());
+                }
+            }  
+        }
+
+        public void removeEntity(Entity entity)
+        {
+            for (int i = 0; i < interestingComponentTypes.Count; i++)
+            {
+                entityIds[i].Remove(entity.getId());
+            }
         }
 
         public abstract void update(GameTime gameTime, AbstractGameState gameState);

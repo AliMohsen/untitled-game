@@ -24,7 +24,7 @@ namespace TheGameOfForever.Service
             if (((MovementState)gameState).isMoving())
             {
                 Entity entityMoving = entityManager.getEntity(((MovementState)gameState).getEntityId());
-                foreach (int entityId in entityIds)
+                foreach (int entityId in entityIds[0])
                 {
                     Entity entity = entityManager.getEntity(entityId);
                     if (entity.hasComponent<InterceptionFirePotential>()

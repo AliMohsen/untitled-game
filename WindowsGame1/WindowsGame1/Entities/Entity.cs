@@ -103,6 +103,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new MovementComponent(6, Vector2.Zero));
                 // Humans form teams.
                 components.Add(new AllegianceComponent(teamId));
+                components.Add(new MovementTime());
                 components.Add(new IsHumanComponent());
                 components.Add(new Controllable(1));
                 components.Add(new EntityModelComponent(ModelLibrary.getModelIdFromName("test")));
