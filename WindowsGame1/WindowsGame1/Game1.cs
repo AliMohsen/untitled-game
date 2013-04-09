@@ -19,6 +19,7 @@ using TheGameOfForever.GameState;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component.Map;
 using TheGameOfForever.Processor.Content.Models;
+using TheGameOfForever.Component.Weapons;
 
 namespace TheGameOfForever
 {
@@ -90,6 +91,7 @@ namespace TheGameOfForever
             Game1.content = Content;
             FontFactory.setContentManager(content);
             ModelLibrary.initModelLibrary(content);
+            WeaponLibrary.initWeaponLibrary();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
             stateManager = new GameStateManager(new EntityLoader(new EntityManager(),

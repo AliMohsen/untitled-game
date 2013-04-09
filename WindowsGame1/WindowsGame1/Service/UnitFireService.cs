@@ -10,13 +10,13 @@ using TheGameOfForever.GameState;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Processor.Content.Models;
+using TheGameOfForever.Component.Weapons;
 
 namespace TheGameOfForever.Service
 {
     class UnitFireService : AbstractGameService
     {
         Random rand = new Random();
-        float weaponAcc = (float)Math.PI / 18;
 
         public UnitFireService(EntityManager entityManager)
             : base(entityManager)
@@ -41,14 +41,12 @@ namespace TheGameOfForever.Service
 
             if (control.isActionBPressed())
             {
-                HashSet<int> newEntityIds = new HashSet<int>();
+                int[] entityIdsUnchanged = entityIds[0].ToArray<int>();
 
-                foreach (int id in entityIds[1])
+                foreach (int id in entityIdsUnchanged)
                 {
-                    Entity entity = entityManager.getEntity(id);
-                    newEntityIds.Add(id);
+                    entityManager.removeEntity(id);
                 }
-                entityIds[1] = newEntityIds;
                 state.disengage();
             }
 
@@ -71,6 +69,10 @@ namespace TheGameOfForever.Service
             {
                 float unitDirection = locationComponent.getFacingRadians();
                 Vector2 unitLocation = locationComponent.getCurrentLocation();
+                
+                int heldWeaponId = unit.getComponent<ArsenalComponent>().getCurrentWeaponId();
+                float weaponAcc = WeaponLibrary.getWeaponFromId(heldWeaponId).getAccuracy();
+
                 float maximum = weaponAcc / 2;
                 float minimum = -weaponAcc / 2;
 
@@ -99,6 +101,9 @@ namespace TheGameOfForever.Service
 
             Rectangle leftLine = new Rectangle(0, 0, 500, 1);
             Rectangle rightLine = new Rectangle(0, 0, 500, 1);
+
+            int heldWeaponId = unit.getComponent<ArsenalComponent>().getCurrentWeaponId();
+            float weaponAcc = WeaponLibrary.getWeaponFromId(heldWeaponId).getAccuracy();
 
             float leftAngle = - weaponAcc / 2;
             float rightAngle = weaponAcc / 2;

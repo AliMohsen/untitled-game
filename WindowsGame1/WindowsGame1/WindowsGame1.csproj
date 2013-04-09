@@ -111,6 +111,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="ByteArrayOutputStream.cs" />
     <Compile Include="Component\AllegianceComponent.cs" />
+    <Compile Include="Component\ArsenalComponent.cs" />
     <Compile Include="Component\BaseComponent.cs" />
     <Compile Include="Component\EntityModelComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
@@ -121,10 +122,11 @@
     <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Component\MovementComponent.cs" />
     <Compile Include="Component\MovementTime.cs" />
-    <Compile Include="Component\WeaponComponent.cs" />
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
     <Compile Include="Component\CanFire.cs" />
+    <Compile Include="Component\Weapons\Weapon.cs" />
+    <Compile Include="Component\Weapons\WeaponLibrary.cs" />
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
     <Compile Include="Configuration\Character\ICharacterStats.cs" />
     <Compile Include="Configuration\Weapon\IWeaponStats.cs" />
