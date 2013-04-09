@@ -12,6 +12,6 @@ namespace TheGameOfForever.Configuration.Weapon
         int getPower();
         float getRange();
         int getWeight();
-        float getCrit();
+        float getCritical();
     }
 }

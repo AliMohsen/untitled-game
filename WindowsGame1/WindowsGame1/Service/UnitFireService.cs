@@ -10,7 +10,7 @@ using TheGameOfForever.GameState;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Processor.Content.Models;
-using TheGameOfForever.Component.Weapons;
+using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever.Service
 {

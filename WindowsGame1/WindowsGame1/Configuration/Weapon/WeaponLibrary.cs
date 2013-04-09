@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TheGameOfForever.Component.Weapons
+namespace TheGameOfForever.Configuration.Weapon
 {
     public class WeaponLibrary
     {
-        static Dictionary<int, Weapon> weapons = new Dictionary<int, Weapon>();
+        static Dictionary<int, WeaponStats> weapons = new Dictionary<int, WeaponStats>();
 
         public static void initWeaponLibrary()
         {
-            weapons.Add(0, new Weapon("pistol", (float)Math.PI / 48, 3, 30, 100, 5, 0.1f));
+            weapons.Add(0, new WeaponStats("pistol", (float)Math.PI / 48, 3, 30, 100, 5, 0.1f));
         }
 
         public static int getWeaponIdFromName(String name)
         {
-            foreach (KeyValuePair<int, Weapon> weaponEntry in weapons)
+            foreach (KeyValuePair<int, WeaponStats> weaponEntry in weapons)
             {
                 if (weaponEntry.Value.getName().Equals(name))
                 {
@@ -26,7 +26,7 @@ namespace TheGameOfForever.Component.Weapons
             throw new Exception("Could not find weapon with name : [" + name + "].");
         }
 
-        public static Weapon getWeaponFromId(int id)
+        public static WeaponStats getWeaponFromId(int id)
         {
             return weapons[id];
         }

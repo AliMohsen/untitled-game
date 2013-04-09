@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TheGameOfForever.Component.Weapons
+namespace TheGameOfForever.Configuration.Weapon
 {
-    public class Weapon
+    public class WeaponStats : IWeaponStats
     {
         private String name;
         private float accuracy;
@@ -15,7 +15,7 @@ namespace TheGameOfForever.Component.Weapons
         private int weight;
         private float critical;
 
-        public Weapon(String name, float accuracy, int shotsPerTurn, int power,
+        public WeaponStats(String name, float accuracy, int shotsPerTurn, int power,
             int range, int weight, float critical)
         {
             this.name = name;

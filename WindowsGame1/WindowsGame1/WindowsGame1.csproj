@@ -125,8 +125,8 @@
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
     <Compile Include="Component\CanFire.cs" />
-    <Compile Include="Component\Weapons\Weapon.cs" />
-    <Compile Include="Component\Weapons\WeaponLibrary.cs" />
+    <Compile Include="Configuration\Weapon\Weapon.cs" />
+    <Compile Include="Configuration\Weapon\WeaponLibrary.cs" />
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
     <Compile Include="Configuration\Character\ICharacterStats.cs" />
     <Compile Include="Configuration\Weapon\IWeaponStats.cs" />
