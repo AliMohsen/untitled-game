@@ -12,7 +12,7 @@ namespace TheGameOfForever.GameState
     public abstract class AbstractGameState
     {
         protected GameStateManager gameStateManager;
-        protected List<IGameService> gameServices = new List<IGameService>();
+        private List<IGameService> gameServices = new List<IGameService>();
         private ICamera camera;
         public AbstractGameState(GameStateManager gameStateManager)
         {
@@ -26,6 +26,16 @@ namespace TheGameOfForever.GameState
         public ICamera getCamera()
         {
             return camera;
+        }
+
+        protected void addAndRefreshService(IGameService service)
+        {
+            gameServices.Add(service);
+        }
+
+        protected void addService(IGameService service)
+        {
+            gameServices.Add(service);
         }
 
         protected void changeState(AbstractGameState gameState)

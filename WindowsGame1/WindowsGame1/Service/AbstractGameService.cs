@@ -80,5 +80,10 @@ namespace TheGameOfForever.Service
         {
 
         }
+
+        public virtual void refresh()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
