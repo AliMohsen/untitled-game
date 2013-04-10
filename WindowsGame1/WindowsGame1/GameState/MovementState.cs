@@ -73,7 +73,7 @@ namespace TheGameOfForever.GameState
 
         public void engageUnit()
         {
-            addStateOnTopOfThis(new EngageState(entityId, gameStateManager));
+            addStateOnTopOfThis(new EngageState(gameStateManager));
         }
 
 

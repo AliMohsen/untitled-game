@@ -23,6 +23,7 @@ namespace TheGameOfForever.Service
         {
             subscribeToComponentGroup(typeof(IsProjectile));
             subscribeToComponentGroup(typeof(Controllable));
+            subscribeToComponentGroup(typeof(Selected));
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -36,7 +37,12 @@ namespace TheGameOfForever.Service
                 Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();
                 Vector2 nextLocation = location + entity.getComponent<MovementComponent>().getVelocity();
                 entity.getComponent<LocationComponent>().setCurrentLocation(nextLocation);
+            }
 
+            Entity unit = null;
+            foreach (int id in entityIds[2])
+            {
+                unit = entityManager.getEntity(id);
             }
 
             if (control.isActionBPressed())
@@ -50,10 +56,8 @@ namespace TheGameOfForever.Service
                 state.disengage();
             }
 
-            Entity unit = entityManager.getEntity(state.getEntityId());
+
             LocationComponent locationComponent = unit.getComponent<LocationComponent>();
-
-
 
             if (control.isLLeftHeld())
             {
@@ -91,8 +95,11 @@ namespace TheGameOfForever.Service
 
         public override void draw(GameTime gameTime, AbstractGameState gameState, SpriteBatch spriteBatch)
         {
-            EngageState state = (EngageState)gameState;
-            Entity unit = entityManager.getEntity(state.getEntityId());
+            Entity unit = null;
+            foreach (int id in entityIds[2])
+            {
+                unit = entityManager.getEntity(id);
+            }
             Vector2 location = unit.getComponent<LocationComponent>().getCurrentLocation();
             float direction = unit.getComponent<LocationComponent>().getFacingRadians();
 

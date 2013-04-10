@@ -121,6 +121,7 @@
     <Compile Include="Component\LocationComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Component\MovementComponent.cs" />
+    <Compile Include="Component\MovementSelectedComponent.cs" />
     <Compile Include="Component\MovementTime.cs" />
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityManager.cs" />
     <Compile Include="Entities\Exception\InvalidEntityException.cs" />
+    <Compile Include="Entities\GameEntity.cs" />
     <Compile Include="Entities\IEntityLoader.cs" />
     <Compile Include="GameState\EngageState.cs" />
     <Compile Include="GameState\GlobalStateInfo.cs" />

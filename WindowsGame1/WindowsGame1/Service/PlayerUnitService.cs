@@ -29,17 +29,30 @@ namespace TheGameOfForever.Service
             IControl control = DefaultControl.Instance;
             UnitSelectState state = ((UnitSelectState)gameState);
             List<int> selectableIds = new List<int>();
+            Entity selected = null;
 
             foreach (int id in entityIds[0])
             {
-                if (entityManager.getEntity(id).getComponent<AllegianceComponent>()
-                    .getControlId() == state.getControlId())
+                Entity entity = entityManager.getEntity(id);
+                if (entity.getComponent<AllegianceComponent>()
+                    .getControlId() == GameEntity.turnId)
                 {
                     selectableIds.Add(id);
                 }
+
+                if (entity.hasComponent<Selected>())
+                {
+                    selected = entity;
+                }
             }
-            int index = selectableIds.IndexOf(state.getSelectId());
-            if (index == -1) index = 0;
+
+            if (selected == null)
+            {
+                selected = entityManager.getEntity(selectableIds[0]);
+                selected.addComponent(new Selected());
+            }
+            int index = selectableIds.IndexOf(selected.getId());
+
             //If the player presses next.
             if (control.isLRightPressed())
             {
@@ -53,12 +66,18 @@ namespace TheGameOfForever.Service
                 else index = (index - 1) % selectableIds.Count;
             }
 
-            state.setSelectId(selectableIds[index]);
+            if (selectableIds[index] != selected.getId())
+            {
+                // Switch selected entity.
+                selected.removeComponent<Selected>();
+                selected = entityManager.getEntity(selectableIds[index]);
+                selected.addComponent(new Selected());
+            }
 
             //If the player presses action(one).
             if (control.isActionAPressed())
             {
-                int commandCost = entityManager.getEntity(state.getSelectId()).getComponent<Controllable>().getCommandCost();
+                int commandCost = selected.getComponent<Controllable>().getCommandCost();
                 if (state.getCommandPoints() >= commandCost)
                 {
                     state.selectUnit(commandCost);
@@ -78,9 +97,9 @@ namespace TheGameOfForever.Service
                 Entity entity = entityManager.getEntity(id);
                 Vector2 location = entity.getComponent<LocationComponent>().getCurrentLocation();
                 if (entity.getComponent<AllegianceComponent>()
-                    .getControlId() == ((UnitSelectState)gameState).getControlId())
+                    .getControlId() == GameEntity.turnId)
                 {
-                    if (id == ((UnitSelectState)gameState).getSelectId())
+                    if (entity.hasComponent<Selected>())
                     {
                         spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0,0,1,1), Color.Orange, 
                             (float)Math.PI/2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None,1);

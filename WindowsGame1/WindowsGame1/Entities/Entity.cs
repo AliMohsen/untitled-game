@@ -12,6 +12,7 @@ namespace TheGameOfForever.Entities
     {
         int id = -1;
         private List<BaseComponent> components;
+        private EntityManager entityManager;
 
         private Entity(int id, params BaseComponent[] components)
         {
@@ -19,6 +20,11 @@ namespace TheGameOfForever.Entities
             {
                 this.components.Add(components[i]);
             }
+        }
+
+        public void setEntityManager(EntityManager entityManager)
+        {
+            this.entityManager = entityManager;
         }
 
         private Entity(int id, List<BaseComponent> components)
@@ -66,6 +72,29 @@ namespace TheGameOfForever.Entities
                 }
             }
             return default(T);
+        }
+
+        public void removeComponent<T>() where T : BaseComponent
+        {
+            List<BaseComponent> componentsToRemove = new List<BaseComponent>();
+            foreach (BaseComponent component in components)
+            {
+                if (component is T)
+                {
+                    componentsToRemove.Add(component);
+                }
+            }
+            foreach (BaseComponent component in componentsToRemove)
+            {
+                components.Remove(component);
+            }
+            entityManager.updateEntity(this);
+        }
+
+        public void addComponent(BaseComponent component)
+        {
+            components.Add(component);
+            entityManager.updateEntity(this);
         }
 
         public class EntityFactory

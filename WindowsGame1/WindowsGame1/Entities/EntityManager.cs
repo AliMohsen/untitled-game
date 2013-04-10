@@ -33,6 +33,7 @@ namespace TheGameOfForever.Entities
             {
                 throw new InvalidEntityException("Invalid ID for entity.");
             }
+            entity.setEntityManager(this);
             entities.Add(entity.getId(), entity);
             foreach (IGameService service in services)
             {
@@ -47,6 +48,12 @@ namespace TheGameOfForever.Entities
                 service.removeEntity(entities[entityId]);
             }
             entities.Remove(entityId);
+        }
+
+        public void updateEntity(Entity entity)
+        {
+            removeEntity(entity.getId());
+            addEntity(entity);
         }
     }
 }
