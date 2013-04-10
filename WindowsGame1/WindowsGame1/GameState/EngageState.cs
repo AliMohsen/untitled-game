@@ -14,8 +14,8 @@ namespace TheGameOfForever.GameState
             : base(gameStateManager)
         {
             this.entityId = entityId;
-            gameServices.Add(gameStateManager.getService<UnitDrawService>());
-            gameServices.Add(gameStateManager.getService<UnitFireService>());
+            addService(gameStateManager.getService<UnitDrawService>());
+            addService(gameStateManager.getService<UnitFireService>());
         }
 
         public void disengage()

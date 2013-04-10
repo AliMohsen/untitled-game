@@ -24,9 +24,9 @@ namespace TheGameOfForever.GameState
         public MovementState(int entityId, GameStateManager gameStateManager) : base(gameStateManager)
         {
             this.entityId = entityId;
-            gameServices.Add(gameStateManager.getService<UnitDrawService>());
-            gameServices.Add(gameStateManager.getService<MovementService>());
-            gameServices.Add(gameStateManager.getService<TrackingCameraService>());
+            addService(gameStateManager.getService<UnitDrawService>());
+            addService(gameStateManager.getService<MovementService>());
+            addService(gameStateManager.getService<TrackingCameraService>());
         }
 
         public int getEntityId()

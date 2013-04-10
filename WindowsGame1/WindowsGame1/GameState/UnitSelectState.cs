@@ -18,9 +18,9 @@ namespace TheGameOfForever.GameState
         {
             commandPoints = 10;
             this.controlId = controlId;
-            gameServices.Add(gameStateManager.getService<UnitDrawService>());
-            gameServices.Add(gameStateManager.getService<PlayerUnitService>());
-            gameServices.Add(gameStateManager.getService<TrackingCameraService>());
+            addService(gameStateManager.getService<UnitDrawService>());
+            addService(gameStateManager.getService<PlayerUnitService>());
+            addService(gameStateManager.getService<TrackingCameraService>());
         }
 
         public void selectUnit(int commandCost)
