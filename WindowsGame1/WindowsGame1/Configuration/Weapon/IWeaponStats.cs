@@ -7,7 +7,7 @@ namespace TheGameOfForever.Configuration.Weapon
 {
     public interface IWeaponStats
     {
-        int getAccuracy();
+        float getAccuracy();
         int getShotsPerTurn();
         int getPower();
         float getRange();

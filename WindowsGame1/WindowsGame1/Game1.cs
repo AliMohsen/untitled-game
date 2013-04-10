@@ -19,7 +19,7 @@ using TheGameOfForever.GameState;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component.Map;
 using TheGameOfForever.Processor.Content.Models;
-using TheGameOfForever.Component.Weapons;
+using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever
 {

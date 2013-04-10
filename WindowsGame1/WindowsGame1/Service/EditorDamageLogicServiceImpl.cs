@@ -50,7 +50,7 @@ namespace TheGameOfForever.Service
 
             if (rand.NextDouble() <= attacker.getLuck())
             {
-                critModifier = weapon.getCrit();
+                critModifier = weapon.getCritical();
             }
 
             modifiers = critModifier * evasionModifier * luckModifier;

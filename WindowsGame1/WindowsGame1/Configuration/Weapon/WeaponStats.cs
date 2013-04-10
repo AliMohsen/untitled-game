@@ -11,7 +11,7 @@ namespace TheGameOfForever.Configuration.Weapon
         private float accuracy;
         private int shotsPerTurn;
         private int power;
-        private int range;
+        private float range;
         private int weight;
         private float critical;
 
@@ -47,7 +47,7 @@ namespace TheGameOfForever.Configuration.Weapon
             return power;
         }
 
-        public int getRange()
+        public float getRange()
         {
             return range;
         }

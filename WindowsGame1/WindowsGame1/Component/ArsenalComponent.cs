@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TheGameOfForever.Entities;
 using Microsoft.Xna.Framework;
-using TheGameOfForever.Component.Weapons;
+using TheGameOfForever.Configuration.Weapon;
 
 namespace TheGameOfForever.Component
 {
