@@ -130,6 +130,7 @@
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
     <Compile Include="Configuration\Character\ICharacterStats.cs" />
     <Compile Include="Configuration\Weapon\IWeaponStats.cs" />
+    <Compile Include="Configuration\Weapon\WeaponStats.cs" />
     <Compile Include="Control\Control.cs" />
     <Compile Include="Control\GamepadControl.cs" />
     <Compile Include="Control\IControl.cs" />

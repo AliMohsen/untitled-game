@@ -6,7 +6,7 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
-    class EngageState : AbstractGameState
+    public class EngageState : AbstractGameState
     {
         private int entityId;
 
