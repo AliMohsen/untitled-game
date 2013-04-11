@@ -77,6 +77,7 @@ namespace TheGameOfForever.Service
             //If the player presses action(one).
             if (control.isActionAPressed())
             {
+                selected.addComponent(new TrackingComponent());
                 int commandCost = selected.getComponent<Controllable>().getCommandCost();
                 if (state.getCommandPoints() >= commandCost)
                 {

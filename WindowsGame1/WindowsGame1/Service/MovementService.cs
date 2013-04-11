@@ -83,9 +83,18 @@ namespace TheGameOfForever.Service
                     movementTime.decrementMillisToMove(gameTime.ElapsedGameTime.Milliseconds);
                 }
 
+                if (entity.hasComponent<TrackingComponent>())
+                {
+                    entity.getComponent<TrackingComponent>()
+                        .setTrackingLocation(locationComponent.getCurrentLocation())
+                        .setTrackingRotation(locationComponent.getFacingRadians());
+
+                }
+
                 if (control.isActionAPressed())
                 {
                     movementTime.incrementMovedAmount();
+                    entity.removeComponent<TrackingComponent>();
                     observer.endMovement();
                 }
 

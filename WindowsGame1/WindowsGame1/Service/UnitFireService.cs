@@ -42,7 +42,7 @@ namespace TheGameOfForever.Service
 
                 foreach (int id2 in entityIdsUnchanged)
                 {
-                    entityManager.removeEntity(entity.getId());
+                    entityManager.removeEntity(id2);
                 }
                 state.disengage();
             }

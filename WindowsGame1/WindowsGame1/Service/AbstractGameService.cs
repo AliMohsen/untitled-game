@@ -124,6 +124,11 @@ namespace TheGameOfForever.Service
             {
                 return entityIds.GetEnumerator();
             }
+
+            internal int count()
+            {
+                return entityIds.Count;
+            }
         }
     }
 }
