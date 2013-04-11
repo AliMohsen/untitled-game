@@ -11,11 +11,12 @@ namespace TheGameOfForever.Entities
     public class Entity
     {
         int id = -1;
-        private List<BaseComponent> components;
+        private List<BaseComponent> components = new List<BaseComponent>();
         private EntityManager entityManager;
 
         private Entity(int id, params BaseComponent[] components)
         {
+            this.id = id;
             for (int i = 0; i < components.Length; i++)
             {
                 this.components.Add(components[i]);
@@ -129,7 +130,7 @@ namespace TheGameOfForever.Entities
                 // WHERE YOU AT!
                 components.Add(new LocationComponent(startingLocation, 0));
                 // People can move.
-                components.Add(new MovementComponent(6, Vector2.Zero));
+                components.Add(new MovementComponent(0.1f, Vector2.Zero));
                 // Humans form teams.
                 components.Add(new AllegianceComponent(teamId));
                 components.Add(new MovementTime());

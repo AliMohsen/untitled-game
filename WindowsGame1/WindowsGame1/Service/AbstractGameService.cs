@@ -12,7 +12,7 @@ namespace TheGameOfForever.Service
     public abstract class AbstractGameService : IGameService
     {
         private List<List<Type>> interestingComponentTypes = new List<List<Type>>();
-        protected List<HashSet<int>> entityIds = new List<HashSet<int>>();
+        protected List<InterestingEntityCollection> entityIds = new List<InterestingEntityCollection>();
         protected EntityManager entityManager;
 
         public AbstractGameService(EntityManager entityManager)
@@ -23,7 +23,7 @@ namespace TheGameOfForever.Service
         protected void subscribeToComponentGroup(params Type[] types)
         {
             interestingComponentTypes.Add(new List<Type>(types));
-            entityIds.Add(new HashSet<int>());
+            entityIds.Add(new InterestingEntityCollection());
         }
 
         public void registerEntityIfNeeded(Entity entity)
@@ -41,7 +41,7 @@ namespace TheGameOfForever.Service
                 }
                 if (add)
                 {
-                    entityIds[i].Add(entity.getId());
+                    entityIds[i].add(entity.getId());
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace TheGameOfForever.Service
                 }
                 if (!add)
                 {
-                    entityIds[i].Remove(entity.getId());
+                    entityIds[i].remove(entity.getId());
                 }
             }  
         }
@@ -70,7 +70,7 @@ namespace TheGameOfForever.Service
         {
             for (int i = 0; i < interestingComponentTypes.Count; i++)
             {
-                entityIds[i].Remove(entity.getId());
+                entityIds[i].remove(entity.getId());
             }
         }
 
@@ -84,6 +84,46 @@ namespace TheGameOfForever.Service
         public virtual void refresh()
         {
             throw new NotImplementedException();
+        }
+
+        public class InterestingEntityCollection : IEnumerable<int>
+        {
+            HashSet<int> entityIds = new HashSet<int>();
+            int last = -1;
+
+            public bool add(int id)
+            {
+                last = id;
+                return entityIds.Add(id);
+            }
+
+            public bool contains(int id)
+            {
+                return entityIds.Contains(id);
+            }
+
+            public bool remove(int id)
+            {
+                return entityIds.Remove(id);
+            }
+
+            /// <summary>
+            /// Gets last added, does not guarantee that this id still exists in the collection.
+            /// </summary>
+            public int getLast()
+            {
+                return last;
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return entityIds.GetEnumerator();
+            }
+
+            IEnumerator<int> IEnumerable<int>.GetEnumerator()
+            {
+                return entityIds.GetEnumerator();
+            }
         }
     }
 }

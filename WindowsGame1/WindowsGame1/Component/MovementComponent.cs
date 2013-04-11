@@ -10,7 +10,7 @@ namespace TheGameOfForever.Component
     {
         private float baseMovementSpeed;
         private Vector2 velocity;
-        private float turningSpeed = 0.1f;
+        private float turningSpeed = 0.001f;
 
         public MovementComponent(float baseMovementSpeed, Vector2 velocity)
         {
@@ -18,9 +18,9 @@ namespace TheGameOfForever.Component
             this.velocity = velocity;
         }
 
-        public float getBaseMovementSpeed()
+        public float getBaseMovementSpeed(GameTime gameTime)
         {
-            return baseMovementSpeed;
+            return baseMovementSpeed * gameTime.ElapsedGameTime.Milliseconds;
         }
 
         public Vector2 getVelocity()
@@ -33,9 +33,9 @@ namespace TheGameOfForever.Component
             this.velocity = velocity;
         }
 
-        public float getTurningSpeed()
+        public float getTurningSpeed(GameTime gameTime)
         {
-            return turningSpeed;
+            return turningSpeed * gameTime.ElapsedGameTime.Milliseconds;
         }
     }
 }

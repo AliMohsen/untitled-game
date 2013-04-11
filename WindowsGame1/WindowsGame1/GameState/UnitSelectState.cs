@@ -20,6 +20,7 @@ namespace TheGameOfForever.GameState
             this.controlId = controlId;
             addService(gameStateManager.getService<UnitDrawService>());
             addService(gameStateManager.getService<PlayerUnitService>());
+            addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<TrackingCameraService>());
         }
 

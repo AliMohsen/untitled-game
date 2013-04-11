@@ -119,6 +119,7 @@
     <Compile Include="Component\IsHumanComponent.cs" />
     <Compile Include="Component\IsProjectile.cs" />
     <Compile Include="Component\LocationComponent.cs" />
+    <Compile Include="Component\MapElementComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Component\MovementComponent.cs" />
     <Compile Include="Component\MovementSelectedComponent.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
     <Compile Include="Component\CanFire.cs" />
+    <Compile Include="Component\VertexListComponent.cs" />
     <Compile Include="Configuration\Weapon\WeaponStats.cs" />
     <Compile Include="Configuration\Weapon\WeaponLibrary.cs" />
     <Compile Include="Configuration\Character\EditorCharacterStats.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
+    <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\UnitDrawService.cs" />
     <Compile Include="Service\UnitFireService.cs" />

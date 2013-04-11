@@ -30,91 +30,89 @@ namespace TheGameOfForever.Service
         {
             MovementServiceObserver observer = (MovementServiceObserver)gameState;
             IControl control = DefaultControl.Instance;
-            foreach (int id in entityIds[0])
+            int id = entityIds[0].getLast();
+
+            Entity entity = entityManager.getEntity(id);
+            if (entity.hasComponent<LocationComponent>())
             {
-                Entity entity = entityManager.getEntity(id);
-                if (entity.hasComponent<LocationComponent>())
+                LocationComponent locationComponent = entity.getComponent<LocationComponent>();
+                MovementComponent movementComponent = entity.getComponent<MovementComponent>();
+                MovementTime movementTime = entity.getComponent<MovementTime>();
+
+                // Need controller input.
+                Vector2 moveInDirection = Vector2.Zero;
+                if (control.isLLeftHeld())
                 {
-                    LocationComponent locationComponent = entity.getComponent<LocationComponent>();
-                    MovementComponent movementComponent = entity.getComponent<MovementComponent>();
-                    MovementTime movementTime = entity.getComponent<MovementTime>();
+                    moveInDirection += new Vector2(-1, 0);
+                }
+                if (control.isLRightHeld())
+                {
+                    moveInDirection += new Vector2(1, 0);
+                }
+                if (control.isLDownHeld())
+                {
+                    moveInDirection += new Vector2(0, 1);
+                }
+                if (control.isLUpHeld())
+                {
+                    moveInDirection += new Vector2(0, -1);
+                }
 
-                    // Need controller input.
-                    Vector2 moveInDirection = Vector2.Zero;
-                    if (control.isLLeftHeld())
-                    {
-                        moveInDirection += new Vector2(-1, 0);
-                    }
-                    if (control.isLRightHeld())
-                    {
-                        moveInDirection += new Vector2(1, 0);
-                    }
-                    if (control.isLDownHeld())
-                    {
-                        moveInDirection += new Vector2(0, 1);
-                    }
-                    if (control.isLUpHeld())
-                    {
-                        moveInDirection += new Vector2(0, -1);
-                    }
+                if (moveInDirection != Vector2.Zero) moveInDirection.Normalize();
+                moveInDirection = moveInDirection * movementComponent.getBaseMovementSpeed(gameTime);
 
-                    if (moveInDirection != Vector2.Zero) moveInDirection.Normalize();
-                    moveInDirection = moveInDirection * movementComponent.getBaseMovementSpeed();
+                if (control.isRLeftHeld())
+                {
+                    locationComponent.setFacingRadians(locationComponent.getFacingRadians()
+                        - movementComponent.getTurningSpeed(gameTime));
+                }
+                if (control.isRRightHeld())
+                {
+                    locationComponent.setFacingRadians(locationComponent.getFacingRadians()
+                        + movementComponent.getTurningSpeed(gameTime));
+                }
+                if (movementTime.getMillisToMove() > 0)
+                {
+                    moveInDirection = GeometryHelper.rotateVec(moveInDirection, locationComponent.getFacingRadians());
+                    locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
+                }
 
-                    if (control.isRLeftHeld())
-                    {
-                        locationComponent.setFacingRadians(locationComponent.getFacingRadians()
-                            - movementComponent.getTurningSpeed());
-                    }
-                    if (control.isRRightHeld())
-                    {
-                        locationComponent.setFacingRadians(locationComponent.getFacingRadians()
-                            + movementComponent.getTurningSpeed());
-                    }
-                    if (movementTime.getMillisToMove() > 0)
-                    {
-                        moveInDirection = GeometryHelper.rotateVec(moveInDirection, locationComponent.getFacingRadians());
-                        locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() + moveInDirection);
-                    }
+                if (movementTime.getFullMillisToMove() == movementTime.getMillisToMove() && moveInDirection != Vector2.Zero
+                    || movementTime.getFullMillisToMove() != movementTime.getMillisToMove())
+                {
+                    movementTime.decrementMillisToMove(gameTime.ElapsedGameTime.Milliseconds);
+                }
 
-                    if (movementTime.getFullMillisToMove() == movementTime.getMillisToMove() && moveInDirection != Vector2.Zero
-                        || movementTime.getFullMillisToMove() != movementTime.getMillisToMove())
-                    {
-                        movementTime.decrementMillisToMove(gameTime.ElapsedGameTime.Milliseconds);
-                    }
+                if (control.isActionAPressed())
+                {
+                    movementTime.incrementMovedAmount();
+                    observer.endMovement();
+                }
 
-                    if (control.isActionAPressed())
-                    {
-                        movementTime.incrementMovedAmount();
-                        observer.endMovement();
-                    }
-
-                    if (control.isActionBPressed())
-                    {
-                        observer.engageUnit();
-                    }
+                if (control.isActionBPressed())
+                {
+                    observer.engageUnit();
                 }
             }
         }
 
         public override void draw(GameTime gameTime, AbstractGameState gameState, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            foreach (int id in entityIds[0])
-            {
-                Entity entity = entityManager.getEntity(id);
-                MovementTime movementTime = entity.getComponent<MovementTime>();
+            int id = entityIds[0].getLast();
+            Entity entity = entityManager.getEntity(id);
+            MovementTime movementTime = entity.getComponent<MovementTime>();
 
-                float fractionLeftToMove = movementTime.getMillisToMove() / (float)movementTime.getFullMillisToMove();
-                spriteBatch.End();
-                DrawHelper.spriteBatchBeginUI(spriteBatch);
+            float fractionLeftToMove = movementTime.getMillisToMove() / (float)movementTime.getFullMillisToMove();
+            spriteBatch.End();
 
-                spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 200, 5), Color.DarkGray);
-                spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 11, (int)(200 * fractionLeftToMove), 2), Color.LightBlue);
-                spriteBatch.End();
-                DrawHelper.spriteBatchBeginGame(spriteBatch);
+            DrawHelper.spriteBatchBeginUI(spriteBatch);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 200, 5), Color.DarkGray);
+            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 11, (int)(200 * fractionLeftToMove), 2), Color.LightBlue);
+            spriteBatch.End();
 
-                base.draw(gameTime, gameState, spriteBatch);
-            }
+            DrawHelper.spriteBatchBeginGame(spriteBatch);
+
+            base.draw(gameTime, gameState, spriteBatch);
         }
     }
 }

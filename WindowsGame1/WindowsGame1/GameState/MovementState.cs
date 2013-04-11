@@ -26,6 +26,7 @@ namespace TheGameOfForever.GameState
             this.entityId = entityId;
             addService(gameStateManager.getService<UnitDrawService>());
             addService(gameStateManager.getService<MovementService>());
+            addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<TrackingCameraService>());
         }
 
