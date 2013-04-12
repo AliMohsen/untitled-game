@@ -38,5 +38,7 @@ namespace TheGameOfForever.Control
         bool isActionCHeld();
         bool isActionDPressed();
         bool isActionDHeld();
+        bool isActionEPressed();
+        bool isActionEHeld();
     }
 }

@@ -144,11 +144,22 @@ namespace TheGameOfForever.Control
 
         public bool isActionDPressed()
         {
+            return current.IsKeyDown(Keys.Q)
+                && previous.IsKeyUp(Keys.Q);
+        }
+
+        public bool isActionDHeld()
+        {
+            return current.IsKeyDown(Keys.Q);
+        }
+
+        public bool isActionEPressed()
+        {
             return current.IsKeyDown(Keys.E)
                 && previous.IsKeyUp(Keys.E);
         }
 
-        public bool isActionDHeld()
+        public bool isActionEHeld()
         {
             return current.IsKeyDown(Keys.E);
         }

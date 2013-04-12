@@ -108,6 +108,14 @@ namespace TheGameOfForever.Service
                     entity.getComponent<Selected>().incrementShotsFired();
                 }
             }
+            else if (control.isActionEPressed())
+            {
+                entity.getComponent<ArsenalComponent>().selectNextWeapon();
+            }
+            else if (control.isActionDPressed())
+            {
+                entity.getComponent<ArsenalComponent>().selectPreviousWeapon();
+            }
 
             if (control.isActionBPressed())
             {

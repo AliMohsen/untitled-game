@@ -53,5 +53,16 @@ namespace TheGameOfForever.Component
         {
             currentlySelected = weaponId;
         }
+
+        public void selectNextWeapon()
+        {
+            currentlySelected = (currentlySelected + 1) % weapons.Count;
+        }
+
+        public void selectPreviousWeapon()
+        {
+            if (currentlySelected == 0) currentlySelected = weapons.Count - 1;
+            else currentlySelected = (currentlySelected - 1) % weapons.Count;
+        }
     }
 }

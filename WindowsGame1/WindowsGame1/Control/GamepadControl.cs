@@ -152,5 +152,15 @@ namespace TheGameOfForever.Control
         {
             return current.Buttons.B == ButtonState.Pressed;
         }
+
+        public bool isActionEPressed()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool isActionEHeld()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
