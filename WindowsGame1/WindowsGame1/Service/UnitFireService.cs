@@ -15,16 +15,15 @@ using TheGameOfForever.Geometry;
 
 namespace TheGameOfForever.Service
 {
-    class UnitFireService : AbstractGameService
+    public class UnitFireService : AbstractGameService
     {
-        Random rand = new Random();
-
         public UnitFireService(EntityManager entityManager)
             : base(entityManager)
         {
             subscribeToComponentGroup(typeof(IsProjectile));
             subscribeToComponentGroup(typeof(Controllable));
             subscribeToComponentGroup(typeof(Selected));
+            subscribeToComponentGroup(typeof(IsTarget));
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -36,18 +35,43 @@ namespace TheGameOfForever.Service
             LocationComponent locationComponent = entity.getComponent<LocationComponent>();           
             MovementComponent movementComponent = entity.getComponent<MovementComponent>();
 
-            if (control.isActionBPressed())
-            {
-                int[] entityIdsUnchanged = entityIds[0].ToArray<int>();
+            Entity targetted = null;
+            List<int> targettableIds = new List<int>();
+            
 
-                foreach (int id2 in entityIdsUnchanged)
+            foreach (int id in entityIds[1])
+            {
+                Entity potentialEnemy = entityManager.getEntity(id);
+                if (potentialEnemy.getComponent<AllegianceComponent>()
+                    .getControlId() != GameEntity.turnId)
                 {
-                    entityManager.removeEntity(id2);
+                    targettableIds.Add(id);
                 }
-                state.disengage();
+
+                if (potentialEnemy.hasComponent<IsTarget>())
+                {
+                    targetted = potentialEnemy;
+                }
             }
 
-            if (control.isLLeftHeld())
+            if (targetted == null)
+            {
+                targetted = entityManager.getEntity(targettableIds[0]);
+                targetted.addComponent(new IsTarget());
+            }
+
+            int index = targettableIds.IndexOf(targetted.getId());
+
+            if (control.isRLeftPressed())
+            {
+                if (index == 0) index = targettableIds.Count - 1;
+                else index = (index - 1) % targettableIds.Count;
+            }
+            else if (control.isRRightPressed())
+            {
+                index = (index + 1) % targettableIds.Count;
+            }
+            else if (control.isLLeftHeld())
             {
                 locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
                     - movementComponent.getTurningSpeed(gameTime));
@@ -73,8 +97,30 @@ namespace TheGameOfForever.Service
                 components.Add(new MovementComponent(10, 
                     GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
                 components.Add(new IsProjectile(100, true));
-
+                
                 entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
+            }
+
+            if (control.isActionBPressed())
+            {
+                int[] entityIdsUnchanged = entityIds[0].ToArray<int>();
+
+                foreach (int id2 in entityIdsUnchanged)
+                {
+                    entityManager.removeEntity(id2);
+                }
+                state.disengage();
+            }
+
+            if (targettableIds[index] != targetted.getId())
+            {
+                targetted.removeComponent<IsTarget>();
+                targetted = entityManager.getEntity(targettableIds[index]);
+                targetted.addComponent(new IsTarget());
+
+                Entity newTarget = entityManager.getEntity(targettableIds[index]);
+                Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
+                locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
             }
         }
 

@@ -118,6 +118,7 @@
     <Compile Include="Component\Controllable.cs" />
     <Compile Include="Component\IsHumanComponent.cs" />
     <Compile Include="Component\IsProjectile.cs" />
+    <Compile Include="Component\IsTarget.cs" />
     <Compile Include="Component\LocationComponent.cs" />
     <Compile Include="Component\MapElementComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
