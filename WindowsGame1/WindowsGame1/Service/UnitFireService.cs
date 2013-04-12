@@ -83,22 +83,30 @@ namespace TheGameOfForever.Service
             }
             else if (control.isActionAPressed() || control.isActionAHeld())
             {
-                float unitDirection = locationComponent.getFacingRadians();
-                Vector2 unitLocation = locationComponent.getCurrentLocation();
-                
-                int heldWeaponId = entity.getComponent<ArsenalComponent>().getCurrentWeaponId();
-                float weaponAcc = WeaponLibrary.getWeaponFromId(heldWeaponId).getAccuracy();
-                float maximum = weaponAcc / 2;
-                float minimum = -weaponAcc / 2;
-                float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
+                WeaponStats heldWeapon = WeaponLibrary.getWeaponFromId(
+                    entity.getComponent<ArsenalComponent>().getCurrentWeaponId());
+                int shotsPerTurn = heldWeapon.getShotsPerTurn();
+                int shotsFired = entity.getComponent<Selected>().getShotsFired();
 
-                List<BaseComponent> components = new List<BaseComponent>();
-                components.Add(new LocationComponent(unitLocation, bulletDirection));
-                components.Add(new MovementComponent(10, 
-                    GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
-                components.Add(new IsProjectile(100, true));
-                
-                entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
+                if (shotsFired < shotsPerTurn)
+                {
+                    float unitDirection = locationComponent.getFacingRadians();
+                    Vector2 unitLocation = locationComponent.getCurrentLocation();
+
+                    float weaponAcc = heldWeapon.getAccuracy();
+                    float maximum = weaponAcc / 2;
+                    float minimum = -weaponAcc / 2;
+                    float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
+
+                    List<BaseComponent> components = new List<BaseComponent>();
+                    components.Add(new LocationComponent(unitLocation, bulletDirection));
+                    components.Add(new MovementComponent(10,
+                        GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
+                    components.Add(new IsProjectile(100, true));
+
+                    entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
+                    entity.getComponent<Selected>().incrementShotsFired();
+                }
             }
 
             if (control.isActionBPressed())

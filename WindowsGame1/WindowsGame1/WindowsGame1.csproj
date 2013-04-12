@@ -123,7 +123,7 @@
     <Compile Include="Component\MapElementComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Component\MovementComponent.cs" />
-    <Compile Include="Component\MovementSelectedComponent.cs" />
+    <Compile Include="Component\Selected.cs" />
     <Compile Include="Component\MovementTime.cs" />
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
