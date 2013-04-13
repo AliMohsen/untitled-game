@@ -14,9 +14,10 @@ namespace TheGameOfForever.Configuration.Weapon
         private float range;
         private int weight;
         private float critical;
+        private long timeBetweenShots;
 
         public WeaponStats(String name, float accuracy, int shotsPerTurn, int power,
-            int range, int weight, float critical)
+            int range, int weight, float critical, long timeBetweenShots)
         {
             this.name = name;
             this.accuracy = accuracy;
@@ -25,6 +26,7 @@ namespace TheGameOfForever.Configuration.Weapon
             this.range = range;
             this.weight = weight;
             this.critical = critical;
+            this.timeBetweenShots = timeBetweenShots;
         }
 
         public String getName()
@@ -60,6 +62,11 @@ namespace TheGameOfForever.Configuration.Weapon
         public float getCritical()
         {
             return critical;
+        }
+
+        public long getTimeBetweenShots()
+        {
+            return timeBetweenShots;
         }
     }
 }

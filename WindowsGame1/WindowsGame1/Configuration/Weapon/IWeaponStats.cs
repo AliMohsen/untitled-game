@@ -13,5 +13,6 @@ namespace TheGameOfForever.Configuration.Weapon
         float getRange();
         int getWeight();
         float getCritical();
+        long getTimeBetweenShots();
     }
 }

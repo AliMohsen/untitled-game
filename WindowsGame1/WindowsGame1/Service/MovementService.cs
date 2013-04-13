@@ -100,6 +100,7 @@ namespace TheGameOfForever.Service
 
                 if (control.isActionBPressed())
                 {
+                    entity.addComponent(new IsFiring());
                     observer.engageUnit();
                 }
             }

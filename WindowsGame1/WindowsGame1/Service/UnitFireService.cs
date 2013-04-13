@@ -24,6 +24,7 @@ namespace TheGameOfForever.Service
             subscribeToComponentGroup(typeof(Controllable));
             subscribeToComponentGroup(typeof(Selected));
             subscribeToComponentGroup(typeof(IsTarget));
+            subscribeToComponentGroup(typeof(IsFiring));
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -83,12 +84,16 @@ namespace TheGameOfForever.Service
             }
             else if (control.isActionAPressed() || control.isActionAHeld())
             {
+                long time = entity.getComponent<IsFiring>().getTimeSinceFirstShot();
+                entity.getComponent<IsFiring>().setTimeSinceFirstShot(time + gameTime.ElapsedGameTime.Milliseconds);
+
                 WeaponStats heldWeapon = WeaponLibrary.getWeaponFromId(
                     entity.getComponent<ArsenalComponent>().getCurrentWeaponId());
                 int shotsPerTurn = heldWeapon.getShotsPerTurn();
-                int shotsFired = entity.getComponent<Selected>().getShotsFired();
+                long timeBetweenShots = heldWeapon.getTimeBetweenShots();
+                int shotsFired = entity.getComponent<IsFiring>().getShotsFired();
 
-                if (shotsFired < shotsPerTurn)
+                if (shotsFired < shotsPerTurn && time > timeBetweenShots * shotsFired)
                 {
                     float unitDirection = locationComponent.getFacingRadians();
                     Vector2 unitLocation = locationComponent.getCurrentLocation();
@@ -105,7 +110,8 @@ namespace TheGameOfForever.Service
                     components.Add(new IsProjectile(100, true));
 
                     entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
-                    entity.getComponent<Selected>().incrementShotsFired();
+                    entity.getComponent<IsFiring>().incrementShotsFired();
+
                 }
             }
             else if (control.isActionEPressed())
@@ -125,6 +131,7 @@ namespace TheGameOfForever.Service
                 {
                     entityManager.removeEntity(id2);
                 }
+                entity.removeComponent<IsFiring>();
                 state.disengage();
             }
 

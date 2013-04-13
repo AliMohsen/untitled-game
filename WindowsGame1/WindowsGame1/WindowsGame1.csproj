@@ -116,6 +116,7 @@
     <Compile Include="Component\EntityModelComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
     <Compile Include="Component\Controllable.cs" />
+    <Compile Include="Component\IsFiring.cs" />
     <Compile Include="Component\IsHumanComponent.cs" />
     <Compile Include="Component\IsProjectile.cs" />
     <Compile Include="Component\IsTarget.cs" />
