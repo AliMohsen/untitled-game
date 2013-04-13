@@ -10,6 +10,7 @@ using TheGameOfForever.Control;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Ui.Font;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Service
 {
@@ -102,23 +103,40 @@ namespace TheGameOfForever.Service
                 {
                     if (entity.hasComponent<Selected>())
                     {
-                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0,0,1,1), Color.Orange, 
-                            (float)Math.PI/2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None,1);
+                        DrawHelper.drawBetween(location - new Vector2(-5, 5), location - new Vector2(-25, 30), spriteBatch, Color.Orange, 1);
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("Command cost: " + entity.getComponent<Controllable>().getCommandCost());
+                        sb.AppendLine();
+                        if (entity.hasComponent<MovementTime>())
+                        {
+                            sb.Append("Time to move: " + entity.getComponent<MovementTime>().getFullMillisToMove());
+                        }
+
+                        DrawStringHelper.drawString(spriteBatch, sb.ToString(),
+                            "mentone", 10, Color.Orange, location - new Vector2(-28, 36));
                     }
                     else
                     {
-                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Green,
-                            (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
+                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.White,
+                            (float)Math.PI / 2, new Vector2(0.5f), new Vector2(2), SpriteEffects.None, 1);
                     }
                 }
                 else
                 {
+                    /*
                     spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Red,
                         (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
+                     */
                 }
             }
+
+            spriteBatch.End();
+            DrawHelper.spriteBatchBeginUI(spriteBatch);
+
             DrawStringHelper.drawString(spriteBatch, "Command points remaining: " + ((UnitSelectState)gameState).getCommandPoints(),
-                "mentone", 12, Color.Black, new Vector2(5));
+                "mentone", 12, Color.Gray, new Vector2(5));
+            spriteBatch.End();
+            DrawHelper.spriteBatchBeginGame(spriteBatch);
         }
     }
 }

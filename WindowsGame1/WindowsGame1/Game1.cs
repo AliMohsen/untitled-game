@@ -99,7 +99,7 @@ namespace TheGameOfForever
             (EntityManager entityManager) =>
             {
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 10), 0, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 40), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 80), 0, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
                 entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(new MapElementComponent(), 

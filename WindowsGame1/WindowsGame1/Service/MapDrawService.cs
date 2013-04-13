@@ -9,11 +9,13 @@ using TheGameOfForever.Component;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Ui.Font;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Service
 {
     public class MapDrawService : AbstractGameService
     {
+        Color col = new Color(0.5f, 0.5f, 0.5f);
         public MapDrawService(EntityManager entityManager) : base(entityManager)
         {
             subscribeToComponentGroup(typeof(MapElementComponent), typeof(VertexListComponent));
@@ -49,7 +51,7 @@ namespace TheGameOfForever.Service
                     centerY += (start.Y + end.Y) * areaToAdd;
                     area += areaToAdd;
 
-                    drawBetween(start, end, spriteBatch);
+                    DrawHelper.drawBetween(start, end, spriteBatch, col, 2);
                 }
                 area /= 2;
                 if (area != 0)
@@ -57,26 +59,12 @@ namespace TheGameOfForever.Service
                     centerX /= 6 * area;
                     centerY /= 6 * area;
                 }
-                DrawStringHelper.drawString(spriteBatch, "Map\nitem", "mentone", 10, Color.Purple, new Vector2(centerX, centerY), 
+                DrawStringHelper.drawString(spriteBatch, "Map\nitem", "mentone", 10, col, new Vector2(centerX, centerY), 
                     VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
             }
 
             base.draw(gameTime, gameState, spriteBatch);
         }
 
-        private void drawBetween(Vector2 start, Vector2 end, SpriteBatch spriteBatch)
-        {
-            Vector2 between = start - end;
-            float angle = (float)Math.Atan2(between.Y, between.X);
-            // add 1 for single points and due to the way   
-            // the origin is set up  
-            float distance = between.Length() + 1.0f;
-            spriteBatch.Draw(EditorContent.blank, end, null, Color.Black, angle, new Vector2(0, 0.5f),
-                new Vector2(distance, 2), SpriteEffects.None, 1);
-            spriteBatch.Draw(EditorContent.blank, end, null, Color.Orange, angle, new Vector2(0, 0.5f),
-                new Vector2(2, 2), SpriteEffects.None, 1);
-            spriteBatch.Draw(EditorContent.blank, end, null, Color.Orange, angle, new Vector2(0.5f),
-                 new Vector2(2, 2), SpriteEffects.None, 1);
-        }
     }
 }

@@ -28,6 +28,7 @@ namespace TheGameOfForever.Service
         {
             if (entityIds[0].count() != 0)
             {
+                gameState.getCamera().setEntityViewpoint(true);
                 TrackingComponent tracking = entityManager.getEntity(entityIds[0].getLast())
                     .getComponent<TrackingComponent>();
                 gameState.getCamera().setWorldPosition(new Vector2(
@@ -41,6 +42,7 @@ namespace TheGameOfForever.Service
             }
             else
             {
+                gameState.getCamera().setEntityViewpoint(false);
                 gameState.getCamera().setWorldPosition(new Vector2(
                     MathHelper.SmoothStep(
                         0,

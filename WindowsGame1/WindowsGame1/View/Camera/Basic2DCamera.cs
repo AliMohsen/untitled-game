@@ -26,6 +26,7 @@ namespace TheGameOfForever.View.Camera
         private Matrix transform;
         private Vector2 position;
         private float rotation;
+        private bool entityViewpoint;
 
         private Map map;
 
@@ -48,19 +49,12 @@ namespace TheGameOfForever.View.Camera
         {
             if (isStale || transform == null)
             {
-                /*
-                transform =
-                   Matrix.CreateTranslation(position.X, position.Y, 0) *
-                   Matrix.CreateScale(zoom, zoom, 1) *
-                   Matrix.CreateRotationZ(MathHelper.ToRadians(rotation)) *
-                   Matrix.CreateTranslation(viewportWidth, viewportHeight, 0);
-                /**/
                 transform =
                     Matrix.CreateTranslation(-position.X, -position.Y, 0) *
-                    Matrix.CreateRotationZ(-rotation) * 
+                    Matrix.CreateRotationZ(-rotation + (entityViewpoint ? (float) Math.PI : 0)) * 
                     Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
                     Matrix.CreateTranslation(new Vector3(viewportWidth / 2f,
-                        viewportHeight / 2f, 0)); 
+                        viewportHeight / 2f, 0));
             }
             return transform;
         }
@@ -96,6 +90,11 @@ namespace TheGameOfForever.View.Camera
         public Vector2 getWorldPosition()
         {
             return position;
+        }
+
+        public void setEntityViewpoint(bool entityViewpoint)
+        {
+            this.entityViewpoint = entityViewpoint;
         }
     }
 }

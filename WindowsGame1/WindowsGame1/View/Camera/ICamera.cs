@@ -23,6 +23,8 @@ namespace TheGameOfForever.View.Camera
         void setWorldPosition(Vector2 position);
         Vector2 getWorldPosition();
 
+        void setEntityViewpoint(bool entityViewpoint);
+
         #endregion
     }
 }

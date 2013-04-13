@@ -43,19 +43,19 @@ namespace TheGameOfForever.Service
                 Vector2 moveInDirection = Vector2.Zero;
                 if (control.isLLeftHeld())
                 {
-                    moveInDirection += new Vector2(-1, 0);
+                    moveInDirection += new Vector2(1, 0);
                 }
                 if (control.isLRightHeld())
                 {
-                    moveInDirection += new Vector2(1, 0);
+                    moveInDirection += new Vector2(-1, 0);
                 }
                 if (control.isLDownHeld())
                 {
-                    moveInDirection += new Vector2(0, 1);
+                    moveInDirection += new Vector2(0, -1);
                 }
                 if (control.isLUpHeld())
                 {
-                    moveInDirection += new Vector2(0, -1);
+                    moveInDirection += new Vector2(0, 1);
                 }
 
                 if (moveInDirection != Vector2.Zero) moveInDirection.Normalize();

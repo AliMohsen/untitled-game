@@ -16,6 +16,8 @@ namespace TheGameOfForever.Processor.Content.Models
         {
             definitions.Add(0, new ModelDefinition("test", content.Load<Texture2D>("model//test"), new Vector2(1),
                 0, new Vector2(10), new Rectangle(0,0,20,20)));
+            definitions.Add(1, new ModelDefinition("human", content.Load<Texture2D>("model//humanEntity"), new Vector2(1),
+                0, new Vector2(15), new Rectangle(0, 0, 30, 30)));
         }
 
         public static int getModelIdFromName(String name)

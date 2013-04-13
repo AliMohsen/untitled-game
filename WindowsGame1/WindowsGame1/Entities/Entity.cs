@@ -136,7 +136,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new MovementTime());
                 components.Add(new IsHumanComponent());
                 components.Add(new Controllable(1));
-                components.Add(new EntityModelComponent(ModelLibrary.getModelIdFromName("test")));
+                components.Add(new EntityModelComponent(ModelLibrary.getModelIdFromName("human")));
                 components.Add(new ArsenalComponent("pistol", "ak47"));
                 return createEntityWithComponents(components);
             }

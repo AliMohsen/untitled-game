@@ -114,7 +114,7 @@ namespace TheGameOfForever.GameState
         {
             graphicsDevice.SetRenderTarget(gameRenderTarget);
 
-            graphicsDevice.Clear(Color.LightGray);
+            graphicsDevice.Clear(new Color(0.1f,0.1f,0.1f));
 
             bool canDraw = true;
             List<AbstractGameState> layersToDraw = new List<AbstractGameState>();
