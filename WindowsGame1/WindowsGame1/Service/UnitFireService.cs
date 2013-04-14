@@ -84,35 +84,7 @@ namespace TheGameOfForever.Service
             }
             else if (control.isActionAPressed() || control.isActionAHeld())
             {
-                long time = entity.getComponent<IsFiring>().getTimeSinceFirstShot();
-                entity.getComponent<IsFiring>().setTimeSinceFirstShot(time + gameTime.ElapsedGameTime.Milliseconds);
-
-                WeaponStats heldWeapon = WeaponLibrary.getWeaponFromId(
-                    entity.getComponent<ArsenalComponent>().getCurrentWeaponId());
-                int shotsPerTurn = heldWeapon.getShotsPerTurn();
-                long timeBetweenShots = heldWeapon.getTimeBetweenShots();
-                int shotsFired = entity.getComponent<IsFiring>().getShotsFired();
-
-                if (shotsFired < shotsPerTurn && time > timeBetweenShots * shotsFired)
-                {
-                    float unitDirection = locationComponent.getFacingRadians();
-                    Vector2 unitLocation = locationComponent.getCurrentLocation();
-
-                    float weaponAcc = heldWeapon.getAccuracy();
-                    float maximum = weaponAcc / 2;
-                    float minimum = -weaponAcc / 2;
-                    float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
-
-                    List<BaseComponent> components = new List<BaseComponent>();
-                    components.Add(new LocationComponent(unitLocation, bulletDirection));
-                    components.Add(new MovementComponent(10,
-                        GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
-                    components.Add(new IsProjectile(100, true));
-
-                    entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
-                    entity.getComponent<IsFiring>().incrementShotsFired();
-
-                }
+                entity.addComponent(new IsFiring());
             }
             else if (control.isActionEPressed())
             {
@@ -144,6 +116,38 @@ namespace TheGameOfForever.Service
                 Entity newTarget = entityManager.getEntity(targettableIds[index]);
                 Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
                 locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+            }
+
+            if (entity.hasComponent<IsFiring>())
+            {
+                long time = entity.getComponent<IsFiring>().getTimeSinceFirstShot();
+                entity.getComponent<IsFiring>().setTimeSinceFirstShot(time + gameTime.ElapsedGameTime.Milliseconds);
+
+                WeaponStats heldWeapon = WeaponLibrary.getWeaponFromId(
+                    entity.getComponent<ArsenalComponent>().getCurrentWeaponId());
+                int shotsPerTurn = heldWeapon.getShotsPerTurn();
+                long timeBetweenShots = heldWeapon.getTimeBetweenShots();
+                int shotsFired = entity.getComponent<IsFiring>().getShotsFired();
+
+                if (shotsFired < shotsPerTurn && time > timeBetweenShots * shotsFired)
+                {
+                    float unitDirection = locationComponent.getFacingRadians();
+                    Vector2 unitLocation = locationComponent.getCurrentLocation();
+
+                    float weaponAcc = heldWeapon.getAccuracy();
+                    float maximum = weaponAcc / 2;
+                    float minimum = -weaponAcc / 2;
+                    float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
+
+                    List<BaseComponent> components = new List<BaseComponent>();
+                    components.Add(new LocationComponent(unitLocation, bulletDirection));
+                    components.Add(new MovementComponent(10,
+                        GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
+                    components.Add(new IsProjectile(100, true));
+
+                    entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
+                    entity.getComponent<IsFiring>().incrementShotsFired();
+                }
             }
         }
 
