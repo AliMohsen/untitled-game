@@ -118,7 +118,7 @@ namespace TheGameOfForever.Service
                 locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
             }
 
-            if (entity.hasComponent<IsFiring>())
+            if (entity.hasComponent<IsFiring>() && !entity.getComponent<Selected>().getHasFired())
             {
                 long time = entity.getComponent<IsFiring>().getTimeSinceFirstShot();
                 entity.getComponent<IsFiring>().setTimeSinceFirstShot(time + gameTime.ElapsedGameTime.Milliseconds);
@@ -129,24 +129,31 @@ namespace TheGameOfForever.Service
                 long timeBetweenShots = heldWeapon.getTimeBetweenShots();
                 int shotsFired = entity.getComponent<IsFiring>().getShotsFired();
 
-                if (shotsFired < shotsPerTurn && time > timeBetweenShots * shotsFired)
+                if (shotsFired < shotsPerTurn)
                 {
-                    float unitDirection = locationComponent.getFacingRadians();
-                    Vector2 unitLocation = locationComponent.getCurrentLocation();
+                    if (time > timeBetweenShots * shotsFired)
+                    {
+                        float unitDirection = locationComponent.getFacingRadians();
+                        Vector2 unitLocation = locationComponent.getCurrentLocation();
 
-                    float weaponAcc = heldWeapon.getAccuracy();
-                    float maximum = weaponAcc / 2;
-                    float minimum = -weaponAcc / 2;
-                    float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
+                        float weaponAcc = heldWeapon.getAccuracy();
+                        float maximum = weaponAcc / 2;
+                        float minimum = -weaponAcc / 2;
+                        float bulletDirection = GeometryHelper.getRandomFloat(minimum, maximum);
 
-                    List<BaseComponent> components = new List<BaseComponent>();
-                    components.Add(new LocationComponent(unitLocation, bulletDirection));
-                    components.Add(new MovementComponent(10,
-                        GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
-                    components.Add(new IsProjectile(100, true));
+                        List<BaseComponent> components = new List<BaseComponent>();
+                        components.Add(new LocationComponent(unitLocation, bulletDirection));
+                        components.Add(new MovementComponent(10,
+                            GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection) * 10));
+                        components.Add(new IsProjectile(100, true));
 
-                    entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
-                    entity.getComponent<IsFiring>().incrementShotsFired();
+                        entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
+                        entity.getComponent<IsFiring>().incrementShotsFired();
+                    }
+                }
+                else
+                {
+                    entity.getComponent<Selected>().setHasFired(true);
                 }
             }
         }
