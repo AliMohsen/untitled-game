@@ -7,7 +7,7 @@ using TheGameOfForever.Component.Map;
 
 namespace TheGameOfForever.View.Camera
 {
-    public interface ICamera
+    public interface ICamera2D
     {
         Matrix getCameraTransformMatrix();
         void setMap(Map map);

@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace TheGameOfForever.Processor.Content.Models
+namespace TheGameOfForever.Processor.Content.Textures
 {
-    public class ModelDefinition
+    public class TextureDefinition
     {
         String name;
         Texture2D spriteSheet;
@@ -16,7 +16,7 @@ namespace TheGameOfForever.Processor.Content.Models
         Vector2 origin;
         Rectangle sourceRectangle;
 
-        public ModelDefinition(String name, Texture2D spriteSheet, Vector2 scale,
+        public TextureDefinition(String name, Texture2D spriteSheet, Vector2 scale,
             float defaultRotation, Vector2 origin, Rectangle sourceRectangle)
         {
             this.name = name;

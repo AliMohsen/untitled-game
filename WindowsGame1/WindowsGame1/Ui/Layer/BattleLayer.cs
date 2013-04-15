@@ -19,7 +19,7 @@ namespace TheGameOfForever.Ui.Layer
     public class BattleLayer : ILayer
     {
         private Map map = new Map();
-        private ICamera camera = new Basic2DCamera();
+        private ICamera2D camera = new Basic2DCamera();
 
         private Vector2 screenOffset = new Vector2(10, 30);
         private Vector2 currentMousePosition;

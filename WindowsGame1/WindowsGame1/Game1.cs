@@ -18,7 +18,7 @@ using System.IO;
 using TheGameOfForever.GameState;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component.Map;
-using TheGameOfForever.Processor.Content.Models;
+using TheGameOfForever.Processor.Content.Textures;
 using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Component;
 
@@ -91,7 +91,7 @@ namespace TheGameOfForever
         {
             Game1.content = Content;
             FontFactory.setContentManager(content);
-            ModelLibrary.initModelLibrary(content);
+            TextureLibrary.initModelLibrary(content);
             WeaponLibrary.initWeaponLibrary();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");

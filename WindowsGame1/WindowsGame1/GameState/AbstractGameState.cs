@@ -13,7 +13,7 @@ namespace TheGameOfForever.GameState
     {
         protected GameStateManager gameStateManager;
         private List<IGameService> gameServices = new List<IGameService>();
-        private ICamera camera;
+        private ICamera2D camera;
         public AbstractGameState(GameStateManager gameStateManager)
         {
             this.gameStateManager = gameStateManager;
@@ -23,7 +23,7 @@ namespace TheGameOfForever.GameState
         public abstract bool isPropagateUpdate();
         public abstract bool isPropagateDraw();
 
-        public ICamera getCamera()
+        public ICamera2D getCamera()
         {
             return camera;
         }

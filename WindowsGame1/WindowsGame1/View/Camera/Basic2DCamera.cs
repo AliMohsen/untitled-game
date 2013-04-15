@@ -10,7 +10,7 @@ namespace TheGameOfForever.View.Camera
     /// <summary>
     /// A basic 2D camera implementation.
     /// </summary>
-    public class Basic2DCamera : ICamera
+    public class Basic2DCamera : ICamera2D
     {
         /// <summary>
         /// IsStale tells us if we need to recompute the map transform.

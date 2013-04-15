@@ -7,7 +7,7 @@ using TheGameOfForever.GameState;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
-using TheGameOfForever.Processor.Content.Models;
+using TheGameOfForever.Processor.Content.Textures;
 
 namespace TheGameOfForever.Service
 {
@@ -16,7 +16,7 @@ namespace TheGameOfForever.Service
         public UnitDrawService(EntityManager entityManager)
             : base(entityManager)
         {
-            subscribeToComponentGroup(typeof(EntityModelComponent)); // 0
+            subscribeToComponentGroup(typeof(EntityTextureComponent)); // 0
         }
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
@@ -28,8 +28,8 @@ namespace TheGameOfForever.Service
             foreach (int id in this.entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id);
-                ModelDefinition model = ModelLibrary.getModelFromId(entity.getComponent<EntityModelComponent>()
-                    .getModelId());
+                TextureDefinition model = TextureLibrary.getTextureFromId(entity.getComponent<EntityTextureComponent>()
+                    .getTextureId());
                 LocationComponent locationComponent = entity.getComponent<LocationComponent>();
                 spriteBatch.Draw(model.getSpriteSheet(), locationComponent.getCurrentLocation(), model.getSourceRectangle(), Color.White, 
                     locationComponent.getFacingRadians(), model.getOrigin(), model.getScale(), SpriteEffects.None, 1);

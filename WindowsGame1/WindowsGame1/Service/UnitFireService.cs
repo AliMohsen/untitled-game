@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using TheGameOfForever.GameState;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Ui.Editor;
-using TheGameOfForever.Processor.Content.Models;
+using TheGameOfForever.Processor.Content.Textures;
 using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Geometry;
 

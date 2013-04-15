@@ -16,7 +16,7 @@ namespace TheGameOfForever.GameState
         LinkedList<AbstractGameState> gameStates = new LinkedList<AbstractGameState>();
         private EntityManager entityManager = new EntityManager();
         private EntityLoader entityLoader;
-        static ICamera camera = new Basic2DCamera();
+        static ICamera2D camera = new Basic2DCamera();
 
         public GameStateManager(EntityLoader entityLoader)
         {
@@ -137,7 +137,7 @@ namespace TheGameOfForever.GameState
             graphicsDevice.SetRenderTarget(null);
         }
 
-        public static ICamera getCamera()
+        public static ICamera2D getCamera()
         {
             return camera;
         }
