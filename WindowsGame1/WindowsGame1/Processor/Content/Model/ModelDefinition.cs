@@ -18,12 +18,6 @@ namespace TheGameOfForever.Processor.Content.Model
             this.name = name;
         }
 
-        public ModelDefinition(String name, VertexPositionColor[] vertices)
-        {
-            this.vertices = vertices;
-            this.name = name;
-        }
-
         public VertexPositionColor[] getVertices()
         {
             return vertices;

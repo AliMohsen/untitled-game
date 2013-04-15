@@ -106,14 +106,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="model\test.png">
+    <Compile Include="texture\test.png">
       <Name>test</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="model\humanEntity.PNG">
+    <Compile Include="texture\humanEntity.PNG">
       <Name>humanEntity</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
