@@ -8,11 +8,27 @@ namespace TheGameOfForever.View.Camera
 {
     public class Basic3DCamera
     {
+        public enum CameraMode
+        {
+            FOLLOWINGSTANDARD,
+            FOLLOWINGAIMING,
+            FREE
+        }
+
         Vector3 position;
         Vector3 lookingAt;
-        float rotated;
+        float rotation;
         float fieldOfView;
         float aspectRatio;
+        CameraMode cameraMode = CameraMode.FREE;
+
+        private Vector3 followingStandardOffset = new Vector3(0, 2, -4);
+        private Vector3 followingAimingOffset = new Vector3(-0.8f, 1.5f, -3);
+
+        public void setEntityRotation(float rotation)
+        {
+            this.rotation = rotation;
+        }
 
         public void setPosition(Vector3 position)
         {
@@ -36,7 +52,30 @@ namespace TheGameOfForever.View.Camera
 
         public Matrix getViewMatrix()
         {
-            return Matrix.CreateLookAt(position, lookingAt, new Vector3(0, 1, 0));
+            switch (cameraMode)
+            {
+                case CameraMode.FOLLOWINGSTANDARD:
+                    {
+                        Matrix rotationMatrix = Matrix.CreateRotationY(rotation);
+                        Vector3 transformedReference =
+                             Vector3.Transform(followingStandardOffset, rotationMatrix);
+                        Vector3 cameraPosition = transformedReference + lookingAt;
+                        return Matrix.CreateLookAt(cameraPosition, lookingAt,
+                            new Vector3(0.0f, 1.0f, 0.0f));
+                    }
+                case CameraMode.FOLLOWINGAIMING:
+                    {
+                        Matrix rotationMatrix = Matrix.CreateRotationY(rotation);
+                        Vector3 transformedReference =
+                             Vector3.Transform(followingAimingOffset, rotationMatrix);
+                        Vector3 cameraPosition = transformedReference + lookingAt;
+                        return Matrix.CreateLookAt(cameraPosition, lookingAt,
+                            new Vector3(0.0f, 1.0f, 0.0f));
+                    }
+                case CameraMode.FREE:
+                    return Matrix.CreateLookAt(position, lookingAt, new Vector3(0, 1, 0));
+            }
+            return default(Matrix);
         }
 
         public Matrix getProjectionMatrix()
