@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Component;
 using TheGameOfForever.Processor.Content.Textures;
+using TheGameOfForever.Service.Shapes;
 
 namespace TheGameOfForever.Entities
 {
@@ -133,8 +134,9 @@ namespace TheGameOfForever.Entities
                 components.Add(new MovementComponent(0.1f, Vector2.Zero));
                 // Humans form teams.
                 components.Add(new AllegianceComponent(teamId));
-                components.Add(new MovementTime());
+                components.Add(new MovementTime(10000000));
                 components.Add(new IsHumanComponent());
+                components.Add(new CollisionHitBox(new Circle(Vector2.Zero, 15, 5)));
                 components.Add(new Controllable(1));
                 components.Add(new EntityTextureComponent(TextureLibrary.getModelIdFromName("human")));
                 components.Add(new ArsenalComponent("pistol", "ak47"));

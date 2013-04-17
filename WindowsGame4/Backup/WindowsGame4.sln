@@ -1,9 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame4", "WindowsGame4\WindowsGame4.csproj", "{5F4E63CA-59AA-41AB-83FD-9140742720AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame4Content", "WindowsGame4\Content\WindowsGame4Content.contentproj", "{9F7A1254-6133-45B8-B2D8-BDB0261A4560}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

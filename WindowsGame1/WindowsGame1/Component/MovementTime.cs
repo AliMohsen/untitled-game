@@ -11,6 +11,12 @@ namespace TheGameOfForever.Component
         private int movedAmount;
         private long millisToMove = 5000;
 
+        public MovementTime(long millisToMove)
+        {
+            this.fullMillisToMove = millisToMove;
+            this.millisToMove = millisToMove;
+        }
+
         public long getMillisToMove()
         {
             return millisToMove;

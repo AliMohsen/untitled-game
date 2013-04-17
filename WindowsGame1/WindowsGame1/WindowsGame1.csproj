@@ -161,6 +161,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
+    <Compile Include="Service\CollisionService.cs" />
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\UnitDrawService.cs" />

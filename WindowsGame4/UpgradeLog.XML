@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WindowsGame4">
+</Property><Property Name="Solution File" Value="C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4.sln">
+</Property><Property Name="Date" Value="17 April 2013">
+</Property><Property Name="Time" Value="22:19">
+</Property><Property Name="Solution" Value="WindowsGame4">
+</Property><Property Name="Solution File" Value="C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\WindowsGame4.sln">
+</Property><Property Name="Date" Value="17 April 2013">
+</Property><Property Name="Time" Value="22:19:37">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WindowsGame4.sln" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4.sln">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Upgraded XNA Game Studio project to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Project file successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\WindowsGame4.csproj">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\begin.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\begin.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\Camera2d.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\Camera2d.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\collision.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\collision.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\collisionShape.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\collisionShape.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\helper.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\helper.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\PrimitiveBatch.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\PrimitiveBatch.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\Program.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\Program.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\Game1.cs" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\Game1.cs">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\Game.ico" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\Game.ico">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\GameThumbnail.png" Description="File successfully backed up as C:\Users\jkh13\Documents\GitHub\untitled-game\WindowsGame4\Backup\WindowsGame4\GameThumbnail.png">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsGame4.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WindowsGame4.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="WindowsGame4" Source="WindowsGame4\WindowsGame4.csproj" Description="Upgraded XNA Framework references to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="circle50.PNG" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="circle50heiht.PNG" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="Content.contentproj" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="light.fx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="null.jpg" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="para.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="parabg.PNG" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="testing blur.PNG" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="testing normal.PNG" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="Thumbs.db" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="WindowsGame4Content" Source="WindowsGame4\Content\WindowsGame4Content.contentproj" Description="Upgraded XNA Game Studio nested content projects to XNA Framework 4.0 and promoted to sibling project.">
+</Event></UpgradeLog>

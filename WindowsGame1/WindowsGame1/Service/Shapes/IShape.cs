@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheGameOfForever.Service.Shapes
 {
-    interface IShape
+    public interface IShape
     {
 
     }
