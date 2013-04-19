@@ -12,6 +12,7 @@ using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Processor.Content.Textures;
 using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Geometry;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Service
 {
@@ -166,8 +167,11 @@ namespace TheGameOfForever.Service
 
             Vector2 location = unit.getComponent<LocationComponent>().getCurrentLocation();
             float direction = unit.getComponent<LocationComponent>().getFacingRadians();
-
+/*
             spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Blue,
+                (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
+*/
+            SpriteBatchWrapper.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Blue,
                 (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
 
             Rectangle leftLine = new Rectangle(0, 0, 1, 500);
@@ -178,21 +182,31 @@ namespace TheGameOfForever.Service
 
             float leftAngle = - weaponAcc / 2;
             float rightAngle = weaponAcc / 2;
-
+/*
             spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), leftLine,
                 Color.DarkGray, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
                 Color.DarkGray, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             spriteBatch.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
                 Color.DarkGray, direction , new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
-
+*/
+            SpriteBatchWrapper.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), leftLine,
+                Color.DarkGray, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+            SpriteBatchWrapper.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
+                Color.DarkGray, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+            SpriteBatchWrapper.Draw(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
+                Color.DarkGray, direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             foreach (int id2 in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id2);
+                /*
                 spriteBatch.Draw(EditorContent.blank,
                     entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
                     (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
-
+                */
+                SpriteBatchWrapper.Draw(EditorContent.blank,
+                    entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 1, 1), Color.HotPink,
+                    (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
             }
         }
     }

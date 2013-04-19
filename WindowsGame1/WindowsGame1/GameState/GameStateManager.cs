@@ -7,6 +7,7 @@ using TheGameOfForever.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.View.Camera;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.GameState
 {
@@ -133,6 +134,7 @@ namespace TheGameOfForever.GameState
             {
                 state.draw(gameTime, spriteBatch);
             }
+            SpriteBatchWrapper.drawItems(spriteBatch);
             spriteBatch.End();
             graphicsDevice.SetRenderTarget(null);
         }
