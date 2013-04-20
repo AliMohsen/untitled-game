@@ -158,6 +158,11 @@
     <Compile Include="Processor\Content\Model\ModelLibrary.cs" />
     <Compile Include="Processor\Content\Texture\TextureDefinition.cs" />
     <Compile Include="Processor\Content\Texture\TextureLibrary.cs" />
+    <Compile Include="Processor\Entity\DataType\Int32Converter.cs" />
+    <Compile Include="Processor\Entity\DataType\TestInterface.cs" />
+    <Compile Include="Processor\Entity\DataType\TypeConverter.cs" />
+    <Compile Include="Processor\Entity\DataType\TypeConverterLibrary.cs" />
+    <Compile Include="Processor\Entity\DataType\Vector2Converter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
