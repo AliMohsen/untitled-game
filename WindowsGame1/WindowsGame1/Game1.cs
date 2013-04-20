@@ -22,6 +22,7 @@ using TheGameOfForever.Processor.Content.Textures;
 using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Component;
 using TheGameOfForever.Processor.Entity.DataType;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever
 {
@@ -98,6 +99,7 @@ namespace TheGameOfForever
             Console.WriteLine(TypeConverterLibrary.getTypeConverter<int>().getTypeAsString());
 
 
+            SpriteBatchWrapper.initialise();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
             stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
