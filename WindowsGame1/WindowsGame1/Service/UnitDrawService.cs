@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using TheGameOfForever.Processor.Content.Textures;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Service
 {
@@ -31,7 +32,7 @@ namespace TheGameOfForever.Service
                 TextureDefinition model = TextureLibrary.getTextureFromId(entity.getComponent<EntityTextureComponent>()
                     .getTextureId());
                 LocationComponent locationComponent = entity.getComponent<LocationComponent>();
-                spriteBatch.Draw(model.getSpriteSheet(), locationComponent.getCurrentLocation(), model.getSourceRectangle(), Color.White, 
+                SpriteBatchWrapper.DrawGame(model.getSpriteSheet(), locationComponent.getCurrentLocation(), model.getSourceRectangle(), Color.White, 
                     locationComponent.getFacingRadians(), model.getOrigin(), model.getScale(), SpriteEffects.None, 1);
             }
         }

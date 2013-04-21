@@ -112,14 +112,14 @@ namespace TheGameOfForever.Service
             MovementTime movementTime = entity.getComponent<MovementTime>();
 
             float fractionLeftToMove = movementTime.getMillisToMove() / (float)movementTime.getFullMillisToMove();
-            spriteBatch.End();
+//            spriteBatch.End();
 
-            DrawHelper.spriteBatchBeginUI(spriteBatch);
-            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 10, 200, 5), Color.DarkGray);
-            spriteBatch.Draw(EditorContent.blank, new Rectangle(10, 11, (int)(200 * fractionLeftToMove), 2), Color.LightBlue);
-            spriteBatch.End();
+//            DrawHelper.spriteBatchBeginUI(spriteBatch);
+            SpriteBatchWrapper.DrawUI(EditorContent.blank, new Rectangle(10, 10, 200, 5), Color.DarkGray);
+            SpriteBatchWrapper.DrawUI(EditorContent.blank, new Rectangle(10, 11, (int)(200 * fractionLeftToMove), 2), Color.LightBlue);
+//            spriteBatch.End();
 
-            DrawHelper.spriteBatchBeginGame(spriteBatch);
+//            DrawHelper.spriteBatchBeginGame(spriteBatch);
 
             base.draw(gameTime, gameState, spriteBatch);
         }

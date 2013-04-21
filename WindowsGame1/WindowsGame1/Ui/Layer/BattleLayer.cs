@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using TheGameOfForever.Ui.Editor;
 using TheGameOfForever.Ui.Editor.Input;
 using TheGameOfForever.Ui.Font;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Ui.Layer
 {
@@ -49,15 +50,15 @@ namespace TheGameOfForever.Ui.Layer
 
         public void draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
-            spriteBatch.Draw(EditorContent.blank, new Rectangle((int) screenOffset.X, (int) screenOffset.Y, 
-                (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.LightGray);
-            DrawStringHelper.drawString(spriteBatch, 
+//            spriteBatch.End();
+//            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,null,null,null,null, camera.getCameraTransformMatrix());
+            SpriteBatchWrapper.DrawCustom(EditorContent.blank, new Rectangle((int) screenOffset.X, (int) screenOffset.Y,
+                (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.LightGray, camera.getCameraTransformMatrix());
+            DrawStringHelper.drawStringCustom(spriteBatch, 
                 "Loc[Metres]: (" + (int) (currentMousePosition.X / 5) + ", " + (int) (currentMousePosition.Y / 5) + ")", "mentone", 10,
-                Color.Black, new Vector2(screenOffset.X, screenOffset.Y + Map.getWorldHeight() - 17));
-            spriteBatch.End();
-            spriteBatch.Begin();
+                Color.Black, new Vector2(screenOffset.X, screenOffset.Y + Map.getWorldHeight() - 17), camera.getCameraTransformMatrix());
+//            spriteBatch.End();
+//            spriteBatch.Begin();
         }
 
         public void update(GameTime gameTime)

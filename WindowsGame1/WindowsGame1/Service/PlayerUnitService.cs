@@ -112,12 +112,12 @@ namespace TheGameOfForever.Service
                             sb.Append("Time to move: " + entity.getComponent<MovementTime>().getFullMillisToMove());
                         }
 
-                        DrawStringHelper.drawString(spriteBatch, sb.ToString(),
+                        DrawStringHelper.drawStringGame(spriteBatch, sb.ToString(),
                             "mentone", 10, Color.Orange, location - new Vector2(-28, 36));
                     }
                     else
                     {
-                        spriteBatch.Draw(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.White,
+                        SpriteBatchWrapper.DrawGame(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.White,
                             (float)Math.PI / 2, new Vector2(0.5f), new Vector2(2), SpriteEffects.None, 1);
                     }
                 }
@@ -130,13 +130,13 @@ namespace TheGameOfForever.Service
                 }
             }
 
-            spriteBatch.End();
-            DrawHelper.spriteBatchBeginUI(spriteBatch);
+//            spriteBatch.End();
+//            DrawHelper.spriteBatchBeginUI(spriteBatch);
 
-            DrawStringHelper.drawString(spriteBatch, "Command points remaining: " + ((UnitSelectState)gameState).getCommandPoints(),
+            DrawStringHelper.drawStringUI(spriteBatch, "Command points remaining: " + ((UnitSelectState)gameState).getCommandPoints(),
                 "mentone", 12, Color.Gray, new Vector2(5));
-            spriteBatch.End();
-            DrawHelper.spriteBatchBeginGame(spriteBatch);
+//            spriteBatch.End();
+//            DrawHelper.spriteBatchBeginGame(spriteBatch);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace TheGameOfForever.Draw
             // the origin is set up  
             float distance = between.Length() + 1.0f;
 
-            spriteBatch.Draw(EditorContent.blank, end, null, color, angle, new Vector2(0, 0.5f),
+            SpriteBatchWrapper.DrawGame(EditorContent.blank, end, null, color, angle, new Vector2(0, 0.5f),
                 new Vector2(distance, width), SpriteEffects.None, 1);
         }
     }
