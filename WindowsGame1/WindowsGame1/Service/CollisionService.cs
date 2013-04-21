@@ -81,7 +81,7 @@ namespace TheGameOfForever.Service
                     if (collisionShape is Circle)
                     {
                         Circle shape = ((Circle)collisionShape);
-                        spriteBatch.Draw(EditorContent.circle100, shape.getLocation(), new Rectangle(0,0,100,100), Color.Orange * 0.4f, 0,
+                        SpriteBatchWrapper.DrawGame(EditorContent.circle100, shape.getLocation(), new Rectangle(0,0,100,100), Color.Orange * 0.4f, 0,
                             new Vector2(EditorContent.circle100.Width/2), shape.getRadius() * 2 / (float)100, SpriteEffects.None, 1);
                     }
 
