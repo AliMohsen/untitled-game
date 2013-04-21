@@ -8,6 +8,8 @@ using TheGameOfForever.Service.Shapes;
 using Microsoft.Xna.Framework;
 using TheGameOfForever.Geometry;
 using TheGameOfForever.Ui.Editor;
+using Microsoft.Xna.Framework.Graphics;
+using TheGameOfForever.Draw;
 
 namespace TheGameOfForever.Service
 {
@@ -62,7 +64,7 @@ namespace TheGameOfForever.Service
             }
         }
 
-        public override void draw(GameTime gameTime, GameState.AbstractGameState gameState, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void draw(GameTime gameTime, GameState.AbstractGameState gameState, SpriteBatch spriteBatch)
         {
             foreach (int id in entityIds[1])
             {
@@ -74,8 +76,21 @@ namespace TheGameOfForever.Service
                     {
                         RectangleShape shape = ((RectangleShape)collisionShape);
                         spriteBatch.Draw(EditorContent.blank, shape.getRectangle(), null, Color.Orange * 0.4f, shape.getRotation(),
-                            shape.getRotatePoint() / new Vector2(shape.getRectangle().Width, shape.getRectangle().Height), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 1);
+                            shape.getRotatePoint() / new Vector2(shape.getRectangle().Width, shape.getRectangle().Height), SpriteEffects.None, 1);
                     }
+                    if (collisionShape is Circle)
+                    {
+                        Circle shape = ((Circle)collisionShape);
+                        spriteBatch.Draw(EditorContent.circle100, shape.getLocation(), new Rectangle(0,0,100,100), Color.Orange * 0.4f, 0,
+                            new Vector2(EditorContent.circle100.Width/2), shape.getRadius() * 2 / (float)100, SpriteEffects.None, 1);
+                    }
+
+                    /*
+                    if (collisionShape is Line)
+                    {
+                        DrawHelper.drawBetween(((Line)collisionShape).getStartPoint(),  ((Line)collisionShape).getEndPoint(),spriteBatch,Color.Red, 2);
+                    }
+                     * */
                 }
             }
         }

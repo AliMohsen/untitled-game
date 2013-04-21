@@ -11,6 +11,7 @@ namespace TheGameOfForever.Ui.Editor
     {
         private static ContentManager contentManager = Game1.content;
         public static Texture2D blank = contentManager.Load<Texture2D>("basictextures\\blank");
+        public static Texture2D circle100 = contentManager.Load<Texture2D>("basictextures\\circle100");
         //public static Texture2D whiteCorner5x5 = contentManager.Load<Texture2D>("whiteCorner5x5");
     }
 }

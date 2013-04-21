@@ -143,7 +143,7 @@ namespace TheGameOfForever.Entities
                     }
                     Vector2 between = start - end;
                     float angle = GeometryHelper.CalculateAngle(end, start);
-                    float distance = between.Length() + 1.0f;
+                    float distance = between.Length();
                     lineShapes.Add(new Line(start, (int)distance, angle, 0));
                 }
                 CollisionHitBox hitboxes = new CollisionHitBox(lineShapes.ToArray());

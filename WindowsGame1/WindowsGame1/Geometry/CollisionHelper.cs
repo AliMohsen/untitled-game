@@ -18,11 +18,13 @@ namespace TheGameOfForever.Geometry
 
             if (a is Circle && b is RectangleShape)
             {
+                if (b is Line) return -circleLineDetect((Line)b, (Circle)a);
                 return intersectCircleRectangle((Circle) a, (RectangleShape) b);
             }
 
             if (a is RectangleShape && b is Circle)
             {
+                if (a is Line) return circleLineDetect((Line)a, (Circle)b);
                 return -intersectCircleRectangle((Circle) b, (RectangleShape) a);
             }
 
@@ -379,6 +381,23 @@ namespace TheGameOfForever.Geometry
                 Normalisedvec = intersectRectangles(new RectangleShape(circleRec, new Vector2(circle.getRadius(), circle.getRadius()), (float)Math.PI / 4, 0), new RectangleShape(recNormal, Vector2.Zero, 0, 0));
             }
             return GeometryHelper.rotatePoint(Normalisedvec, Vector2.Zero, rectangle.getRotation());
+        }
+
+        public static Vector2 circleLineDetect(Line line, Circle circle)
+        {
+            Vector2 v = line.getEndPoint() - (line.getStartPoint());
+            Vector2 w = circle.getLocation() - (line.getStartPoint());
+            float wDotv = Vector2.Dot(w, v);
+            float t = Vector2.Dot(w, v) / Vector2.Dot(v, v);
+            t = MathHelper.Clamp(t, 0, 1);
+            Vector2 p = line.getStartPoint() + v * t;
+
+            if (Vector2.DistanceSquared(p, circle.getLocation()) < circle.getRadius() * circle.getRadius())
+            {
+                Vector2 towardsp = Vector2.Normalize(p - circle.getLocation());
+                return circle.getLocation() + (circle.getRadius() * towardsp) - p;
+            }
+            return Vector2.Zero;
         }
     }
 }
