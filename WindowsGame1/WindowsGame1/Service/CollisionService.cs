@@ -6,12 +6,15 @@ using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using TheGameOfForever.Service.Shapes;
 using Microsoft.Xna.Framework;
+using TheGameOfForever.Geometry;
+using TheGameOfForever.Ui.Editor;
 
 namespace TheGameOfForever.Service
 {
     public class CollisionService : AbstractGameService
     {
-        public CollisionService(EntityManager entityManager) : base(entityManager)
+        public CollisionService(EntityManager entityManager)
+            : base(entityManager)
         {
             subscribeToComponentGroup(typeof(Selected), typeof(CollisionHitBox));
             subscribeToComponentGroup(typeof(CollisionHitBox));
@@ -35,12 +38,13 @@ namespace TheGameOfForever.Service
 
                 foreach (IShape collisionShape in collisionShapes)
                 {
-                    if (collisionShape.GetType() != typeof(Circle)) return;
-                    foreach (IShape collisionShape2 in collisionShapes)
+                    collisionShape.setLocation(selectedLocation.getCurrentLocation());
+                    collisionShape.setRotation(selectedLocation.getFacingRadians());
+                    foreach (IShape collisionShape2 in toCollideHitBox.getCollisionShapes())
                     {
-                        if (collisionShape2.GetType() != typeof(Circle)) continue;
-                        Vector2 repluseForce = intersectCircles((Circle) collisionShape, (Circle) collisionShape2,
-                            selectedLocation.getCurrentLocation(), toCollideLocation.getCurrentLocation());
+                        collisionShape2.setLocation(toCollideLocation.getCurrentLocation());
+                        collisionShape2.setRotation(toCollideLocation.getFacingRadians());
+                        Vector2 repluseForce = CollisionHelper.collide(collisionShape, collisionShape2);
                         selectedLocation.setCurrentLocation(selectedLocation.getCurrentLocation() + repluseForce);
                     }
                 }
@@ -48,19 +52,22 @@ namespace TheGameOfForever.Service
             }
         }
 
-        public Vector2 intersectCircles(Circle a, Circle b, Vector2 locationA, Vector2 locationB)
+        public override void draw(GameTime gameTime, GameState.AbstractGameState gameState, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            float dist = Vector2.Distance(locationA, locationB);
-            if (dist > a.getRadius() + b.getRadius())
+            foreach (int id in entityIds[1])
             {
-                return Vector2.Zero;
+                Entity entityToCollide = entityManager.getEntity(id);
+                CollisionHitBox toCollideHitBox = entityToCollide.getComponent<CollisionHitBox>();
+                foreach (IShape collisionShape in toCollideHitBox.getCollisionShapes())
+                {
+                    if (collisionShape is RectangleShape)
+                    {
+                        RectangleShape shape = ((RectangleShape)collisionShape);
+                        spriteBatch.Draw(EditorContent.blank, shape.getRectangle(), null, Color.Orange * 0.4f, shape.getRotation(),
+                            shape.getRotatePoint() / new Vector2(shape.getRectangle().Width, shape.getRectangle().Height), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 1);
+                    }
+                }
             }
-            else
-            {
-                return Vector2.Normalize(locationB - locationA) * 
-                    (dist - (a.getRadius() + b.getRadius()));
-            }
-
         }
     }
 }

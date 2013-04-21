@@ -152,6 +152,7 @@
     <Compile Include="GameState\GlobalStateInfo.cs" />
     <Compile Include="GameState\MovementState.cs" />
     <Compile Include="GameState\UnitSelectState.cs" />
+    <Compile Include="Geometry\CollisionHelper.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
     <Compile Include="Processor\Content\ContentException.cs" />
     <Compile Include="Processor\Content\Model\ModelDefinition.cs" />

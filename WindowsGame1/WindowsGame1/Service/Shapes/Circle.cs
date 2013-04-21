@@ -33,5 +33,20 @@ namespace TheGameOfForever.Service.Shapes
         {
             return mass;
         }
+
+        public void setLocation(Vector2 location)
+        {
+           this.location = location;
+        }
+
+
+        public void setRotation(float rotation)
+        {
+        }
+
+        public float getRotation()
+        {
+            return 0;
+        }
     }
 }
