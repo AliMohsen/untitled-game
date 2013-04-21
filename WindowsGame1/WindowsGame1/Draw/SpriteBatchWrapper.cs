@@ -54,11 +54,11 @@ namespace TheGameOfForever.Draw
             {
                 if (this.layerDepth > obj.layerDepth)
                 {
-                    return -1;
+                    return 1;
                 }
                 else if (this.layerDepth < obj.layerDepth)
                 {
-                    return 1;
+                    return -1;
                 }
                 else
                 {
@@ -318,27 +318,27 @@ namespace TheGameOfForever.Draw
                     {
                         if (p.scale != null)
                         {
-                            spriteBatch.Draw(p.texture, (Vector2)p.position, p.sourceRectangle, p.color, p.rotation, p.origin, (Vector2)p.scale, p.effects, p.layerDepth);
+                            spriteBatch.Draw(p.texture, (Vector2)p.position, p.sourceRectangle, p.color, p.rotation, p.origin, (Vector2)p.scale, p.effects, 1);
                         }
                         else
                         {
-                            spriteBatch.Draw(p.texture, (Vector2)p.position, p.sourceRectangle, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, p.layerDepth);
+                            spriteBatch.Draw(p.texture, (Vector2)p.position, p.sourceRectangle, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, 1);
                         }
                     }
                     else
                     {
-                        spriteBatch.Draw(p.texture, (Rectangle)p.destinationRectangle, p.sourceRectangle, p.color, p.rotation, p.origin, p.effects, p.layerDepth);
+                        spriteBatch.Draw(p.texture, (Rectangle)p.destinationRectangle, p.sourceRectangle, p.color, p.rotation, p.origin, p.effects, 1);
                     }
                 }
                 else
                 {
                     if (p.text != null)
                     {
-                        spriteBatch.DrawString(p.spriteFont, p.text, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, p.layerDepth);
+                        spriteBatch.DrawString(p.spriteFont, p.text, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, 1);
                     }
                     else
                     {
-                        spriteBatch.DrawString(p.spriteFont, p.textString, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, p.layerDepth);
+                        spriteBatch.DrawString(p.spriteFont, p.textString, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, 1);
                     }
                 }
                 prevMatrixIndex = currMatrixIndex;
