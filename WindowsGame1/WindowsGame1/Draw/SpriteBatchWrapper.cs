@@ -332,13 +332,14 @@ namespace TheGameOfForever.Draw
                 }
                 else
                 {
+                    Vector2 positionToDraw = new Vector2((int) p.position.Value.X, (int) p.position.Value.Y);
                     if (p.text != null)
                     {
-                        spriteBatch.DrawString(p.spriteFont, p.text, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, 1);
+                        spriteBatch.DrawString(p.spriteFont, p.text, positionToDraw, p.color, p.rotation, Vector2.Zero, (float)p.scaleF, p.effects, 1);
                     }
                     else
                     {
-                        spriteBatch.DrawString(p.spriteFont, p.textString, (Vector2)p.position, p.color, p.rotation, p.origin, (float)p.scaleF, p.effects, 1);
+                        spriteBatch.DrawString(p.spriteFont, p.textString, positionToDraw, p.color, p.rotation, Vector2.Zero, (float)p.scaleF, p.effects, 1);
                     }
                 }
                 prevMatrixIndex = currMatrixIndex;
