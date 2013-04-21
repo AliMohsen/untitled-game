@@ -11,15 +11,16 @@ namespace TheGameOfForever.Service.Shapes
         private Vector2 startPoint;
         private int length;
 
-        public Line(Vector2 startPoint, int length, float rotation, int mass) : base(new Rectangle(),startPoint,rotation,mass)
+        public Line(Vector2 startPoint, int length, float rotation, int mass) : 
+            base(new Rectangle(), startPoint, rotation, mass)
         {
             this.rectangle.X = (int)startPoint.X;
             this.rectangle.Y = (int)startPoint.Y;
             this.rectangle.Height = length;
-            this.rectangle.Width = 0;
+            this.rectangle.Width = 1;
             this.rotation = rotation;
             this.mass = mass;
-            this.rotatePoint = startPoint;
-        }
+            this.rotatePoint = Vector2.Zero;
+        }
     }
 }

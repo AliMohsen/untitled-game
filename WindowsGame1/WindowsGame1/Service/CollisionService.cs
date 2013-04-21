@@ -38,14 +38,24 @@ namespace TheGameOfForever.Service
 
                 foreach (IShape collisionShape in collisionShapes)
                 {
-                    collisionShape.setLocation(selectedLocation.getCurrentLocation());
-                    collisionShape.setRotation(selectedLocation.getFacingRadians());
+                    if (selectedLocation != null)
+                    {
+                        collisionShape.setLocation(selectedLocation.getCurrentLocation());
+                        collisionShape.setRotation(selectedLocation.getFacingRadians());
+                    }
                     foreach (IShape collisionShape2 in toCollideHitBox.getCollisionShapes())
                     {
-                        collisionShape2.setLocation(toCollideLocation.getCurrentLocation());
-                        collisionShape2.setRotation(toCollideLocation.getFacingRadians());
+
+                        if (toCollideLocation != null)
+                        {
+                            collisionShape2.setLocation(toCollideLocation.getCurrentLocation());
+                            collisionShape2.setRotation(toCollideLocation.getFacingRadians());
+                        }
                         Vector2 repluseForce = CollisionHelper.collide(collisionShape, collisionShape2);
-                        selectedLocation.setCurrentLocation(selectedLocation.getCurrentLocation() + repluseForce);
+                        if (selectedLocation != null)
+                        {
+                            selectedLocation.setCurrentLocation(selectedLocation.getCurrentLocation() + repluseForce);
+                        }
                     }
                 }
 

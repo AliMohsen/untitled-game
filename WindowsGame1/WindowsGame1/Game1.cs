@@ -109,10 +109,10 @@ namespace TheGameOfForever
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 80), 0, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
-                entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(new MapElementComponent(), 
-                    new VertexListComponent(new Vector2(100, 100), new Vector2(100, 250), new Vector2(150, 240), new Vector2(140, 90))));
-                entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(new MapElementComponent(),
-                     new VertexListComponent(new Vector2(-100, -100), new Vector2(-50, -110), new Vector2(-50, -99), new Vector2(-132, 100))));
+                entityManager.addEntity(Entity.EntityFactory.createMapComponent(new Vector2(100, 100),
+                    new Vector2(100, 250), new Vector2(150, 240), new Vector2(140, 90)));
+                entityManager.addEntity(Entity.EntityFactory.createMapComponent(new Vector2(-132, 100),
+                    new Vector2(-50, -99), new Vector2(-50, -110), new Vector2(-100, -100)));
             }));
             layerManager.addLayerOnTop(new SaveLoadLayer(uiService));
             stateManager.pushState(new UnitSelectState(0, stateManager));

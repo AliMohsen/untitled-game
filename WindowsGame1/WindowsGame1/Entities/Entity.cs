@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using TheGameOfForever.Component;
 using TheGameOfForever.Processor.Content.Textures;
 using TheGameOfForever.Service.Shapes;
+using TheGameOfForever.Geometry;
 
 namespace TheGameOfForever.Entities
 {
@@ -120,6 +121,33 @@ namespace TheGameOfForever.Entities
                     uniqueId++;
                     return new Entity(uniqueId, components);
                 }
+            }
+
+            public static Entity createMapComponent(params Vector2[] points)
+            {
+                List<Line> lineShapes = new List<Line>();
+                VertexListComponent vertex = new VertexListComponent(points);
+
+                for (int i = 0; i < vertex.getPoints().Count; i++)
+                {
+                    Vector2 start = vertex.getPoints()[i];
+                    Vector2 end;
+
+                    if (i + 1 == vertex.getPoints().Count)
+                    {
+                        end = vertex.getPoints()[0];
+                    }
+                    else
+                    {
+                        end = vertex.getPoints()[i + 1];
+                    }
+                    Vector2 between = start - end;
+                    float angle = GeometryHelper.CalculateAngle(end, start);
+                    float distance = between.Length() + 1.0f;
+                    lineShapes.Add(new Line(start, (int)distance, angle, 0));
+                }
+                CollisionHitBox hitboxes = new CollisionHitBox(lineShapes.ToArray());
+                return createEntityWithComponents(new MapElementComponent(), hitboxes, vertex);
             }
 
             public static Entity createHumanEntity(int health, Vector2 startingLocation, int teamId, bool controllable,
