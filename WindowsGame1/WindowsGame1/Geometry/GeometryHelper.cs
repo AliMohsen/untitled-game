@@ -51,5 +51,15 @@ namespace TheGameOfForever.Geometry
             else angle = (float)(Math.PI + (Math.PI + (float)Math.Atan2(vec.Y, vec.X)));
             return angle;
         }
+
+        public static Vector2 rotatePoint(Vector2 toRotate, Vector2 Origin, float rotation)
+        {
+            Vector2 r;
+            r.X = (float)(Origin.X + (Math.Cos(rotation) * (toRotate.X - Origin.X) -
+                    Math.Sin(rotation) * (toRotate.Y - Origin.Y)));
+            r.Y = (float)(Origin.Y + (Math.Sin(rotation) * (toRotate.X - Origin.X) +
+                    Math.Cos(rotation) * (toRotate.Y - Origin.Y)));
+            return r;
+        }
     }
 }

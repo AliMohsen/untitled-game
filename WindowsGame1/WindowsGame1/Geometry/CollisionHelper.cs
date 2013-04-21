@@ -18,12 +18,12 @@ namespace TheGameOfForever.Geometry
 
             if (a is Circle && b is RectangleShape)
             {
-                return -intersectCircleRectangle(a, b);
+                return intersectCircleRectangle((Circle) a, (RectangleShape) b);
             }
 
             if (a is RectangleShape && b is Circle)
             {
-                return intersectCircleRectangle(a, b);
+                return -intersectCircleRectangle((Circle) b, (RectangleShape) a);
             }
 
             if (a is Circle && b is Circle)
@@ -32,11 +32,6 @@ namespace TheGameOfForever.Geometry
             }
 
             return Vector2.Zero;
-        }
-
-        public static Vector2 intersectCircleRectangle(IShape a, IShape b)
-        {
-            throw new NotImplementedException();
         }
 
         public static Vector2 intersectCircles(Circle a, Circle b)
@@ -299,6 +294,91 @@ namespace TheGameOfForever.Geometry
             float aDivisionResult = aNumerator / aDenominator;
             return new Vector2(aDivisionResult * theAxis.X, aDivisionResult * theAxis.Y);
 
+        }
+        
+        private static Vector2 intersectCircleRectangle(Circle circle, RectangleShape rectangle)
+        {
+            RectangleShape rectangle2 = new RectangleShape(new Rectangle((int)(rectangle.getRectangle().X - rectangle.getRotatePoint().X),
+                (int)(rectangle.getRectangle().Y - rectangle.getRotatePoint().Y),
+                rectangle.getRectangle().Width, rectangle.getRectangle().Height),
+                rectangle.getRotatePoint(), rectangle.getRotation(), 0);
+
+            //Rotated Vector points of Rectangle 
+            Vector2 rUL = UpperLeftCorner(rectangle2);
+            Vector2 rUR = UpperRightCorner(rectangle2);
+            Vector2 rLL = LowerLeftCorner(rectangle2);
+            Vector2 rLR = LowerRightCorner(rectangle2);
+
+            Vector2[] bPoints = new Vector2[] { rUL, rUR, rLL, rLR };
+
+            int bLeft = (int)Math.Min(Math.Min(rUL.X, rUR.X), Math.Min(rLL.X, rLR.X));
+            int bTop = (int)Math.Min(Math.Min(rUL.Y, rUR.Y), Math.Min(rLL.Y, rLR.Y));
+            int bRight = (int)Math.Max(Math.Max(rUL.X, rUR.X), Math.Max(rLL.X, rLR.X));
+            int bBottom = (int)Math.Max(Math.Max(rUL.Y, rUR.Y), Math.Max(rLL.Y, rLR.Y));
+
+
+            Vector2 Normalisedvec;
+            //Now we normalise the rectangle and circle by rotating the two objects by the rectangles rotation
+            Vector2 rNUL = GeometryHelper.rotatePoint(rUL, new Vector2(rectangle2.getRectangle().X, rectangle2.getRectangle().Y), -rectangle2.getRotation());
+            Vector2 rNUR = GeometryHelper.rotatePoint(rUR, new Vector2(rectangle2.getRectangle().X, rectangle2.getRectangle().Y), -rectangle2.getRotation());
+            Vector2 rNLL = GeometryHelper.rotatePoint(rLL, new Vector2(rectangle2.getRectangle().X, rectangle2.getRectangle().Y), -rectangle2.getRotation());
+            Vector2 rNLR = GeometryHelper.rotatePoint(rLR, new Vector2(rectangle2.getRectangle().X, rectangle2.getRectangle().Y), -rectangle2.getRotation());
+
+
+            Rectangle recNormal = new Rectangle((int)rNUL.X, (int)rNUL.Y, (int)(rNUR.X - rNUL.X), (int)(rNLL.Y - rNUL.Y));
+
+
+
+            Vector2 circleLoc = GeometryHelper.rotatePoint(circle.getLocation(), 
+                new Vector2(rectangle2.getRectangle().X, rectangle2.getRectangle().Y), -rectangle2.getRotation());
+
+            //Now we check for voronoi regions on the rectangle
+            bool voronoid = false;
+            Vector2 vertexVoronoi;
+
+            //See if cirlce point fits in any voronoi region
+            if (circleLoc.X < recNormal.Left && circleLoc.Y < recNormal.Top)
+            {
+                vertexVoronoi = rNUL;
+                voronoid = true;
+            }
+
+            if (circleLoc.X > recNormal.Right && circleLoc.Y < recNormal.Top)
+            {
+                vertexVoronoi = rNUR;
+                voronoid = true;
+            }
+
+            if (circleLoc.X < recNormal.Left && circleLoc.Y > recNormal.Bottom)
+            {
+                vertexVoronoi = rNLL;
+                voronoid = true;
+            }
+
+            if (circleLoc.X > recNormal.Right && circleLoc.Y > recNormal.Bottom)
+            {
+                vertexVoronoi = rNLR;
+                voronoid = true;
+            }
+
+            if (!voronoid)
+            {
+                circle.setRotation(0.0f);
+
+                Rectangle circleRec = new Rectangle((int)(circleLoc.X - circle.getRadius()), (int)(circleLoc.Y - circle.getRadius()), (int)circle.getRadius() * 2, (int)circle.getRadius() * 2);
+
+                Normalisedvec = intersectRectangles(new RectangleShape(circleRec, Vector2.Zero, 0, 0), new RectangleShape(recNormal, Vector2.Zero, 0, 0));
+            }
+            else
+            {
+                circle.setRotation((float)Math.PI / 4);
+
+                Rectangle circleRec = new Rectangle((int)(circleLoc.X), (int)(circleLoc.Y), (int)circle.getRadius() * 2, (int)circle.getRadius() * 2);
+
+
+                Normalisedvec = intersectRectangles(new RectangleShape(circleRec, new Vector2(circle.getRadius(), circle.getRadius()), (float)Math.PI / 4, 0), new RectangleShape(recNormal, Vector2.Zero, 0, 0));
+            }
+            return GeometryHelper.rotatePoint(Normalisedvec, Vector2.Zero, rectangle.getRotation());
         }
     }
 }
