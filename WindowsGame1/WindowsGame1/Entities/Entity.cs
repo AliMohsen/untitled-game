@@ -164,6 +164,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new AllegianceComponent(teamId));
                 components.Add(new MovementTime(10000000));
                 components.Add(new IsHumanComponent());
+                components.Add(new StatusDrawComponent());
                 components.Add(new CollisionHitBox(new Circle(Vector2.Zero, 15, 5)));
                 //components.Add(new CollisionHitBox(new RectangleShape(new Rectangle((int)(startingLocation.X - 25), 
                  //   (int)(startingLocation.Y - 25), 50,50),new Vector2(25),0,0)));
