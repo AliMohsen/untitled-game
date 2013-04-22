@@ -113,6 +113,7 @@
     <Compile Include="Component\AllegianceComponent.cs" />
     <Compile Include="Component\ArsenalComponent.cs" />
     <Compile Include="Component\BaseComponent.cs" />
+    <Compile Include="Component\DamageComponent.cs" />
     <Compile Include="Component\EntityTextureComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
     <Compile Include="Component\Controllable.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Component\CollisionHitBox.cs" />
     <Compile Include="Component\InterceptionFirePotential.cs" />
     <Compile Include="Component\CanFire.cs" />
+    <Compile Include="Component\StatusDrawComponent.cs" />
     <Compile Include="Component\TrackingComponent.cs" />
     <Compile Include="Component\ModelDefinitionComponent.cs" />
     <Compile Include="Component\VertexListComponent.cs" />
@@ -171,6 +173,8 @@
     <Compile Include="Service\CollisionService.cs" />
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
+    <Compile Include="Service\StatusDrawService.cs" />
+    <Compile Include="Service\TakeDamageService.cs" />
     <Compile Include="Service\UnitDrawService.cs" />
     <Compile Include="Service\UnitFireService.cs" />
     <Compile Include="Service\TrackingCameraService.cs" />

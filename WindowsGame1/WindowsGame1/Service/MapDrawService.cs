@@ -63,7 +63,6 @@ namespace TheGameOfForever.Service
                     VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
             }
 
-            base.draw(gameTime, gameState, spriteBatch);
         }
 
     }

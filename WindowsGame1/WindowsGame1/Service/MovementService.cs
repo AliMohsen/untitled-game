@@ -121,7 +121,6 @@ namespace TheGameOfForever.Service
 
 //            DrawHelper.spriteBatchBeginGame(spriteBatch);
 
-            base.draw(gameTime, gameState, spriteBatch);
         }
     }
 }
