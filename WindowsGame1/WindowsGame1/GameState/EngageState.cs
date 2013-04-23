@@ -17,6 +17,7 @@ namespace TheGameOfForever.GameState
             addService(gameStateManager.getService<TakeDamageService>());
             addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<StatusDrawService>());
+            addService(gameStateManager.getService<ProjectileCollisionService>());
         }
 
         public void disengage()

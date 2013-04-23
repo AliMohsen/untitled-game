@@ -173,6 +173,7 @@
     <Compile Include="Service\CollisionService.cs" />
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
+    <Compile Include="Service\ProjectileCollisionService.cs" />
     <Compile Include="Service\StatusDrawService.cs" />
     <Compile Include="Service\TakeDamageService.cs" />
     <Compile Include="Service\UnitDrawService.cs" />

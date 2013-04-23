@@ -12,7 +12,6 @@ namespace TheGameOfForever.Service.Shapes
         protected Vector2 rotatePoint;
         protected float rotation;
         protected int mass;
-        protected Vector2 location;
 
         public RectangleShape(Rectangle rectangle, Vector2 rotatePoint, float rotation, int mass)
         {
@@ -25,6 +24,11 @@ namespace TheGameOfForever.Service.Shapes
         public Rectangle getRectangle()
         {
             return rectangle;
+        }
+
+        public void setRectangle(Rectangle rectangle)
+        {
+            this.rectangle = rectangle;
         }
 
         public Vector2 getLocation()

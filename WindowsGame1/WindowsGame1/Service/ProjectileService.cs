@@ -22,8 +22,9 @@ namespace TheGameOfForever.Service
             {
                 Entity entity = entityManager.getEntity(e);
                 LocationComponent loc = entity.getComponent<LocationComponent>();
+                Vector2 distance = gameTime.ElapsedGameTime.Milliseconds * entity.getComponent<MovementComponent>().getVelocity() * 0.1f;
                 loc.setCurrentLocation(loc.getCurrentLocation() 
-                    + entity.getComponent<MovementComponent>().getVelocity());
+                    + distance);
             }
         }
     }
