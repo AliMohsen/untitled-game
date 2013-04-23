@@ -15,7 +15,6 @@ namespace WindowsGame4
 {
     public class collisionShape
     {
-
         public Rectangle r;
         public Vector2 rotatePoint;
         public float rotation = 0;
@@ -24,9 +23,6 @@ namespace WindowsGame4
         public float radius;
         public Vector2 location;
         public int mass;
-
-        
-
 
         public collisionShape(Rectangle r, Vector2 rotatePoint, float rotation, int mass)
         {

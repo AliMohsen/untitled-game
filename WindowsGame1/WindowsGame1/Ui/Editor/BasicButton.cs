@@ -97,7 +97,7 @@ namespace TheGameOfForever.Ui.Editor
                 textColor = Color.SlateGray;
             }
             sprite.Draw(EditorContent.blank, box, bgColor);
-            DrawStringHelper.drawString(sprite, displayName, "mentone", 10, textColor, new Vector2(box.X + box.Width / 2, box.Y + box.Height/2), VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
+            DrawStringHelper.drawString(sprite, displayName, "mentone", 10, textColor, new Vector2(box.X + box.Width / 2, box.Y + box.Height/2), 0, VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
             sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y + box.Height, box.Width, 1), underlineColor);
             sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y, box.Width, 1), underlineColor);
             sprite.Draw(EditorContent.blank, new Rectangle(box.X, box.Y, 1, box.Height), underlineColor);

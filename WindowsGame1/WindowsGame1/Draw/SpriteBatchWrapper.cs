@@ -221,9 +221,10 @@ namespace TheGameOfForever.Draw
             toDraw.Add(parameters);
         }
 
-        public static void DrawStringGame(SpriteFont spriteFont, string text, Vector2 position, Color color)
+        public static void DrawStringGame(SpriteFont spriteFont, string text, Vector2 position, float rotationRadians, Color color)
         {
-            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, null, text, color, 0, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(GameStateManager.getCamera().getCameraTransformMatrix()));
+            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, null, text, color, rotationRadians, 
+                new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(GameStateManager.getCamera().getCameraTransformMatrix()));
             toDraw.Add(parameters);
         }
 
@@ -233,21 +234,22 @@ namespace TheGameOfForever.Draw
             toDraw.Add(parameters);
         }
 
-        public static void DrawStringUI(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color)
+        public static void DrawStringUI(SpriteFont spriteFont, StringBuilder text, Vector2 position, float rotationRadians, Color color)
         {
-            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, 0, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, -1);
+            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, rotationRadians, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, -1);
             toDraw.Add(parameters);
         }
 
-        public static void DrawStringGame(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color)
+        public static void DrawStringGame(SpriteFont spriteFont, StringBuilder text, Vector2 position, float rotationRadians, Color color)
         {
-            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, 0, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(GameStateManager.getCamera().getCameraTransformMatrix()));
+            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, rotationRadians,
+                new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(GameStateManager.getCamera().getCameraTransformMatrix()));
             toDraw.Add(parameters);
         }
 
-        public static void DrawStringCustom(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color, Matrix transform)
+        public static void DrawStringCustom(SpriteFont spriteFont, StringBuilder text, Vector2 position, float rotationRadians, Color color, Matrix transform)
         {
-            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, 0, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(transform));
+            DrawParams parameters = new DrawParams(null, spriteFont, position, null, null, text, null, color, rotationRadians, new Vector2(0.5f), new Vector2(1), 1, SpriteEffects.None, 1, addMatrix(transform));
             toDraw.Add(parameters);
         }
 

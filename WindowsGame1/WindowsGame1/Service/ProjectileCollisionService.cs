@@ -25,6 +25,7 @@ namespace TheGameOfForever.Service
         
         public override void update(Microsoft.Xna.Framework.GameTime gameTime, GameState.AbstractGameState gameState)
         {
+            HashSet<int> toRemove = new HashSet<int>();
             foreach (int id in entityIds[0])
             {
                 Entity projectile = entityManager.getEntity(id);
@@ -37,15 +38,15 @@ namespace TheGameOfForever.Service
                 foreach (int id2 in entityIds[1])
                 {
                     Entity entityToCollide = entityManager.getEntity(id2);
-                    
+                    bool hit = false;
                     if (entityToCollide.hasComponent<IsProjectile>()) continue;
                     if (entityToCollide.getId() == entityIds[2].getLast()) continue;
 
                     CollisionHitBox toCollideHitBox = entityToCollide.getComponent<CollisionHitBox>();
                     LocationComponent toCollideLocation = entityToCollide.getComponent<LocationComponent>();
-
                     foreach (RectangleShape collisionShape in collisionShapes)
                     {
+                        if (hit) continue;
                         if (projectileLocation != null)
                         {
                             collisionShape.setRectangle(new Rectangle((int)currentLocation.X, (int)currentLocation.Y,
@@ -55,6 +56,7 @@ namespace TheGameOfForever.Service
 
                         foreach (IShape collisionShape2 in toCollideHitBox.getCollisionShapes())
                         {
+                            if (hit) continue;
                             if (toCollideLocation != null)
                             {
                                 collisionShape2.setLocation(toCollideLocation.getCurrentLocation());
@@ -62,14 +64,23 @@ namespace TheGameOfForever.Service
                             }
                             
                             Vector2 repluseForce = CollisionHelper.collide(collisionShape, collisionShape2);
-                            
                             if (projectileLocation != null)
                             {
                                 projectileLocation.setCurrentLocation(projectileLocation.getCurrentLocation() + repluseForce);
                             }
+                            if (repluseForce.LengthSquared() > 0 && entityToCollide.hasComponent<DamageComponent>())
+                            {
+                                entityToCollide.getComponent<DamageComponent>().addDamage(10);
+                                toRemove.Add(projectile.getId());
+                                hit = true;
+                            }
                         }
                     }
                 }
+            }
+            foreach (int i in toRemove)
+            {
+                entityManager.removeEntity(i);
             }
         }
 

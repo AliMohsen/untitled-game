@@ -29,9 +29,10 @@ namespace TheGameOfForever.Service
                     sumDamage += damage;
                     healthComponent.setHealth(healthComponent.getHealth() - damage);
                 }
-                if (entity.hasComponent<StatusDrawComponent>())
+                damageComponent.clear();
+                if (sumDamage > 0 && entity.hasComponent<StatusDrawComponent>())
                 {
-                    entity.getComponent<StatusDrawComponent>().addEntry(sumDamage.ToString(), Color.Red, 1500);
+                    entity.getComponent<StatusDrawComponent>().addEntry(sumDamage.ToString(), Color.Red, 600);
                 }
             }
         }

@@ -11,15 +11,15 @@ namespace TheGameOfForever.Ui.Font
     public class DrawStringHelper
     {
         public static void drawString(SpriteBatch sprite, String text, String fontName, int size, Color color,
-            Vector2 position)
+            Vector2 position, float rotationRadians)
         {
-            drawString(sprite, text, fontName, size, color, position, VerticalAlignment.RIGHTALIGN, HorizontalAlignment.BELOW);
+            drawString(sprite, text, fontName, size, color, position, rotationRadians, VerticalAlignment.RIGHTALIGN, HorizontalAlignment.BELOW);
         }
 
         public static void drawStringGame(SpriteBatch sprite, String text, String fontName, int size, Color color,
-            Vector2 position)
+            Vector2 position, float rotationRadians)
         {
-            drawStringGame(sprite, text, fontName, size, color, position, VerticalAlignment.RIGHTALIGN, HorizontalAlignment.BELOW);
+            drawStringGame(sprite, text, fontName, size, color, position, rotationRadians, VerticalAlignment.RIGHTALIGN, HorizontalAlignment.BELOW);
         }
 
         public static void drawStringUI(SpriteBatch sprite, String text, String fontName, int size, Color color,
@@ -35,7 +35,7 @@ namespace TheGameOfForever.Ui.Font
         }
         
         public static void drawString(SpriteBatch sprite, String text, String fontName, int size, Color color,
-            Vector2 position, VerticalAlignment alignment, HorizontalAlignment horizontalAlignment)
+            Vector2 position, float rotationRadians, VerticalAlignment alignment, HorizontalAlignment horizontalAlignment)
         {
             SpriteFont font = FontFactory.getInstance().getFont(fontName).getSize(size);
             switch (alignment)
@@ -64,7 +64,7 @@ namespace TheGameOfForever.Ui.Font
         }
 
         public static void drawStringGame(SpriteBatch sprite, String text, String fontName, int size, Color color,
-            Vector2 position, VerticalAlignment alignment, HorizontalAlignment horizontalAlignment)
+            Vector2 position, float rotationRadians, VerticalAlignment alignment, HorizontalAlignment horizontalAlignment)
         {
             SpriteFont font = FontFactory.getInstance().getFont(fontName).getSize(size);
             switch (alignment)
@@ -89,7 +89,7 @@ namespace TheGameOfForever.Ui.Font
                     position = new Vector2(position.X, position.Y - font.MeasureString(text).Y / 2);
                     break;
             }
-            SpriteBatchWrapper.DrawStringGame(font, text, new Vector2((int)position.X, (int)position.Y), color);
+            SpriteBatchWrapper.DrawStringGame(font, text, new Vector2((int)position.X, (int)position.Y), rotationRadians, color);
         }
 
         public static void drawStringUI(SpriteBatch sprite, String text, String fontName, int size, Color color,

@@ -59,7 +59,7 @@ namespace TheGameOfForever.Service
                     centerX /= 6 * area;
                     centerY /= 6 * area;
                 }
-                DrawStringHelper.drawStringGame(spriteBatch, "Map\nitem", "mentone", 10, col, new Vector2(centerX, centerY), 
+                DrawStringHelper.drawStringGame(spriteBatch, "Map\nitem", "mentone", 10, col, new Vector2(centerX, centerY), 0,
                     VerticalAlignment.CENTERED, HorizontalAlignment.CENTERED);
             }
 

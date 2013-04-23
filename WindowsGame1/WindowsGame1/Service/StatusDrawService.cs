@@ -45,12 +45,17 @@ namespace TheGameOfForever.Service
                 Entity entity = entityManager.getEntity(entityId);
                 StatusDrawComponent statusDrawComponent = entity.getComponent<StatusDrawComponent>();
                 LocationComponent locationComponent = entity.getComponent<LocationComponent>();
+
                 for (int i = 0; i < statusDrawComponent.getCount(); i++)
                 {
                     Tuple<string, Color, long, long> entry = statusDrawComponent.getEntry(i);
-                    DrawStringHelper.drawStringGame(spriteBatch, entry.Item1, "mentone", 10, entry.Item2,
-                        locationComponent.getCurrentLocation() + GeometryHelper.rotateVec(new Vector2(15, 15),
-                        locationComponent.getFacingRadians()));
+                    DrawStringHelper.drawStringGame(spriteBatch, entry.Item1, "mentone", 10, entry.Item2 * MathHelper.SmoothStep(0, 1.5f, 
+                        (float)statusDrawComponent.getMillisLeft()[i] / statusDrawComponent.millisToDisplays[i]),
+                        locationComponent.getCurrentLocation() + 
+                        GeometryHelper.rotateVec(
+                        new Vector2(15, 15 + 
+                            MathHelper.SmoothStep(35, 0, (float)statusDrawComponent.getMillisLeft()[i]/statusDrawComponent.millisToDisplays[i])),
+                                       gameState.getCamera().getRotation()), gameState.getCamera().getRotation() + (float) Math.PI);
 
                 }
             }

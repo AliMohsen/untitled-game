@@ -160,6 +160,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new LocationComponent(startingLocation, 0));
                 // People can move.
                 components.Add(new MovementComponent(0.1f, Vector2.Zero));
+                components.Add(new DamageComponent());
                 // Humans form teams.
                 components.Add(new AllegianceComponent(teamId));
                 components.Add(new MovementTime(10000000));
