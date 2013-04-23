@@ -155,7 +155,7 @@ namespace TheGameOfForever
             spriteBatch.Begin();
             layerManager.draw(spriteBatch);
 
-            DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5));
+            DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5),0);
             spriteBatch.Draw(stateManager.getGameScreen(), new Rectangle((int)screenOffset.X, (int)screenOffset.Y,
                 (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.White);
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);

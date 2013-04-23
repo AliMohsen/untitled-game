@@ -113,7 +113,7 @@ namespace TheGameOfForever.Service
                         }
 
                         DrawStringHelper.drawStringGame(spriteBatch, sb.ToString(),
-                            "mentone", 10, Color.Orange, location - new Vector2(-28, 36));
+                            "mentone", 10, Color.Orange, location - new Vector2(-28, 36),0);
                     }
                     else
                     {

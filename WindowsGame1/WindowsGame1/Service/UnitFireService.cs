@@ -145,8 +145,8 @@ namespace TheGameOfForever.Service
 
                         List<BaseComponent> components = new List<BaseComponent>();
                         components.Add(new LocationComponent(unitLocation, bulletDirection));
-                        components.Add(new MovementComponent(10,
-                            Vector2.Normalize(GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection))));
+                        components.Add(new MovementComponent(4,
+                            4 * Vector2.Normalize(GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection))));
                         components.Add(new IsProjectile(100, true));
                         components.Add(new CollisionHitBox(new RectangleShape(new Rectangle((int)unitLocation.X, (int)unitLocation.Y, 10, 10), new Vector2(5f), 0, 10)));
 
@@ -183,18 +183,19 @@ namespace TheGameOfForever.Service
             float rightAngle = weaponAcc / 2;
 
             SpriteBatchWrapper.DrawGame(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), leftLine,
-                Color.DarkGray, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+                Color.DarkGray * 0.3f, leftAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             SpriteBatchWrapper.DrawGame(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
-                Color.DarkGray, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+                Color.DarkGray * 0.3f, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             SpriteBatchWrapper.DrawGame(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
-                Color.DarkGray, direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
+                Color.DarkGray * 0.3f, direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             foreach (int id2 in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(id2);
-
-                SpriteBatchWrapper.DrawGame(EditorContent.blank,
+                MovementComponent movement = entity.getComponent<MovementComponent>();
+                SpriteBatchWrapper.DrawGame(EditorContent.yellowBullet,
                     entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 10, 10), Color.HotPink,
-                    (float)Math.PI / 2, new Vector2(5f), new Vector2(1), SpriteEffects.None, 1);
+                    GeometryHelper.CalculateAngle(Vector2.Zero, movement.getVelocity()), new Vector2(5f), 
+                    new Vector2(1), SpriteEffects.None, 1);
             }
         }
     }

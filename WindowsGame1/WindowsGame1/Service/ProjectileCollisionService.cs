@@ -70,7 +70,8 @@ namespace TheGameOfForever.Service
                             }
                             if (repluseForce.LengthSquared() > 0 && entityToCollide.hasComponent<DamageComponent>())
                             {
-                                entityToCollide.getComponent<DamageComponent>().addDamage(10);
+                                entityToCollide.getComponent<DamageComponent>()
+                                    .addDamage(projectile.getComponent<IsProjectile>().getDamage());
                                 toRemove.Add(projectile.getId());
                                 hit = true;
                             }

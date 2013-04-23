@@ -22,7 +22,7 @@ namespace TheGameOfForever.Ui.Editor
             for (int i = (int)MathHelper.Max(0, consoleOutput.Count - number); i < consoleOutput.Count; i++)
             {
                 DrawStringHelper.drawString(spriteBatch, consoleOutput[i], "mentone", 10,
-                    Color.Black, new Vector2(location.X, location.Y + (i - (int)MathHelper.Max(0, consoleOutput.Count - number)) * 12));
+                    Color.Black, new Vector2(location.X, location.Y + (i - (int)MathHelper.Max(0, consoleOutput.Count - number)) * 12),0);
             }
         }
     }
