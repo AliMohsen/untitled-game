@@ -95,6 +95,7 @@ namespace TheGameOfForever.Service
                 {
                     movementTime.incrementMovedAmount();
                     entity.removeComponent<TrackingComponent>();
+                    entity.removeComponent<Selected>();
                     observer.endMovement();
                 }
 
