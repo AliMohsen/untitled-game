@@ -23,10 +23,18 @@ namespace TheGameOfForever.View.Camera
         private int worldHeight;
 
         private float zoom = 1;
+        private float desiredZoom = 1;
+        private float zoomFollowSpeed = 0.2f;
+
         private Matrix transform;
+
         private Vector2 position;
+        private Vector2 desiredPosition;
+        private float positionFollowSpeed = 0.2f;
+
         private float rotation;
-        private bool entityViewpoint;
+        private float desiredRotation;
+        private float rotationFollowSpeed = 0.2f;
 
         private Map map;
 
@@ -47,21 +55,28 @@ namespace TheGameOfForever.View.Camera
 
         public Matrix getCameraTransformMatrix()
         {
-            if (isStale || transform == null)
-            {
-                transform =
-                    Matrix.CreateTranslation(-position.X, -position.Y, 0) *
-                    Matrix.CreateRotationZ(-rotation + (entityViewpoint ? (float) Math.PI : 0)) * 
-                    Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
-                    Matrix.CreateTranslation(new Vector3(viewportWidth / 2f,
-                        viewportHeight / 2f, 0));
-            }
+
+           transform =
+               Matrix.CreateTranslation(-position.X, -position.Y, 0) *
+               Matrix.CreateRotationZ(-rotation) * 
+               Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
+               Matrix.CreateTranslation(new Vector3(viewportWidth / 2f,
+                  viewportHeight / 2f, 0));
             return transform;
+        }
+
+        public void update()
+        {
+            rotation = MathHelper.SmoothStep(rotation, desiredRotation, rotationFollowSpeed);
+            zoom = MathHelper.SmoothStep(zoom, desiredZoom, zoomFollowSpeed);
+            position.X = MathHelper.SmoothStep(position.X, desiredPosition.X, positionFollowSpeed);
+            position.Y = MathHelper.SmoothStep(position.Y, desiredPosition.Y, positionFollowSpeed);
         }
 
         public void setZoom(float zoom)
         {
             this.zoom = zoom;
+            desiredZoom = zoom;
             isStale = true;
         }
 
@@ -73,6 +88,7 @@ namespace TheGameOfForever.View.Camera
         public void setRotation(float rotation)
         {
             this.rotation = rotation;
+            desiredRotation = rotation;
             isStale = true;
         }
 
@@ -84,6 +100,7 @@ namespace TheGameOfForever.View.Camera
         public void setWorldPosition(Vector2 position)
         {
             this.position = position;
+            desiredPosition = position;
             isStale = true;
         }
 
@@ -92,9 +109,55 @@ namespace TheGameOfForever.View.Camera
             return position;
         }
 
-        public void setEntityViewpoint(bool entityViewpoint)
+        public float getZoom()
         {
-            this.entityViewpoint = entityViewpoint;
+            return zoom;
+        }
+
+        public void setDesiredZoom(float zoom)
+        {
+            desiredZoom = zoom;
+        }
+
+        public void setZoomFollowSpeed(float speed)
+        {
+            zoomFollowSpeed = speed;
+        }
+
+        public void setTrackingRotation(float rotate)
+        {
+            rotation = rotate - (float) Math.PI;
+            desiredRotation = rotation;
+        }
+
+        public void setDesiredTrackingRotation(float rotate)
+        {
+            desiredRotation = rotate - (float)Math.PI;
+        }
+
+        public void setDesiredRotation(float rotate)
+        {
+            desiredRotation = rotate;
+        }
+
+        public float getTrackingRotation()
+        {
+            return rotation + (float)Math.PI;
+        }
+
+        public void setRotationFollowSpeed(float speed)
+        {
+            rotationFollowSpeed = speed;
+        }
+
+        public void setDesiredWorldPosition(Vector2 position)
+        {
+            desiredPosition = position;
+        }
+
+        public void setWorldPositionFollowSpeed(float speed)
+        {
+            positionFollowSpeed = speed;
         }
     }
 }

@@ -85,6 +85,7 @@ namespace TheGameOfForever.GameState
 
         public void update(GameTime gameTime)
         {
+            camera.update();
             Control.DefaultControl.Instance.updateCurrent();
             foreach (AbstractGameState gameState in gameStates)
             {

@@ -28,29 +28,15 @@ namespace TheGameOfForever.Service
         {
             if (entityIds[0].count() != 0)
             {
-                gameState.getCamera().setEntityViewpoint(true);
                 TrackingComponent tracking = entityManager.getEntity(entityIds[0].getLast())
                     .getComponent<TrackingComponent>();
-                gameState.getCamera().setWorldPosition(new Vector2(
-                    MathHelper.SmoothStep(
-                        tracking.getTrackingLocation().X,
-                        gameState.getCamera().getWorldPosition().X, 0.8f),
-                    MathHelper.SmoothStep(
-                        tracking.getTrackingLocation().Y,
-                        gameState.getCamera().getWorldPosition().Y, 0.8f)));
-                gameState.getCamera().setRotation(tracking.getTrackingRotation());
+                gameState.getCamera().setDesiredWorldPosition(tracking.getTrackingLocation());
+                gameState.getCamera().setDesiredTrackingRotation(tracking.getTrackingRotation());
             }
             else
             {
-                gameState.getCamera().setEntityViewpoint(false);
-                gameState.getCamera().setWorldPosition(new Vector2(
-                    MathHelper.SmoothStep(
-                        0,
-                        gameState.getCamera().getWorldPosition().X, 0.8f),
-                    MathHelper.SmoothStep(
-                        0,
-                        gameState.getCamera().getWorldPosition().Y, 0.8f)));
-                gameState.getCamera().setRotation(0);
+                gameState.getCamera().setDesiredRotation(0);
+                gameState.getCamera().setDesiredWorldPosition(Vector2.Zero);
             }
         }
     }
