@@ -114,6 +114,7 @@
     <Compile Include="Component\ArsenalComponent.cs" />
     <Compile Include="Component\BaseComponent.cs" />
     <Compile Include="Component\DamageComponent.cs" />
+    <Compile Include="Component\DeadComponent.cs" />
     <Compile Include="Component\EntityTextureComponent.cs" />
     <Compile Include="Component\HealthComponent.cs" />
     <Compile Include="Component\Controllable.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Entities\Exception\InvalidEntityException.cs" />
     <Compile Include="Entities\GameEntity.cs" />
     <Compile Include="Entities\IEntityLoader.cs" />
+    <Compile Include="GameState\DeathState.cs" />
     <Compile Include="GameState\EngageState.cs" />
     <Compile Include="GameState\GlobalStateInfo.cs" />
     <Compile Include="GameState\MovementState.cs" />
@@ -171,6 +173,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Service\AbstractGameService.cs" />
     <Compile Include="Service\CollisionService.cs" />
+    <Compile Include="Service\DeathService.cs" />
+    <Compile Include="Service\KillCamService.cs" />
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\ProjectileCollisionService.cs" />

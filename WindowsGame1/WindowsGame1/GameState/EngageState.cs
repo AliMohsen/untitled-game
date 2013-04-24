@@ -6,7 +6,7 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
-    public class EngageState : AbstractGameState
+    public class EngageState : AbstractGameState, TakeDamageService.Observer
     {
         public EngageState(GameStateManager gameStateManager) 
             : base(gameStateManager)
@@ -18,6 +18,7 @@ namespace TheGameOfForever.GameState
             addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<StatusDrawService>());
             addService(gameStateManager.getService<ProjectileCollisionService>());
+            addService(gameStateManager.getService<TrackingCameraService>());
         }
 
         public void disengage()
@@ -33,6 +34,11 @@ namespace TheGameOfForever.GameState
         public override bool isPropagateDraw()
         {
             return false;
+        }
+
+        public void handleUnitDeath()
+        {
+            this.addStateOnTopOfThis(new DeathState(gameStateManager));
         }
     }
 }

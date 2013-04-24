@@ -5,20 +5,27 @@ using System.Text;
 using TheGameOfForever.Entities;
 using TheGameOfForever.Component;
 using Microsoft.Xna.Framework;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
     public class TakeDamageService : AbstractGameService
     {
+        public interface Observer
+        {
+            void handleUnitDeath();
+        }
+
         public TakeDamageService(EntityManager entityManager)
             : base(entityManager)
         {
             subscribeToComponentGroup(typeof(DamageComponent), typeof(HealthComponent));
         }
-
+       
         List<int> entitiesToRemove = new List<int>();
         public override void update(Microsoft.Xna.Framework.GameTime gameTime, GameState.AbstractGameState gameState)
         {
+            bool enterKillCamState = false;
             entitiesToRemove.Clear();
             foreach (int id in entityIds[0])
             {
@@ -34,16 +41,17 @@ namespace TheGameOfForever.Service
                 damageComponent.clear();
                 if (healthComponent.getHealth() < 0)
                 {
-                    entitiesToRemove.Add(id);
+                    entity.addComponent(new DeadComponent(-healthComponent.getHealth()));
+                    enterKillCamState = true;
                 }
                 if (sumDamage > 0 && entity.hasComponent<StatusDrawComponent>())
                 {
                     entity.getComponent<StatusDrawComponent>().addEntry(sumDamage.ToString(), Color.Red, 600);
                 }
             }
-            foreach (int id in entitiesToRemove)
+            if (enterKillCamState)
             {
-                entityManager.removeEntity(id);
+                ((Observer)gameState).handleUnitDeath();
             }
         }
     }

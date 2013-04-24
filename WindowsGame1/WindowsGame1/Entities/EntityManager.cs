@@ -27,27 +27,25 @@ namespace TheGameOfForever.Entities
             return entities[id];
         }
 
+        private List<Tuple<Action, int, Entity>> actionList =
+            new List<Tuple<Action, int, Entity>>();
+        private enum Action
+        {
+            ADD,
+            REMOVE,
+        }
+
         public void addEntity(Entity entity)
         {
-            if (entity.getId() < 0) 
-            {
-                throw new InvalidEntityException("Invalid ID for entity.");
-            }
-            entity.setEntityManager(this);
-            entities.Add(entity.getId(), entity);
-            foreach (IGameService service in services)
-            {
-                service.registerEntityIfNeeded(entity);
-            }
+            actionList.Add(
+                new Tuple<Action, int, Entity>(Action.ADD, entity.getId(), entity));
+
         }
 
         public void removeEntity(int entityId)
         {
-            foreach (IGameService service in services)
-            {
-                service.removeEntity(entities[entityId]);
-            }
-            entities.Remove(entityId);
+            actionList.Add(
+                new Tuple<Action, int, Entity>(Action.REMOVE, entityId, null));
         }
 
         public void updateEntity(Entity entity)
@@ -55,5 +53,42 @@ namespace TheGameOfForever.Entities
             removeEntity(entity.getId());
             addEntity(entity);
         }
+
+        public void refreshAfterService()
+        {
+            foreach (Tuple<Action, int, Entity> action in actionList)
+            {
+                switch (action.Item1)
+                {
+                    case Action.ADD:
+                        {
+                            if (action.Item2 < 0)
+                            {
+                                throw new InvalidEntityException("Invalid ID for entity.");
+                            }
+                            action.Item3.setEntityManager(this);
+                            entities.Add(action.Item2, action.Item3);
+                            foreach (IGameService service in services)
+                            {
+                                service.registerEntityIfNeeded(action.Item3);
+                            }
+                        }
+                        break;
+                    case Action.REMOVE:
+                        {
+                            foreach (IGameService service in services)
+                            {
+                                service.removeEntity(entities[action.Item2]);
+                            }
+                            entities.Remove(action.Item2);
+                        }
+                        break;
+
+                }
+
+            }
+            actionList.Clear();
+        }
+
     }
 }

@@ -15,5 +15,6 @@ namespace TheGameOfForever.Service
         void removeEntity(Entity entity);
         void refresh();
         void update(GameTime gameTime, AbstractGameState gameState);
+        void refreshEntities();
     }
 }

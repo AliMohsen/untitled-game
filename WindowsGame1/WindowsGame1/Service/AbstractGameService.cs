@@ -130,5 +130,11 @@ namespace TheGameOfForever.Service
                 return entityIds.Count;
             }
         }
+
+
+        public void refreshEntities()
+        {
+            entityManager.refreshAfterService();
+        }
     }
 }

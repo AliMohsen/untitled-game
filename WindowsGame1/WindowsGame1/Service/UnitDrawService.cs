@@ -33,7 +33,7 @@ namespace TheGameOfForever.Service
                     .getTextureId());
                 LocationComponent locationComponent = entity.getComponent<LocationComponent>();
                 SpriteBatchWrapper.DrawGame(model.getSpriteSheet(), locationComponent.getCurrentLocation(), model.getSourceRectangle(), Color.White, 
-                    locationComponent.getFacingRadians(), model.getOrigin(), model.getScale(), SpriteEffects.None, 1);
+                    locationComponent.getFacingRadians(), model.getOrigin(), model.getScale(), SpriteEffects.None, 0.8f);
             }
         }
     }

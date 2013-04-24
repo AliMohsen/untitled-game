@@ -63,6 +63,7 @@ namespace TheGameOfForever.GameState
             foreach (IGameService service in gameServices)
             {
                 service.update(gameTime, this);
+                service.refreshEntities();
             }
         }
 
