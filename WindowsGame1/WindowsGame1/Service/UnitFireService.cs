@@ -56,68 +56,70 @@ namespace TheGameOfForever.Service
                     targetted = potentialEnemy;
                 }
             }
-
-            if (targetted == null)
+            if (targettableIds.Count > 0)
             {
-                targetted = entityManager.getEntity(targettableIds[0]);
-                targetted.addComponent(new IsTarget());
-            }
-
-            int index = targettableIds.IndexOf(targetted.getId());
-
-            if (control.isRLeftPressed())
-            {
-                if (index == 0) index = targettableIds.Count - 1;
-                else index = (index - 1) % targettableIds.Count;
-            }
-            else if (control.isRRightPressed())
-            {
-                index = (index + 1) % targettableIds.Count;
-            }
-            else if (control.isLLeftHeld())
-            {
-                locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
-                    - movementComponent.getTurningSpeed(gameTime));
-            }
-            else if (control.isLRightHeld())
-            {
-                locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
-                    + movementComponent.getTurningSpeed(gameTime));
-            }
-            else if (control.isActionAPressed() || control.isActionAHeld())
-            {
-                entity.addComponent(new IsFiring());
-            }
-            else if (control.isActionEPressed())
-            {
-                entity.getComponent<ArsenalComponent>().selectNextWeapon();
-            }
-            else if (control.isActionDPressed())
-            {
-                entity.getComponent<ArsenalComponent>().selectPreviousWeapon();
-            }
-
-            if (control.isActionBPressed())
-            {
-                int[] entityIdsUnchanged = entityIds[0].ToArray<int>();
-
-                foreach (int id2 in entityIdsUnchanged)
+                if (targetted == null)
                 {
-                    entityManager.removeEntity(id2);
+                    targetted = entityManager.getEntity(targettableIds[0]);
+                    targetted.addComponent(new IsTarget());
                 }
-                entity.removeComponent<IsFiring>();
-                state.disengage();
-            }
 
-            if (targettableIds[index] != targetted.getId())
-            {
-                targetted.removeComponent<IsTarget>();
-                targetted = entityManager.getEntity(targettableIds[index]);
-                targetted.addComponent(new IsTarget());
+                int index = targettableIds.IndexOf(targetted.getId());
 
-                Entity newTarget = entityManager.getEntity(targettableIds[index]);
-                Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
-                locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+                if (control.isRLeftPressed())
+                {
+                    if (index == 0) index = targettableIds.Count - 1;
+                    else index = (index - 1) % targettableIds.Count;
+                }
+                else if (control.isRRightPressed())
+                {
+                    index = (index + 1) % targettableIds.Count;
+                }
+                else if (control.isLLeftHeld())
+                {
+                    locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
+                        - movementComponent.getTurningSpeed(gameTime));
+                }
+                else if (control.isLRightHeld())
+                {
+                    locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
+                        + movementComponent.getTurningSpeed(gameTime));
+                }
+                else if (control.isActionAPressed() || control.isActionAHeld())
+                {
+                    entity.addComponent(new IsFiring());
+                }
+                else if (control.isActionEPressed())
+                {
+                    entity.getComponent<ArsenalComponent>().selectNextWeapon();
+                }
+                else if (control.isActionDPressed())
+                {
+                    entity.getComponent<ArsenalComponent>().selectPreviousWeapon();
+                }
+
+                if (control.isActionBPressed())
+                {
+                    int[] entityIdsUnchanged = entityIds[0].ToArray<int>();
+
+                    foreach (int id2 in entityIdsUnchanged)
+                    {
+                        entityManager.removeEntity(id2);
+                    }
+                    entity.removeComponent<IsFiring>();
+                    state.disengage();
+                }
+
+                if (targettableIds[index] != targetted.getId())
+                {
+                    targetted.removeComponent<IsTarget>();
+                    targetted = entityManager.getEntity(targettableIds[index]);
+                    targetted.addComponent(new IsTarget());
+
+                    Entity newTarget = entityManager.getEntity(targettableIds[index]);
+                    Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
+                    locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+                }
             }
 
             if (entity.hasComponent<IsFiring>() && !entity.getComponent<Selected>().getHasFired())

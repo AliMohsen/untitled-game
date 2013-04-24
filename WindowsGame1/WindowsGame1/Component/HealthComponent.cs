@@ -14,6 +14,7 @@ namespace TheGameOfForever.Component
         public HealthComponent(int health)
         {
             startHealth = health;
+            this.health = startHealth;
         }
 
         public int getHealth()

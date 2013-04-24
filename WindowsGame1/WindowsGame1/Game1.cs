@@ -105,10 +105,10 @@ namespace TheGameOfForever
             stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
             (EntityManager entityManager) =>
             {
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 10), 0, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(10, 80), 0, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 100), 1, true));
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(100, new Vector2(300, 140), 1, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(10, 10), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(10, 80), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(300, 100), 1, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(300, 140), 1, true));
                 entityManager.addEntity(Entity.EntityFactory.createMapComponent(new Vector2(100, 100),
                     new Vector2(100, 250), new Vector2(150, 240), new Vector2(140, 90)));
                 entityManager.addEntity(Entity.EntityFactory.createMapComponent(new Vector2(-132, 100),
