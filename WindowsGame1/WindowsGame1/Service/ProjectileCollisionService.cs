@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using TheGameOfForever.Draw;
 using TheGameOfForever.Ui.Editor;
 using Microsoft.Xna.Framework.Graphics;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
@@ -21,6 +22,7 @@ namespace TheGameOfForever.Service
             subscribeToComponentGroup(typeof(IsProjectile));
             subscribeToComponentGroup(typeof(CollisionHitBox));
             subscribeToComponentGroup(typeof(Selected));
+            subscribeToComponentGroup(typeof(IsFiring));
         }
         
         public override void update(Microsoft.Xna.Framework.GameTime gameTime, GameState.AbstractGameState gameState)
@@ -66,12 +68,19 @@ namespace TheGameOfForever.Service
                             Vector2 repluseForce = CollisionHelper.collide(collisionShape, collisionShape2);
                             if (projectileLocation != null)
                             {
-                                projectileLocation.setCurrentLocation(projectileLocation.getCurrentLocation() + repluseForce);
+                                //projectileLocation.setCurrentLocation(projectileLocation.getCurrentLocation() + repluseForce);
                             }
                             if (repluseForce.LengthSquared() > 0 && entityToCollide.hasComponent<DamageComponent>())
                             {
-                                entityToCollide.getComponent<DamageComponent>()
-                                    .addDamage(projectile.getComponent<IsProjectile>().getDamage());
+                                int damage = projectile.getComponent<IsProjectile>().getDamage();
+                                entityToCollide.getComponent<DamageComponent>().addDamage(damage);
+
+                                if (!entityToCollide.hasComponent<RetaliateComponent>())
+                                {
+                                    entityToCollide.addComponent(new RetaliateComponent());
+                                }
+                                entityToCollide.getComponent<RetaliateComponent>().addDamage(damage);
+
                                 toRemove.Add(projectile.getId());
                                 hit = true;
                             }
@@ -82,6 +91,23 @@ namespace TheGameOfForever.Service
             foreach (int i in toRemove)
             {
                 entityManager.removeEntity(i);
+            }
+
+            if (gameState is EngageState 
+                && entityManager.getEntity(entityIds[2].getLast()).getComponent<Selected>().getHasFired()
+                && entityIds[0].count() == 0)
+            {
+                EngageState state = (EngageState)gameState;
+                state.retaliate();
+            }
+
+            if (gameState is RetaliateState
+                && entityIds[0].count() == 0
+                && entityManager.getEntity(entityIds[3].getLast()).getComponent<IsFiring>().getCompleted())
+            {
+                entityManager.getEntity(entityIds[3].getLast()).removeComponent<IsFiring>();
+                RetaliateState state = (RetaliateState)gameState;
+                state.retaliationComplete();
             }
         }
 

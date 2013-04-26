@@ -126,6 +126,7 @@
     <Compile Include="Component\MapElementComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
     <Compile Include="Component\MovementComponent.cs" />
+    <Compile Include="Component\RetaliateComponent.cs" />
     <Compile Include="Component\Selected.cs" />
     <Compile Include="Component\MovementTime.cs" />
     <Compile Include="Component\CollisionHitBox.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="GameState\EngageState.cs" />
     <Compile Include="GameState\GlobalStateInfo.cs" />
     <Compile Include="GameState\MovementState.cs" />
+    <Compile Include="GameState\RetaliateState.cs" />
     <Compile Include="GameState\UnitSelectState.cs" />
     <Compile Include="Geometry\CollisionHelper.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\ProjectileCollisionService.cs" />
+    <Compile Include="Service\RetaliationService.cs" />
     <Compile Include="Service\StatusDrawService.cs" />
     <Compile Include="Service\TakeDamageService.cs" />
     <Compile Include="Service\UnitDrawService.cs" />

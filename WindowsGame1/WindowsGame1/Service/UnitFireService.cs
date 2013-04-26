@@ -159,6 +159,7 @@ namespace TheGameOfForever.Service
                 else
                 {
                     entity.getComponent<Selected>().setHasFired(true);
+                    entity.removeComponent<IsFiring>();
                 }
             }
         }
@@ -171,9 +172,6 @@ namespace TheGameOfForever.Service
 
             Vector2 location = unit.getComponent<LocationComponent>().getCurrentLocation();
             float direction = unit.getComponent<LocationComponent>().getFacingRadians();
-
-            SpriteBatchWrapper.DrawGame(EditorContent.blank, location, new Rectangle(0, 0, 1, 1), Color.Blue,
-                (float)Math.PI / 2, new Vector2(0.5f), new Vector2(5), SpriteEffects.None, 1);
 
             Rectangle leftLine = new Rectangle(0, 0, 1, 500);
             Rectangle rightLine = new Rectangle(0, 0, 1, 500);
@@ -190,15 +188,6 @@ namespace TheGameOfForever.Service
                 Color.DarkGray * 0.3f, rightAngle + direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
             SpriteBatchWrapper.DrawGame(EditorContent.blank, unit.getComponent<LocationComponent>().getCurrentLocation(), rightLine,
                 Color.DarkGray * 0.3f, direction, new Vector2(0.5f), new Vector2(1), SpriteEffects.None, 1);
-            foreach (int id2 in entityIds[0])
-            {
-                Entity entity = entityManager.getEntity(id2);
-                MovementComponent movement = entity.getComponent<MovementComponent>();
-                SpriteBatchWrapper.DrawGame(EditorContent.yellowBullet,
-                    entity.getComponent<LocationComponent>().getCurrentLocation(), new Rectangle(0, 0, 10, 10), Color.HotPink,
-                    GeometryHelper.CalculateAngle(Vector2.Zero, movement.getVelocity()), new Vector2(5f), 
-                    new Vector2(1), SpriteEffects.None, 1);
-            }
         }
     }
 }

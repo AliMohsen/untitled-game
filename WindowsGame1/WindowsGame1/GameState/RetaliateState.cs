@@ -6,24 +6,19 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
-    public class EngageState : AbstractGameState, TakeDamageService.Observer
+    public class RetaliateState : AbstractGameState
     {
-        public EngageState(GameStateManager gameStateManager) 
+        public RetaliateState(GameStateManager gameStateManager) 
             : base(gameStateManager)
         {
+            addService(gameStateManager.getService<RetaliationService>());
             addService(gameStateManager.getService<UnitDrawService>());
-            addService(gameStateManager.getService<UnitFireService>());
             addService(gameStateManager.getService<ProjectileService>());
             addService(gameStateManager.getService<TakeDamageService>());
             addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<StatusDrawService>());
             addService(gameStateManager.getService<ProjectileCollisionService>());
             addService(gameStateManager.getService<TrackingCameraService>());
-        }
-
-        public void disengage()
-        {
-            this.removeState();
         }
 
         public override bool isPropagateUpdate()
@@ -36,14 +31,9 @@ namespace TheGameOfForever.GameState
             return false;
         }
 
-        public void handleUnitDeath()
+        public void retaliationComplete()
         {
-            this.addStateOnTopOfThis(new DeathState(gameStateManager));
-        }
-
-        public void retaliate()
-        {
-            this.changeState(new RetaliateState(gameStateManager));
+            removeState();
         }
     }
 }
