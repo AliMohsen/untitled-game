@@ -6,7 +6,7 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
-    public class RetaliateState : AbstractGameState
+    public class RetaliateState : AbstractGameState, RetaliationService.Observer, TakeDamageService.Observer
     {
         public RetaliateState(GameStateManager gameStateManager) 
             : base(gameStateManager)
@@ -34,6 +34,16 @@ namespace TheGameOfForever.GameState
         public void retaliationComplete()
         {
             removeState();
+        }
+
+        public void handleEndRetaliation()
+        {
+            gameStateManager.removeState(this);
+        }
+
+        public void handleUnitDeath()
+        {
+            this.addStateOnTopOfThis(new DeathState(gameStateManager));
         }
     }
 }

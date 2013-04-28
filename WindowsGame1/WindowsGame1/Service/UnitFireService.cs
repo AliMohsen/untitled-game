@@ -19,6 +19,11 @@ namespace TheGameOfForever.Service
 {
     public class UnitFireService : AbstractGameService
     {
+        public interface Observer
+        {
+            void handleFinishedFiring();
+        }
+
         public UnitFireService(EntityManager entityManager)
             : base(entityManager)
         {
@@ -40,7 +45,10 @@ namespace TheGameOfForever.Service
 
             Entity targetted = null;
             List<int> targettableIds = new List<int>();
-            
+
+            //Not firing.
+            if (entityIds[4].count() == 0) 
+            {
 
             foreach (int id in entityIds[1])
             {
@@ -56,6 +64,8 @@ namespace TheGameOfForever.Service
                     targetted = potentialEnemy;
                 }
             }
+
+            // Target enemy aiming.
             if (targettableIds.Count > 0)
             {
                 if (targetted == null)
@@ -75,7 +85,21 @@ namespace TheGameOfForever.Service
                 {
                     index = (index + 1) % targettableIds.Count;
                 }
-                else if (control.isLLeftHeld())
+
+                if (targettableIds[index] != targetted.getId())
+                {
+                    targetted.removeComponent<IsTarget>();
+                    targetted = entityManager.getEntity(targettableIds[index]);
+                    targetted.addComponent(new IsTarget());
+
+                    Entity newTarget = entityManager.getEntity(targettableIds[index]);
+                    Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
+                    locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+                }
+            }
+
+                // Manual control aiming.
+                if (control.isLLeftHeld())
                 {
                     locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
                         - movementComponent.getTurningSpeed(gameTime));
@@ -85,11 +109,9 @@ namespace TheGameOfForever.Service
                     locationComponent.setFacingRadians(entity.getComponent<LocationComponent>().getFacingRadians()
                         + movementComponent.getTurningSpeed(gameTime));
                 }
-                else if (control.isActionAPressed() || control.isActionAHeld())
-                {
-                    entity.addComponent(new IsFiring());
-                }
-                else if (control.isActionEPressed())
+
+                // Change weapon.
+                if (control.isActionEPressed())
                 {
                     entity.getComponent<ArsenalComponent>().selectNextWeapon();
                 }
@@ -108,21 +130,14 @@ namespace TheGameOfForever.Service
                     }
                     entity.removeComponent<IsFiring>();
                     state.disengage();
-                }
-
-                if (targettableIds[index] != targetted.getId())
+                } else if (control.isActionAHeld() && !entity.getComponent<Selected>().getHasFired())
+                // Firing action.   
                 {
-                    targetted.removeComponent<IsTarget>();
-                    targetted = entityManager.getEntity(targettableIds[index]);
-                    targetted.addComponent(new IsTarget());
-
-                    Entity newTarget = entityManager.getEntity(targettableIds[index]);
-                    Vector2 newTargetLocation = newTarget.getComponent<LocationComponent>().getCurrentLocation();
-                    locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+                    entity.addComponent(new IsFiring());
                 }
             }
-
-            if (entity.hasComponent<IsFiring>() && !entity.getComponent<Selected>().getHasFired())
+            else
+            // firing mini-state.
             {
                 long time = entity.getComponent<IsFiring>().getTimeSinceFirstShot();
                 entity.getComponent<IsFiring>().setTimeSinceFirstShot(time + gameTime.ElapsedGameTime.Milliseconds);
@@ -149,7 +164,7 @@ namespace TheGameOfForever.Service
                         components.Add(new LocationComponent(unitLocation, bulletDirection));
                         components.Add(new MovementComponent(4,
                             4 * Vector2.Normalize(GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection))));
-                        components.Add(new IsProjectile(100, true));
+                        components.Add(new IsProjectile(100, true, 100));
                         components.Add(new CollisionHitBox(new RectangleShape(new Rectangle((int)unitLocation.X, (int)unitLocation.Y, 10, 10), new Vector2(5f), 0, 10)));
 
                         entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
@@ -158,8 +173,12 @@ namespace TheGameOfForever.Service
                 }
                 else
                 {
-                    entity.getComponent<Selected>().setHasFired(true);
-                    entity.removeComponent<IsFiring>();
+                    if (entityIds[0].count() == 0)
+                    {
+                        entity.getComponent<Selected>().setHasFired(true);
+                        entity.removeComponent<IsFiring>();
+                        ((Observer)gameState).handleFinishedFiring();
+                    }
                 }
             }
         }

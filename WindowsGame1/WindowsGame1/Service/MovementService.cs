@@ -28,7 +28,13 @@ namespace TheGameOfForever.Service
 
         public override void update(GameTime gameTime, AbstractGameState gameState)
         {
+
             MovementServiceObserver observer = (MovementServiceObserver)gameState;
+            if (entityIds[0].count() == 0)
+            {
+                observer.endMovement();
+                return;
+            }
             IControl control = DefaultControl.Instance;
             int id = entityIds[0].getLast();
 
@@ -108,6 +114,7 @@ namespace TheGameOfForever.Service
 
         public override void draw(GameTime gameTime, AbstractGameState gameState, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
+            if (entityIds[0].count() == 0) return;
             int id = entityIds[0].getLast();
             Entity entity = entityManager.getEntity(id);
             MovementTime movementTime = entity.getComponent<MovementTime>();

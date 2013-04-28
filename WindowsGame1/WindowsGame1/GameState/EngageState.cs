@@ -6,7 +6,7 @@ using TheGameOfForever.Service;
 
 namespace TheGameOfForever.GameState
 {
-    public class EngageState : AbstractGameState, TakeDamageService.Observer
+    public class EngageState : AbstractGameState, TakeDamageService.Observer, UnitFireService.Observer
     {
         public EngageState(GameStateManager gameStateManager) 
             : base(gameStateManager)
@@ -41,7 +41,7 @@ namespace TheGameOfForever.GameState
             this.addStateOnTopOfThis(new DeathState(gameStateManager));
         }
 
-        public void retaliate()
+        public void handleFinishedFiring()
         {
             this.changeState(new RetaliateState(gameStateManager));
         }

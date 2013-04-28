@@ -8,11 +8,17 @@ using Microsoft.Xna.Framework;
 using TheGameOfForever.Geometry;
 using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Service.Shapes;
+using TheGameOfForever.GameState;
 
 namespace TheGameOfForever.Service
 {
     public class RetaliationService : AbstractGameService
     {
+        public interface Observer
+        {
+            void handleEndRetaliation();
+        }
+
         public RetaliationService(EntityManager entityManager)
             : base(entityManager)
         {
@@ -22,9 +28,13 @@ namespace TheGameOfForever.Service
             subscribeToComponentGroup(typeof(IsFiring));
         }
 
-        public override void update(Microsoft.Xna.Framework.GameTime gameTime, GameState.AbstractGameState gameState)
+        public override void update(GameTime gameTime, AbstractGameState gameState)
         {
-            if (entityIds[3].count() == 0)
+            if (entityIds[0].count() == 0)
+            {
+                ((Observer)gameState).handleEndRetaliation();
+            } else if (entityIds[3].count() == 0)
+            // Select the most damaged.
             {
                 int mostDamaged = entityIds[0].ElementAt(0);
                 for (int i = 1; i < entityIds[0].count(); i++)
@@ -42,9 +52,9 @@ namespace TheGameOfForever.Service
                 Vector2 newTargetLocation = target.getComponent<LocationComponent>().getCurrentLocation();
 
                 locationComponent.setFacingRadians(GeometryHelper.CalculateAngle(newTargetLocation, locationComponent.getCurrentLocation()));
+                // Most damage now firing.
                 attacker.addComponent(new IsFiring());
             }
-
             else if (!entityManager.getEntity(entityIds[3].getLast()).getComponent<IsFiring>().getCompleted())
             {
                 Entity entity = entityManager.getEntity(entityIds[3].getLast());
@@ -75,7 +85,7 @@ namespace TheGameOfForever.Service
                         components.Add(new LocationComponent(unitLocation, bulletDirection));
                         components.Add(new MovementComponent(4,
                             4 * Vector2.Normalize(GeometryHelper.rotateVec(new Vector2(0, 1), bulletDirection + unitDirection))));
-                        components.Add(new IsProjectile(100, true));
+                        components.Add(new IsProjectile(100, true, 100));
                         components.Add(new CollisionHitBox(new RectangleShape(new Rectangle((int)unitLocation.X, (int)unitLocation.Y, 10, 10), new Vector2(5f), 0, 10)));
 
                         entityManager.addEntity(Entity.EntityFactory.createEntityWithComponents(components));
@@ -84,11 +94,14 @@ namespace TheGameOfForever.Service
                 }
                 else
                 {
-                    entity.getComponent<IsFiring>().setCompleted(true);
-                    
-                    foreach (int id in entityIds[0])
+                    if (entityIds[1].count() == 0)
                     {
-                        entityManager.getEntity(id).removeComponent<RetaliateComponent>();
+                        foreach (int id in entityIds[0])
+                        {
+                            entityManager.getEntity(id).removeComponent<RetaliateComponent>();
+                        }
+                        entity.removeComponent<IsFiring>();
+                        ((Observer)gameState).handleEndRetaliation();
                     }
                 }
             }

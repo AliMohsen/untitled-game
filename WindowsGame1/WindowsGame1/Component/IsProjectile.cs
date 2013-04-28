@@ -9,11 +9,13 @@ namespace TheGameOfForever.Component
     {
         private int damage;
         private bool canCollide;
-
-        public IsProjectile(int damage, bool canCollide)
+        private float maxRange = 0;
+        private float travelled = 0;
+        public IsProjectile(int damage, bool canCollide, float maxRange)
         {
             this.canCollide = canCollide;
             this.damage = damage;
+            this.maxRange = maxRange;
         }
 
         public int getDamage()
@@ -24,6 +26,21 @@ namespace TheGameOfForever.Component
         public bool isCanCollide()
         {
             return canCollide;
+        }
+
+        public float getMaxRange()
+        {
+            return maxRange;
+        }
+
+        public float getTravelled()
+        {
+            return travelled;
+        }
+
+        public void addToTravelled(float distance)
+        {
+            travelled += distance;
         }
     }
 }

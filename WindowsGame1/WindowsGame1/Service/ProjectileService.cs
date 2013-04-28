@@ -25,10 +25,16 @@ namespace TheGameOfForever.Service
             foreach (int e in entityIds[0])
             {
                 Entity entity = entityManager.getEntity(e);
-                LocationComponent loc = entity.getComponent<LocationComponent>();
+                IsProjectile isProjectile = entity.getComponent<IsProjectile>();
+                LocationComponent locationComponent = entity.getComponent<LocationComponent>();
                 Vector2 distance = gameTime.ElapsedGameTime.Milliseconds * entity.getComponent<MovementComponent>().getVelocity() * 0.1f;
-                loc.setCurrentLocation(loc.getCurrentLocation() 
+                locationComponent.setCurrentLocation(locationComponent.getCurrentLocation() 
                     + distance);
+                isProjectile.addToTravelled(distance.Length());
+                if (isProjectile.getTravelled() > isProjectile.getMaxRange())
+                {
+                    entityManager.removeEntity(e);
+                }
             }
         }
 

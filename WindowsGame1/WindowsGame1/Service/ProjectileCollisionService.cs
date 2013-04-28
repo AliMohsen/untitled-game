@@ -21,7 +21,6 @@ namespace TheGameOfForever.Service
         {
             subscribeToComponentGroup(typeof(IsProjectile));
             subscribeToComponentGroup(typeof(CollisionHitBox));
-            subscribeToComponentGroup(typeof(Selected));
             subscribeToComponentGroup(typeof(IsFiring));
         }
         
@@ -91,23 +90,6 @@ namespace TheGameOfForever.Service
             foreach (int i in toRemove)
             {
                 entityManager.removeEntity(i);
-            }
-
-            if (gameState is EngageState 
-                && entityManager.getEntity(entityIds[2].getLast()).getComponent<Selected>().getHasFired()
-                && entityIds[0].count() == 0)
-            {
-                EngageState state = (EngageState)gameState;
-                state.retaliate();
-            }
-
-            if (gameState is RetaliateState
-                && entityIds[0].count() == 0
-                && entityManager.getEntity(entityIds[3].getLast()).getComponent<IsFiring>().getCompleted())
-            {
-                entityManager.getEntity(entityIds[3].getLast()).removeComponent<IsFiring>();
-                RetaliateState state = (RetaliateState)gameState;
-                state.retaliationComplete();
             }
         }
 

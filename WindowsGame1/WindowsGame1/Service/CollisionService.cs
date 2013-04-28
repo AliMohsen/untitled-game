@@ -24,6 +24,7 @@ namespace TheGameOfForever.Service
 
         public override void update(Microsoft.Xna.Framework.GameTime gameTime, GameState.AbstractGameState gameState)
         {
+            if (entityIds[0].count() == 0) return;
             int selectedId = entityIds[0].getLast();
             if (selectedId == -1) return;
             Entity entity = entityManager.getEntity(selectedId);

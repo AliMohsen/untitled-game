@@ -155,7 +155,7 @@ namespace TheGameOfForever.Entities
             {
                 List<BaseComponent> components = new List<BaseComponent>();
                 // Add health.
-                components.Add(new HealthComponent(health));
+                components.Add(new HealthComponent(400));
                 // WHERE YOU AT!
                 components.Add(new LocationComponent(startingLocation, 0));
                 // People can move.
