@@ -12,7 +12,8 @@ namespace TheGameOfForever.View.Camera
         Matrix getCameraTransformMatrix();
         void update();
         void setMap(Map map);
-
+        Vector2 translateToGame(Vector2 point);
+        Vector2 translateToUI(Vector2 point);
         #region Camera functions.
 
         void setZoom(float zoom);

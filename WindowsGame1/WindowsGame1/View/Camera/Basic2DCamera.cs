@@ -65,6 +65,18 @@ namespace TheGameOfForever.View.Camera
             return transform;
         }
 
+        public Vector2 translateToGame(Vector2 point)
+        {
+            Vector3 output = (Matrix.CreateTranslation(point.X, point.Y, 0) * Matrix.Invert(transform)).Translation;
+            return new Vector2(output.X, output.Y);
+        }
+
+        public Vector2 translateToUI(Vector2 point)
+        {
+            Vector3 output = (Matrix.CreateTranslation(point.X, point.Y, 0) * transform).Translation;
+                           return new Vector2(output.X, output.Y);
+        }
+
         public void update()
         {
             rotation = MathHelper.SmoothStep(rotation, desiredRotation, rotationFollowSpeed);
