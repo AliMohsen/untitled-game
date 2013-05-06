@@ -125,6 +125,7 @@
     <Compile Include="Component\LocationComponent.cs" />
     <Compile Include="Component\MapElementComponent.cs" />
     <Compile Include="Component\Map\Map.cs" />
+    <Compile Include="Component\Model3D.cs" />
     <Compile Include="Component\MovementComponent.cs" />
     <Compile Include="Component\RetaliateComponent.cs" />
     <Compile Include="Component\Selected.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Geometry\CollisionHelper.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
     <Compile Include="Processor\Content\ContentException.cs" />
+    <Compile Include="Processor\Content\Effects\EffectLibrary.cs" />
     <Compile Include="Processor\Content\Model\ModelDefinition.cs" />
     <Compile Include="Processor\Content\Model\ModelLibrary.cs" />
     <Compile Include="Processor\Content\Texture\TextureDefinition.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="Service\CollisionService.cs" />
     <Compile Include="Service\DeathService.cs" />
     <Compile Include="Service\KillCamService.cs" />
+    <Compile Include="Service\MapDraw3DService.cs" />
     <Compile Include="Service\MapDrawService.cs" />
     <Compile Include="Service\MovementService.cs" />
     <Compile Include="Service\ProjectileCollisionService.cs" />

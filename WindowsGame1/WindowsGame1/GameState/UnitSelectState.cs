@@ -23,6 +23,7 @@ namespace TheGameOfForever.GameState
             addService(gameStateManager.getService<MapDrawService>());
             addService(gameStateManager.getService<TrackingCameraService>());
             addService(gameStateManager.getService<StatusDrawService>());
+            addService(gameStateManager.getService<MapDraw3DService>());
         }
 
         public void selectUnit(int commandCost)

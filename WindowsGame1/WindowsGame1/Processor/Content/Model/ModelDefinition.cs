@@ -9,16 +9,16 @@ namespace TheGameOfForever.Processor.Content.Model
 {
     public class ModelDefinition
     {
-        VertexPositionColor[] vertices;
+        VertexPositionNormalTexture[] vertices;
         String name;
 
-        public ModelDefinition(String name, params VertexPositionColor[] vertices)
+        public ModelDefinition(String name, VertexPositionNormalTexture[] vertices)
         {
             this.vertices = vertices;
             this.name = name;
         }
 
-        public VertexPositionColor[] getVertices()
+        public VertexPositionNormalTexture[] getVertices()
         {
             return vertices;
         }

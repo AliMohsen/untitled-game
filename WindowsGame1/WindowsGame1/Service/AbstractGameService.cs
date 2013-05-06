@@ -136,5 +136,9 @@ namespace TheGameOfForever.Service
         {
             entityManager.refreshAfterService();
         }
+
+        public virtual void draw3d(GameTime gameTime, AbstractGameState state, GraphicsDevice device)
+        {
+        }
     }
 }

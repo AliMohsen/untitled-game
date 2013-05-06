@@ -31,6 +31,7 @@ namespace TheGameOfForever.GameState
             addService(gameStateManager.getService<TakeDamageService>());
             addService(gameStateManager.getService<TrackingCameraService>());
             addService(gameStateManager.getService<StatusDrawService>());
+            addService(gameStateManager.getService<MapDraw3DService>());
         }
 
         public int getEntityId()

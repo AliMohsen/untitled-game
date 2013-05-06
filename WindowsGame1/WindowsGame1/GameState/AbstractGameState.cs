@@ -74,5 +74,13 @@ namespace TheGameOfForever.GameState
                 gameService.draw(gameTime, this, spriteBatch);
             }
         }
+
+        public virtual void draw3d(GameTime gameTime, GraphicsDevice device)
+        {
+            foreach (AbstractGameService gameService in gameServices)
+            {
+                gameService.draw3d(gameTime, this, device);
+            }
+        }
     }
 }

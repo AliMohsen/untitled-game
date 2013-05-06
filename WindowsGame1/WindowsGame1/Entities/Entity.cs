@@ -172,6 +172,7 @@ namespace TheGameOfForever.Entities
                 components.Add(new Controllable(1));
                 components.Add(new EntityTextureComponent(TextureLibrary.getModelIdFromName("human")));
                 components.Add(new ArsenalComponent("pistol", "ak47"));
+                components.Add(new Model3D(0, 1));
                 return createEntityWithComponents(components);
             }
         }

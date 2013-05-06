@@ -100,23 +100,35 @@ namespace TheGameOfForever.GameState
         }
 
         GraphicsDevice graphicsDevice;
-        RenderTarget2D gameRenderTarget;
-        public void createRenderTarget(GraphicsDevice graphicsDevice, int width, int height) {
+        RenderTarget2D gameRenderTarget2D;
+        public void createRenderTarget2D(GraphicsDevice graphicsDevice, int width, int height) {
             this.graphicsDevice = graphicsDevice;
-            gameRenderTarget = new RenderTarget2D(graphicsDevice, width, height);
+            gameRenderTarget2D = new RenderTarget2D(graphicsDevice, width, height);
 
+        }
+
+        RenderTarget2D gameRenderTarget3D;
+        public void createRenderTarget3D(GraphicsDevice graphicsDevice, int width, int height)
+        {
+            this.graphicsDevice = graphicsDevice;
+            gameRenderTarget3D = new RenderTarget2D(graphicsDevice, width, height, true, graphicsDevice.DisplayMode.Format, DepthFormat.Depth24);
         }
 
         public Texture2D getGameScreen()
         {
-            return gameRenderTarget;
+            return gameRenderTarget2D;
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public Texture2D getGameScreen3D()
         {
-            graphicsDevice.SetRenderTarget(gameRenderTarget);
+            return gameRenderTarget3D;
+        }
 
-            graphicsDevice.Clear(new Color(0.1f,0.1f,0.1f));
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDevice device)
+        {
+            device.SetRenderTarget(gameRenderTarget2D);
+
+            device.Clear(new Color(0.1f, 0.1f, 0.1f));
 
             bool canDraw = true;
             List<AbstractGameState> layersToDraw = new List<AbstractGameState>();
@@ -130,13 +142,30 @@ namespace TheGameOfForever.GameState
                 }
             }
             layersToDraw.Reverse();
-//            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, camera.getCameraTransformMatrix());
             foreach (AbstractGameState state in layersToDraw)
             {
                 state.draw(gameTime, spriteBatch);
             }
             SpriteBatchWrapper.drawItems(spriteBatch);
-//            spriteBatch.End();
+
+            graphicsDevice.SetRenderTarget(gameRenderTarget3D);
+            device.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, Color.DarkSlateBlue, 1.0f, 0);
+            canDraw = true;
+            layersToDraw = new List<AbstractGameState>();
+
+            foreach (AbstractGameState state in gameStates)
+            {
+                if (canDraw)
+                {
+                    layersToDraw.Add(state);
+                    canDraw &= state.isPropagateDraw();
+                }
+            }
+            layersToDraw.Reverse();
+            foreach (AbstractGameState state in layersToDraw)
+            {
+                state.draw3d(gameTime, device);
+            }
             graphicsDevice.SetRenderTarget(null);
         }
 

@@ -23,6 +23,7 @@ using TheGameOfForever.Configuration.Weapon;
 using TheGameOfForever.Component;
 using TheGameOfForever.Processor.Entity.DataType;
 using TheGameOfForever.Draw;
+using TheGameOfForever.Processor.Content.Effects;
 
 namespace TheGameOfForever
 {
@@ -86,7 +87,8 @@ namespace TheGameOfForever
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
             base.Initialize();
-            stateManager.createRenderTarget(GraphicsDevice, (int)Map.getWorldWidth(), (int)Map.getWorldHeight());
+            stateManager.createRenderTarget2D(GraphicsDevice, (int)Map.getWorldWidth(), (int)Map.getWorldHeight());
+            stateManager.createRenderTarget3D(GraphicsDevice, (int)Map.getWorldWidth(), (int)Map.getWorldHeight());
         }
 
         protected override void LoadContent()
@@ -102,10 +104,11 @@ namespace TheGameOfForever
             SpriteBatchWrapper.initialise();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mousePointer = Content.Load<Texture2D>("editor//mousepointer");
+            EffectLibrary.basicEffect = Content.Load<Effect>("effects//effects");
             stateManager = new GameStateManager(new EntityLoader(new EntityManager(),
             (EntityManager entityManager) =>
             {
-                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(10, 10), 0, true));
+                entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(0, 0), 0, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(10, 80), 0, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(300, 100), 1, true));
                 entityManager.addEntity(Entity.EntityFactory.createHumanEntity(1000, new Vector2(300, 140), 1, true));
@@ -142,7 +145,7 @@ namespace TheGameOfForever
         protected override void Draw(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
-            stateManager.draw(gameTime, spriteBatch);
+            stateManager.draw(gameTime, spriteBatch, GraphicsDevice);
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
@@ -156,8 +159,10 @@ namespace TheGameOfForever
             layerManager.draw(spriteBatch);
 
             DrawStringHelper.drawString(spriteBatch, "BestGameEver - v0.01", "mentone", 10, Color.Black, new Vector2(10, 5),0);
-            spriteBatch.Draw(stateManager.getGameScreen(), new Rectangle((int)screenOffset.X, (int)screenOffset.Y,
-                (int)Map.getWorldWidth(), (int)Map.getWorldHeight()), Color.White);
+            spriteBatch.Draw(stateManager.getGameScreen3D(), new Rectangle((int)screenOffset.X, (int)screenOffset.Y,
+                (int)Map.getWorldWidth(), (int)Map.getWorldHeight() ), Color.White);
+            spriteBatch.Draw(stateManager.getGameScreen(), new Rectangle((int)screenOffset.X, (int)screenOffset.Y + (int) (3 * Map.getWorldHeight() / 4),
+                (int)Map.getWorldWidth() / 4, (int)Map.getWorldHeight() / 4), Color.White);
             spriteBatch.Draw(mousePointer, new Vector2(mouse.X, mouse.Y), Color.White);
             OutputConsole.draw(spriteBatch, 4, new Vector2(10,660), 0);
             spriteBatch.End();
